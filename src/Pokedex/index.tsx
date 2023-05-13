@@ -1,3 +1,15 @@
+import { useEffect, useState } from 'react';
+import { InputSearch } from '../Components/Input';
+import { usePokemon } from '../Hook/usePokemon';
+import { Pokemons } from '../Components/Pokemons';
+
 export default function Pokedex() {
-  return <h1>Hello World</h1>;
+  const { allPokemons, isLoading } = usePokemon();
+
+  return (
+    <>
+      <InputSearch />
+      <Pokemons isLoading={isLoading} pokemons={allPokemons} />
+    </>
+  );
 }

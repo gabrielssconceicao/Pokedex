@@ -4,13 +4,16 @@ import Pokedex from './Pokedex';
 import { GlobalStyle } from './Styles/global';
 import { theme } from './Styles/Theme';
 import { PokedexRoutes } from './routes';
+import { PokemonProvider } from './Context';
 
 export default function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <PokedexRoutes />
-        <GlobalStyle />
+        <PokemonProvider>
+          <PokedexRoutes />
+          <GlobalStyle />
+        </PokemonProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
