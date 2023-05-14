@@ -1,23 +1,18 @@
 import { useState } from 'react';
 import { searchPokemon } from '../../api';
+import { Container } from './inputStyle';
 
 export function InputSearch() {
   const [value, setValue] = useState('');
 
-  const handleClick = () => {
-    searchPokemon(value).then((pokemon) => console.log(pokemon));
-  };
-
   return (
-    <>
+    <Container>
       <input
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <button type="button" onClick={handleClick}>
-        Procurar
-      </button>
-    </>
+      <button type="button">Procurar</button>
+    </Container>
   );
 }
