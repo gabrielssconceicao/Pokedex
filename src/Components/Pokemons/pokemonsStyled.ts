@@ -1,3 +1,31 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const Container = styled.div``;
+const loadAnimation = keyframes`
+from {
+  transform: rotate(0deg);
+} to {
+  transform: rotate(360deg);
+}`;
+
+export const PokemonContainer = styled.div`
+  flex: 1;
+  padding: 2rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  overflow: auto;
+`;
+
+export const Loading = styled.div`
+  width: 30rem;
+  height: 30rem;
+
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+
+  animation: ${loadAnimation} infinite 600ms;
+`;

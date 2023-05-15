@@ -1,13 +1,14 @@
 import { AllPokemonsProps } from '../../Interfaces/allPokemons';
 
-interface PokemonContainerProps {
+interface PokemonProps {
   pokemon: AllPokemonsProps;
 }
-export default function PokemonContainer({ pokemon }: PokemonContainerProps) {
+export function Pokemon({ pokemon }: PokemonProps) {
   return (
     <div key={pokemon.id}>
       <img src={pokemon.sprites.front_default} alt={`${pokemon.name}`} />
-      <p>{pokemon.name}</p>
+      <h1>{pokemon.name}</h1>
+      <p>{pokemon.id}</p>
     </div>
   );
 }

@@ -11,6 +11,7 @@ export function InputSearch() {
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        placeholder="Digite o nome ou id do pokemon"
       />
       <button type="button">Procurar</button>
     </Container>

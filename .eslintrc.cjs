@@ -25,5 +25,6 @@ module.exports = {
     'import/no-absolute-path': 0,
     'import/prefer-default-export': 0,
     'consistent-return': 0,
+    'react/jsx-no-constructed-context-values': 0,
   },
 };
