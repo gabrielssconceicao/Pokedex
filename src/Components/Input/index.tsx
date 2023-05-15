@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { searchPokemon } from '../../api';
+
 import { Container } from './inputStyle';
 
 export function InputSearch() {

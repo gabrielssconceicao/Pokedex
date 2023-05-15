@@ -11,7 +11,6 @@ export default function Pokedex() {
       <Nav />
       <InputSearch />
       <Pokemons isLoading={isLoading} pokemons={allPokemons} />
-      <p>Pagination</p>
     </>
   );
 }

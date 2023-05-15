@@ -1,4 +1,6 @@
 import { AllPokemonsProps } from '../../Interfaces/allPokemons';
+import PokemonContainer from '../PokemonContainer';
+import { Container } from './pokemonsStyled';
 
 interface PokemonsProps {
   isLoading: boolean;
@@ -6,19 +8,16 @@ interface PokemonsProps {
 }
 export function Pokemons({ isLoading, pokemons }: PokemonsProps) {
   return (
-    <>
+    <Container>
       <h1>Pokemon</h1>
+
       {isLoading ? (
         <p>Carregando</p>
       ) : (
         pokemons.map((pokemon) => (
-          <div key={pokemon.id}>
-            <p>
-              {pokemon.name} - <span>{pokemon.id}</span>
-            </p>
-          </div>
+          <PokemonContainer key={pokemon.id} pokemon={pokemon} />
         ))
       )}
-    </>
+    </Container>
   );
 }
