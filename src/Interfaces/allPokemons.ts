@@ -7,6 +7,18 @@ export interface AllPokemonsProps {
 
 interface PokemonImage {
   front_default: string;
+  other: {
+    'official-artwork': {
+      front_default: string;
+    };
+  };
+  versions: {
+    'generation-v': {
+      'black-white': {
+        animated: { front_default: string };
+      };
+    };
+  };
 }
 
 export interface PokemonTypes {
