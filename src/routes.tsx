@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Pokedex from './Pokedex';
+import Pokedex from './Pages/Pokedex';
 
 export function PokedexRoutes() {
   return (

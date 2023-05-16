@@ -9,13 +9,11 @@ interface PokemonProps {
 }
 export function Pokemon({ pokemon }: PokemonProps) {
   return (
-    <Container
-      key={pokemon.id}
-      to={`pokemon/${pokemon.name}`}
-      bg-color={pokemon.types[0]}
-      bg2-color={pokemon.types[1]}
-    >
-      <img src={pokemon.sprites.front_default} alt={`${pokemon.name}`} />
+    <Container key={pokemon.id} to={`pokemon/${pokemon.name}`}>
+      <div className="img">
+        <img src={pokemon.sprites.front_default} alt={`${pokemon.name}`} />
+      </div>
+
       <h1>{pokemon.name}</h1>
 
       <div style={{ display: 'flex' }}>

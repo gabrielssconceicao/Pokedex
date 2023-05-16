@@ -16,6 +16,7 @@ export const PokemonContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  gap: 1.5em;
   overflow: auto;
 `;
 

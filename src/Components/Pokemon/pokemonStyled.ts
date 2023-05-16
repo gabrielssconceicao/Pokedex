@@ -6,9 +6,16 @@ export const Container = styled(NavLink)`
   &:visited {
     color: blue;
   }
-`;
 
-export const TypeDiv = styled.div`
-  flex: 1;
-  text-align: 'center';
+  width: 15rem;
+  .img {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      object-fit: contain;
+    }
+  }
 `;
