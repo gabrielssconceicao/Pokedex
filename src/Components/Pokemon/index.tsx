@@ -1,14 +1,20 @@
 import {
   AllPokemonsProps,
-  PokeTypescolors,
+  PokemonTypesColors,
 } from '../../Interfaces/allPokemons';
+import { Container } from './pokemonStyled';
 
 interface PokemonProps {
   pokemon: AllPokemonsProps;
 }
 export function Pokemon({ pokemon }: PokemonProps) {
   return (
-    <div key={pokemon.id}>
+    <Container
+      key={pokemon.id}
+      to={`pokemon/${pokemon.name}`}
+      bg-color={pokemon.types[0]}
+      bg2-color={pokemon.types[1]}
+    >
       <img src={pokemon.sprites.front_default} alt={`${pokemon.name}`} />
       <h1>{pokemon.name}</h1>
 
@@ -17,7 +23,7 @@ export function Pokemon({ pokemon }: PokemonProps) {
           <div
             key={`${pokemon.name}-${type}`}
             style={{
-              background: PokeTypescolors[type.type.name],
+              background: PokemonTypesColors[type.type.name],
               flex: 1,
               textAlign: 'center',
             }}
@@ -26,6 +32,6 @@ export function Pokemon({ pokemon }: PokemonProps) {
           </div>
         ))}
       </div>
-    </div>
+    </Container>
   );
 }
