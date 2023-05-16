@@ -1,4 +1,7 @@
-import { AllPokemonsProps } from '../../Interfaces/allPokemons';
+import {
+  AllPokemonsProps,
+  PokeTypescolors,
+} from '../../Interfaces/allPokemons';
 
 interface PokemonProps {
   pokemon: AllPokemonsProps;
@@ -9,9 +12,18 @@ export function Pokemon({ pokemon }: PokemonProps) {
       <img src={pokemon.sprites.front_default} alt={`${pokemon.name}`} />
       <h1>{pokemon.name}</h1>
 
-      <div>
+      <div style={{ display: 'flex' }}>
         {pokemon.types.map((type) => (
-          <div key={`${pokemon.name}-${type}`}>{type.type.name}</div>
+          <div
+            key={`${pokemon.name}-${type}`}
+            style={{
+              background: PokeTypescolors[type.type.name],
+              flex: 1,
+              textAlign: 'center',
+            }}
+          >
+            {type.type.name}
+          </div>
         ))}
       </div>
     </div>
