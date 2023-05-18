@@ -1,17 +1,18 @@
 import { usePokemon } from '../../Hook/usePokemon';
+import { Container } from './paginationStyte';
 
 export function Pagination() {
   const { actualPage, totalPages, nextPage, prevPage, firstPage, lastPage } =
     usePokemon();
   return (
-    <div>
+    <Container>
       <button type="button" onClick={firstPage}>
         {'<<'}
       </button>
       <button type="button" onClick={prevPage}>
         {'<'}
       </button>
-      <div>
+      <div className="page_index">
         {actualPage + 1} / {totalPages}
       </div>
       <button type="button" onClick={nextPage}>
@@ -20,6 +21,6 @@ export function Pagination() {
       <button type="button" onClick={lastPage}>
         {'>>'}
       </button>
-    </div>
+    </Container>
   );
 }

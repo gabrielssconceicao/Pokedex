@@ -49,7 +49,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
   const lastPage = (): void => setActualPage(totalPages - 1);
 
   const prevPage = (): void => {
-    if (actualPage < 0) return;
+    if (actualPage < 1) return;
     setActualPage((prev) => prev - 1);
   };
 

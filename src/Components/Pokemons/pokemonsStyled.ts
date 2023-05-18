@@ -29,4 +29,9 @@ export const Loading = styled.div`
   border-radius: 50%;
 
   animation: ${loadAnimation} infinite 600ms;
+
+  @media (max-width: 425px) {
+    width: 20rem;
+    height: 20rem;
+  }
 `;

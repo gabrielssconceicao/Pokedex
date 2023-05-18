@@ -11,4 +11,10 @@ export const Container = styled.div`
       object-fit: contain;
     }
   }
+
+  @media (max-width: 425px) {
+    img {
+      width: 200px;
+    }
+  }
 `;
