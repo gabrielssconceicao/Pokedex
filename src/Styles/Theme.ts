@@ -24,11 +24,13 @@ export const theme: DefaultTheme = {
     gray800: '#1D1E21',
     gray900: '#141518',
 
-    primary: '#216BFF',
-    darkPrimary: '#1F01B9',
-    lightPrimary: '#8ECAE6',
-    secondary: '#FFB703',
-    darkSecundary: '#FB8500',
+    primary: '#c00',
+    darkPrimary: '#f00',
+
+    secondary: '#ffde00',
+    darkSecundary: '#b3a125',
+
+    tertiary: '#3b4cca',
   },
 
   fontSize: {

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   AllPokemonsProps,
   PokemonTypesColors,
@@ -9,7 +10,7 @@ interface PokemonProps {
 }
 export function Pokemon({ pokemon }: PokemonProps) {
   return (
-    <Container key={pokemon.id} to={`pokemon/${pokemon.name}`}>
+    <Container key={pokemon.id}>
       <div
         className="img"
         style={{ background: PokemonTypesColors[pokemon.types[0].type.name] }}
@@ -26,7 +27,7 @@ export function Pokemon({ pokemon }: PokemonProps) {
         />
       </div>
 
-      <h1>{pokemon.name}</h1>
+      <p>{pokemon.name.toUpperCase()}</p>
 
       <div className="types">
         {pokemon.types.map((type) => (
@@ -34,13 +35,16 @@ export function Pokemon({ pokemon }: PokemonProps) {
             key={`${pokemon.name}-${type}`}
             style={{
               background: PokemonTypesColors[type.type.name],
-              flex: 1,
-              textAlign: 'center',
             }}
+            className="type"
           >
             {type.type.name}
           </div>
         ))}
+      </div>
+
+      <div className="link">
+        <Link to={`pokemon/${pokemon.name}`}>More info</Link>
       </div>
     </Container>
   );

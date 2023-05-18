@@ -28,7 +28,7 @@ declare module 'styled-components' {
       secondary: string;
       darkPrimary: string;
       darkSecundary: string;
-      lightPrimary: string;
+      tertiary: string;
     };
 
     fontSize: {
