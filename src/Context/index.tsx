@@ -5,7 +5,7 @@ import {
   PokemonProviderProps,
 } from '../Interfaces/pokemonContext';
 import { AllPokemonsProps } from '../Interfaces/allPokemons';
-import { getPokemonData, getPokemons } from '../api';
+import { getPokemonData, getPokemons, searchPokemon } from '../api';
 
 export const PokemonContext = createContext({} as PokemonContextProps);
 
@@ -55,6 +55,15 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
 
   const firstPage = (): void => setActualPage(0);
 
+  const inputSearch = async (value: string): Promise<void> => {
+    if (!value) return;
+
+    const response: AllPokemonsProps = await searchPokemon(value.toLowerCase());
+
+    if (!response) return;
+    setAllPokemons([response]);
+  };
+
   useEffect(() => {
     fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,6 +80,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
         prevPage,
         firstPage,
         lastPage,
+        inputSearch,
       }}
     >
       {children}

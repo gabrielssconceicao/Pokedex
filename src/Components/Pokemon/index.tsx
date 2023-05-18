@@ -10,7 +10,7 @@ interface PokemonProps {
 }
 export function Pokemon({ pokemon }: PokemonProps) {
   return (
-    <Container key={pokemon.id}>
+    <Container key={`${pokemon.name}-${pokemon.id}`}>
       <div
         className="img"
         style={{ background: PokemonTypesColors[pokemon.types[0].type.name] }}
@@ -27,12 +27,15 @@ export function Pokemon({ pokemon }: PokemonProps) {
         />
       </div>
 
-      <p>{pokemon.name.toUpperCase()}</p>
+      <p>
+        {pokemon.id}-{pokemon.name.toUpperCase()}
+      </p>
 
       <div className="types">
-        {pokemon.types.map((type) => (
+        {pokemon.types.map((type, index) => (
           <div
-            key={`${pokemon.name}-${type}`}
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${pokemon.name.toLowerCase()}-${type}-${index}`}
             style={{
               background: PokemonTypesColors[type.type.name],
             }}

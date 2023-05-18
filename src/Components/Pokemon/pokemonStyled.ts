@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 25rem;
-  height: 23rem;
+  width: 20rem;
+  height: 26rem;
   background-color: #ccc;
 
   display: flex;
@@ -10,6 +10,8 @@ export const Container = styled.div`
 
   border-radius: 1rem;
   color: #000;
+
+  box-shadow: 5px 5px 5px #000;
 
   p {
     padding: 0.5rem;

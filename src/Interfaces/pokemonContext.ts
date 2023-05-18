@@ -10,6 +10,7 @@ export interface PokemonContextProps {
   nextPage: () => void;
   firstPage: () => void;
   lastPage: () => void;
+  inputSearch: (value: string) => void;
 }
 
 export interface PokemonProviderProps {
