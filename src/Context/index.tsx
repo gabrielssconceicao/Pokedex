@@ -11,6 +11,7 @@ export const PokemonContext = createContext({} as PokemonContextProps);
 
 export function PokemonProvider({ children }: PokemonProviderProps) {
   const [allPokemons, setAllPokemons] = useState<AllPokemonsProps[]>([]);
+  const [filterPokemons, setFilterPokemons] = useState<AllPokemonsProps[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [actualPage, setActualPage] = useState(0);
 
@@ -55,17 +56,31 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
 
   const firstPage = (): void => setActualPage(0);
 
-  const inputSearch = async (value: string): Promise<void> => {
-    if (!value) return;
+  const inputSearch = async (value: string) => {
+    try {
+      setIsLoading(true);
+      const data = await getPokemons(10000, 0);
 
-    const response: AllPokemonsProps = await searchPokemon(value.toLowerCase());
+      const promises = data.results.map(async (pokemon: GetAllPokemonProps) => {
+        return getPokemonData(pokemon.url);
+      });
+      Promise.all(promises).then((response: AllPokemonsProps[]) =>
+        setFilterPokemons(response)
+      );
+      const filteredPokemons = filterPokemons.filter(
+        (poke) => poke.id.toString() === value || poke.name.includes(value)
+      );
+      setAllPokemons(filteredPokemons);
 
-    if (!response) return;
-    setAllPokemons([response]);
+      setIsLoading(false);
+    } catch {
+      fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
+    }
   };
 
   useEffect(() => {
     fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actualPage]);
 

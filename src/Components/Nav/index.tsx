@@ -1,3 +1,4 @@
+import { InputSearch } from '../Input';
 import { Container } from './navStyle';
 
 export function Nav() {
@@ -9,6 +10,7 @@ export function Nav() {
           alt="PokeApi"
         />
       </nav>
+      <InputSearch />
     </Container>
   );
 }

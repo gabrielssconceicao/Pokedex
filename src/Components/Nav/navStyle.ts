@@ -1,20 +1,26 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1rem;
   nav {
+    flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 2rem 0;
-
     img {
       object-fit: contain;
     }
   }
 
-  @media (max-width: 425px) {
+  @media (max-width: 630px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     img {
-      width: 200px;
+      width: 20rem;
     }
   }
 `;

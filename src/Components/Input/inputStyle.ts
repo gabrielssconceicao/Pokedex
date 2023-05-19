@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 2rem;
   gap: 1rem;
+  flex: 1;
 
   input {
     flex: 1;
