@@ -43,7 +43,12 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     []
   );
 
-  const inputSearch = async (value: string, setSearch = false) => {
+  const inputSearch = async (value: string) => {
+    if (!value) {
+      fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
+      setIsSearching(false);
+      return;
+    }
     try {
       setIsLoading(true);
       setIsSearching(true);
@@ -61,9 +66,6 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
 
       setAllPokemons(filteredPokemons);
       setIsLoading(false);
-      if (setSearch) {
-        setIsSearching(false);
-      }
     } catch {
       setIsSearching(false);
       fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);

@@ -8,7 +8,7 @@ export function InputSearch() {
   const { inputSearch } = usePokemon();
 
   const checkValue = () => {
-    if (!value) inputSearch(value.toLowerCase(), true);
+    if (!value) inputSearch('');
   };
   return (
     <Container>

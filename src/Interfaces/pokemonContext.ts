@@ -9,7 +9,7 @@ export interface PokemonContextProps {
   isSearching: boolean;
   setActualPage: Dispatch<SetStateAction<number>>;
 
-  inputSearch: (value: string, setSearch?: boolean) => void;
+  inputSearch: (value: string) => void;
 }
 
 export interface PokemonProviderProps {

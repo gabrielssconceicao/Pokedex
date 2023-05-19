@@ -43,7 +43,8 @@ export const Container = styled.div`
     margin-bottom: 1rem;
     .type {
       border-radius: 1rem;
-
+      border: 2px solid #000;
+      box-shadow: 1px 2px 0 #000;
       flex: 1;
 
       font-size: 1.2rem;
@@ -78,5 +79,15 @@ export const Container = styled.div`
         box-shadow: inset -2px 3px 0 #000;
       }
     }
+  }
+
+  @media (orientation: landscape) {
+    width: 23rem;
+    height: 26rem;
+  }
+
+  @media (orientation: portrait) {
+    width: 26rem;
+    height: 25rem;
   }
 `;
