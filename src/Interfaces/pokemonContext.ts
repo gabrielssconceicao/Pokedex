@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { AllPokemonsProps } from './allPokemons';
 
 export interface PokemonContextProps {
@@ -6,11 +6,10 @@ export interface PokemonContextProps {
   isLoading: boolean;
   actualPage: number;
   totalPages: number;
-  prevPage: () => void;
-  nextPage: () => void;
-  firstPage: () => void;
-  lastPage: () => void;
-  inputSearch: (value: string) => void;
+  isSearching: boolean;
+  setActualPage: Dispatch<SetStateAction<number>>;
+
+  inputSearch: (value: string, setSearch?: boolean) => void;
 }
 
 export interface PokemonProviderProps {

@@ -5,7 +5,7 @@ import {
   PokemonProviderProps,
 } from '../Interfaces/pokemonContext';
 import { AllPokemonsProps } from '../Interfaces/allPokemons';
-import { getPokemonData, getPokemons, searchPokemon } from '../api';
+import { getPokemonData, getPokemons } from '../api';
 
 export const PokemonContext = createContext({} as PokemonContextProps);
 
@@ -16,6 +16,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
   const [actualPage, setActualPage] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
   const limitPokemonPerPage = 25;
   const fetchPokemon = useCallback(
     async (limit = limitPokemonPerPage, offset = 0) => {
@@ -42,25 +43,12 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     []
   );
 
-  const nextPage = (): void => {
-    if (actualPage > totalPages) return;
-    setActualPage((prev) => prev + 1);
-  };
-
-  const lastPage = (): void => setActualPage(totalPages - 1);
-
-  const prevPage = (): void => {
-    if (actualPage < 1) return;
-    setActualPage((prev) => prev - 1);
-  };
-
-  const firstPage = (): void => setActualPage(0);
-
-  const inputSearch = async (value: string) => {
+  const inputSearch = async (value: string, setSearch = false) => {
     try {
       setIsLoading(true);
-      const data = await getPokemons(10000, 0);
+      setIsSearching(true);
 
+      const data = await getPokemons(10000, 0);
       const promises = data.results.map(async (pokemon: GetAllPokemonProps) => {
         return getPokemonData(pokemon.url);
       });
@@ -70,10 +58,14 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
       const filteredPokemons = filterPokemons.filter(
         (poke) => poke.id.toString() === value || poke.name.includes(value)
       );
-      setAllPokemons(filteredPokemons);
 
+      setAllPokemons(filteredPokemons);
       setIsLoading(false);
+      if (setSearch) {
+        setIsSearching(false);
+      }
     } catch {
+      setIsSearching(false);
       fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
     }
   };
@@ -91,10 +83,8 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
         isLoading,
         totalPages,
         actualPage,
-        nextPage,
-        prevPage,
-        firstPage,
-        lastPage,
+        isSearching,
+        setActualPage,
         inputSearch,
       }}
     >
