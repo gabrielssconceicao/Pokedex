@@ -81,11 +81,6 @@ export const Container = styled.div`
     }
   }
 
-  @media (orientation: landscape) {
-    width: 23rem;
-    height: 26rem;
-  }
-
   @media (orientation: portrait) {
     width: 26rem;
     height: 25rem;

@@ -49,31 +49,36 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
       setIsSearching(false);
       return;
     }
-    try {
-      setIsLoading(true);
-      setIsSearching(true);
 
-      const data = await getPokemons(10000, 0);
-      const promises = data.results.map(async (pokemon: GetAllPokemonProps) => {
-        return getPokemonData(pokemon.url);
-      });
-      Promise.all(promises).then((response: AllPokemonsProps[]) =>
-        setFilterPokemons(response)
-      );
-      const filteredPokemons = filterPokemons.filter(
-        (poke) => poke.id.toString() === value || poke.name.includes(value)
-      );
+    const filteredPokemons = filterPokemons.filter(
+      (poke) => poke.id.toString() === value || poke.name.includes(value)
+    );
 
-      setAllPokemons(filteredPokemons);
-      setIsLoading(false);
-    } catch {
-      setIsSearching(false);
+    if (!filteredPokemons.length) {
       fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
+      return;
     }
+    setAllPokemons(filteredPokemons);
   };
 
   useEffect(() => {
+    const getPokemonToFilter = async () => {
+      try {
+        const data = await getPokemons(10000, 0);
+        const promises = data.results.map(
+          async (pokemon: GetAllPokemonProps) => {
+            return getPokemonData(pokemon.url);
+          }
+        );
+        Promise.all(promises).then((response: AllPokemonsProps[]) =>
+          setFilterPokemons(response)
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
     fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
+    getPokemonToFilter();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actualPage]);
