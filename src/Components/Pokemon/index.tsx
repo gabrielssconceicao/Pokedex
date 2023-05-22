@@ -11,6 +11,31 @@ interface PokemonProps {
 export function Pokemon({ pokemon }: PokemonProps) {
   return (
     <Container key={`${pokemon.name}-${pokemon.id}`}>
+      <div className="desc">
+        <p>
+          {pokemon.id}-{pokemon.name.toUpperCase()}
+        </p>
+
+        <div className="types">
+          {pokemon.types.map((type, index) => (
+            <div
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${pokemon.name.toLowerCase()}-${type}-${index}`}
+              style={{
+                background: PokemonTypesColors[type.type.name],
+              }}
+              className="type"
+            >
+              {type.type.name}
+            </div>
+          ))}
+        </div>
+
+        <div className="link">
+          <Link to={`pokemon/${pokemon.name}`}>More info</Link>
+        </div>
+      </div>
+
       <div
         className="img"
         style={{ background: PokemonTypesColors[pokemon.types[0].type.name] }}
@@ -25,29 +50,6 @@ export function Pokemon({ pokemon }: PokemonProps) {
           }
           alt={`${pokemon.name}`}
         />
-      </div>
-
-      <p>
-        {pokemon.id}-{pokemon.name.toUpperCase()}
-      </p>
-
-      <div className="types">
-        {pokemon.types.map((type, index) => (
-          <div
-            // eslint-disable-next-line react/no-array-index-key
-            key={`${pokemon.name.toLowerCase()}-${type}-${index}`}
-            style={{
-              background: PokemonTypesColors[type.type.name],
-            }}
-            className="type"
-          >
-            {type.type.name}
-          </div>
-        ))}
-      </div>
-
-      <div className="link">
-        <Link to={`pokemon/${pokemon.name}`}>More info</Link>
       </div>
     </Container>
   );

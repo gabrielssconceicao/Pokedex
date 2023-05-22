@@ -2,6 +2,7 @@ import { Link, useParams, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { searchPokemon } from '../../api';
 import { AllPokemonsProps } from '../../Interfaces/allPokemons';
+import Loading from '../../Components/Loading';
 
 export function PokemonsDetails() {
   const [pokemon, setPokemon] = useState<AllPokemonsProps>();
@@ -44,6 +45,6 @@ export function PokemonsDetails() {
       </div>
     </section>
   ) : (
-    <h1>Carregando</h1>
+    <Loading />
   );
 }

@@ -1,6 +1,7 @@
 import { AllPokemonsProps } from '../../Interfaces/allPokemons';
+import Loading from '../Loading';
 import { Pokemon } from '../Pokemon';
-import { Loading, PokemonContainer } from './pokemonsStyled';
+import { PokemonContainer } from './pokemonsStyled';
 
 interface PokemonsProps {
   isLoading: boolean;
