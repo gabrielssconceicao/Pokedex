@@ -3,6 +3,7 @@ import { AllPokemonsProps } from './allPokemons';
 
 export interface PokemonContextProps {
   allPokemons: AllPokemonsProps[];
+
   isLoading: boolean;
   actualPage: number;
   totalPages: number;

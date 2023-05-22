@@ -35,7 +35,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
 
         // setAllPokemons(result);
       } catch (error) {
-        console.log('Error', error);
+        console.log('Error');
       } finally {
         setIsLoading(false);
       }
@@ -74,7 +74,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
           setFilterPokemons(response)
         );
       } catch (err) {
-        console.log(err);
+        console.log('Error');
       }
     };
     fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
