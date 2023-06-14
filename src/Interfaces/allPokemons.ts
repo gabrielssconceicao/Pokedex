@@ -1,4 +1,4 @@
-export interface AllPokemonsProps {
+export interface PokemonsPerPage {
   name: string;
   sprites: PokemonImage;
   types: PokemonTypes[];

@@ -4,20 +4,22 @@ import {
   PokemonContextProps,
   PokemonProviderProps,
 } from '../Interfaces/pokemonContext';
-import { AllPokemonsProps } from '../Interfaces/allPokemons';
-import { getPokemonData, getPokemons } from '../api';
+import { PokemonsPerPage } from '../Interfaces/allPokemons';
+import { getPokemonData } from '../api';
 
 export const PokemonContext = createContext({} as PokemonContextProps);
 
 export function PokemonProvider({ children }: PokemonProviderProps) {
-  const [allPokemons, setAllPokemons] = useState<AllPokemonsProps[]>([]);
-  const [filterPokemons, setFilterPokemons] = useState<AllPokemonsProps[]>([]);
+  const [pokemonsPerPage, setPokemonsPerPage] = useState<PokemonsPerPage[]>([]);
+  const [filterPokemons, setFilterPokemons] = useState<PokemonsPerPage[]>([]);
+
   const [totalPages, setTotalPages] = useState(0);
   const [actualPage, setActualPage] = useState(0);
-
+  const limitPokemonPerPage = 25;
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
-  const limitPokemonPerPage = 25;
+
+  /*
   const fetchPokemon = useCallback(
     async (limit = limitPokemonPerPage, offset = 0) => {
       try {
@@ -42,6 +44,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     },
     []
   );
+  */
 
   const inputSearch = async (value: string) => {
     if (!value) {
@@ -61,32 +64,72 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     setAllPokemons(filteredPokemons);
   };
 
-  useEffect(() => {
-    const getPokemonToFilter = async () => {
-      try {
-        const data = await getPokemons(10000, 0);
-        const promises = data.results.map(
-          async (pokemon: GetAllPokemonProps) => {
-            return getPokemonData(pokemon.url);
+  const getPokemonsPerPage = async (pag: number, limit: number) => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${25 * pag}`
+      );
+
+      const { results, count } = await response.json();
+
+      const promises = results.map((result: GetAllPokemonProps) =>
+        getPokemonData(result.url)
+      );
+
+      setTotalPages(Math.ceil(count / limitPokemonPerPage));
+
+      type PromiseAllSettle = {
+        status: 'fulfilled' | 'rejected';
+        value: PokemonsPerPage;
+      };
+      Promise.allSettled(promises).then((promise) => {
+        // eslint-disable-next-line array-callback-return
+        const promiseValue = promise.map(
+          (prom: PromiseAllSettle | PromiseRejectedResult) => {
+            if (prom.status === 'fulfilled') {
+              return prom.value;
+            }
           }
         );
-        Promise.all(promises).then((response: AllPokemonsProps[]) =>
-          setFilterPokemons(response)
-        );
-      } catch (err) {
-        console.log('Error');
-      }
-    };
-    fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
-    getPokemonToFilter();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        if (promiseValue.every((el) => el !== undefined)) {
+          setPokemonsPerPage(promiseValue);
+        }
+
+        setIsLoading(false);
+      });
+    } catch (error) {
+      console.log('Erro Pkm per page');
+    }
+  };
+
+  /*
+  const getAllPokemons = async (pag: number, limit: number) => {
+    const p = await fetch('https://pokeapi.co/api/v2/pokemon/');
+    const { count } = await p.json();
+
+    const data = await getPokemons(count, 0);
+    const promises = data.results.map(async (pokemon: GetAllPokemonProps) => {
+      return getPokemonData(pokemon.url);
+    });
+
+    Promise.allSettled(promises)
+      .then((result) => result)
+      .then((result) => {
+        const d = result.map((res) => res.value);
+        setFilterPokemons(d);
+      });
+  };
+  */
+  useEffect(() => {
+    getPokemonsPerPage(actualPage, limitPokemonPerPage);
   }, [actualPage]);
 
   return (
     <PokemonContext.Provider
       value={{
-        allPokemons,
+        pokemonsPerPage,
         isLoading,
         totalPages,
         actualPage,

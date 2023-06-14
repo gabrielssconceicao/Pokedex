@@ -1,8 +1,8 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
-import { AllPokemonsProps } from './allPokemons';
+import { PokemonsPerPage } from './allPokemons';
 
 export interface PokemonContextProps {
-  allPokemons: AllPokemonsProps[];
+  pokemonsPerPage: PokemonsPerPage[];
 
   isLoading: boolean;
   actualPage: number;

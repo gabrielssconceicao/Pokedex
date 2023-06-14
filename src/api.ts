@@ -10,9 +10,10 @@ export const searchPokemon = async (pokemon: string) => {
 export const getPokemonData = async (url: string) => {
   try {
     const response = await fetch(url);
-    return await response.json();
+    const data = response.json();
+    return await data;
   } catch (error) {
-    console.log('Error');
+    throw new Error('A');
   }
 };
 
