@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { usePokemon } from '../../Hook/usePokemon';
-import { Container } from './paginationStyte';
+import { Container } from './paginationStyle';
 
 interface PaginationProps {
   isSearching: boolean;
