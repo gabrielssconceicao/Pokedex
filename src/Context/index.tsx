@@ -11,60 +11,68 @@ export const PokemonContext = createContext({} as PokemonContextProps);
 
 export function PokemonProvider({ children }: PokemonProviderProps) {
   const [pokemonsPerPage, setPokemonsPerPage] = useState<PokemonsPerPage[]>([]);
-  const [filterPokemons, setFilterPokemons] = useState<PokemonsPerPage[]>([]);
+  // const [filterPokemons, setFilterPokemons] = useState<PokemonsPerPage[]>([]);
 
   const [totalPages, setTotalPages] = useState(0);
   const [actualPage, setActualPage] = useState(0);
+  const [actualSearchPage, setActualSearchPage] = useState(0);
   const limitPokemonPerPage = 25;
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
 
-  /*
-  const fetchPokemon = useCallback(
-    async (limit = limitPokemonPerPage, offset = 0) => {
-      try {
-        setIsLoading(true);
-        const data = await getPokemons(limit, offset);
-        setTotalPages(Math.ceil(data.count / limitPokemonPerPage));
-        const promises = data.results.map(
-          async (pokemon: GetAllPokemonProps) => {
-            return getPokemonData(pokemon.url);
-          }
-        );
-        Promise.all(promises).then((response: AllPokemonsProps[]) =>
-          setAllPokemons(response)
-        );
-
-        // setAllPokemons(result);
-      } catch (error) {
-        console.log('Error');
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    []
-  );
-  */
-
   const inputSearch = async (value: string) => {
     if (!value) {
-      fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
       setIsSearching(false);
       return;
     }
 
-    const filteredPokemons = filterPokemons.filter(
-      (poke) => poke.id.toString() === value || poke.name.includes(value)
-    );
+    setIsSearching(true);
+    setIsLoading(true);
 
-    if (!filteredPokemons.length) {
-      fetchPokemon(limitPokemonPerPage, limitPokemonPerPage * actualPage);
-      return;
+    const data = await fetch(
+      'https://pokeapi.co/api/v2/pokemon?limit=2000&offset=0'
+    );
+    const { results } = await data.json();
+    const filteredPokemons: GetAllPokemonProps[] = results.filter(
+      // eslint-disable-next-line array-callback-return
+      (result: GetAllPokemonProps) => {
+        const id = result.url
+          .split('https://pokeapi.co/api/v2/pokemon/')[1]
+          .slice(0, -1)
+          .toString();
+        if (
+          result.name.includes(value.toLowerCase()) ||
+          id === value.toString()
+        ) {
+          return result;
+        }
+      }
+    );
+    const filteredPokemonsUrl = filteredPokemons.map((poke) =>
+      getPokemonData(poke.url)
+    );
+    try {
+      Promise.allSettled(filteredPokemonsUrl).then((promises) => {
+        const promisesFulfilled = promises.map((promise) => {
+          if (promise.status === 'fulfilled') return promise.value;
+        });
+
+        setPokemonsPerPage(promisesFulfilled);
+
+        const totPage = Math.ceil(
+          promisesFulfilled.length / limitPokemonPerPage
+        );
+        setActualSearchPage(0);
+        setTotalPages(totPage);
+
+        setIsLoading(false);
+      });
+    } catch (error) {
+      console.log(error);
     }
-    setAllPokemons(filteredPokemons);
   };
 
-  const getPokemonsPerPage = async (pag: number, limit: number) => {
+  const getPokemonsPerPage = useCallback(async (pag: number, limit: number) => {
     try {
       setIsLoading(true);
       const response = await fetch(
@@ -79,20 +87,12 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
 
       setTotalPages(Math.ceil(count / limitPokemonPerPage));
 
-      type PromiseAllSettle = {
-        status: 'fulfilled' | 'rejected';
-        value: PokemonsPerPage;
-      };
       Promise.allSettled(promises).then((promise) => {
-        // eslint-disable-next-line array-callback-return
-        const promiseValue = promise.map(
-          (prom: PromiseAllSettle | PromiseRejectedResult) => {
-            if (prom.status === 'fulfilled') {
-              return prom.value;
-            }
+        const promiseValue = promise.map((prom) => {
+          if (prom.status === 'fulfilled') {
+            return prom.value;
           }
-        );
-
+        });
         if (promiseValue.every((el) => el !== undefined)) {
           setPokemonsPerPage(promiseValue);
         }
@@ -102,29 +102,21 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
     } catch (error) {
       console.log('Erro Pkm per page');
     }
-  };
+  }, []);
 
-  /*
-  const getAllPokemons = async (pag: number, limit: number) => {
-    const p = await fetch('https://pokeapi.co/api/v2/pokemon/');
-    const { count } = await p.json();
-
-    const data = await getPokemons(count, 0);
-    const promises = data.results.map(async (pokemon: GetAllPokemonProps) => {
-      return getPokemonData(pokemon.url);
-    });
-
-    Promise.allSettled(promises)
-      .then((result) => result)
-      .then((result) => {
-        const d = result.map((res) => res.value);
-        setFilterPokemons(d);
-      });
-  };
-  */
   useEffect(() => {
-    getPokemonsPerPage(actualPage, limitPokemonPerPage);
-  }, [actualPage]);
+    if (isSearching) {
+      const prevPoke = [...pokemonsPerPage];
+      const newPoke = prevPoke.slice(
+        actualSearchPage,
+        limitPokemonPerPage * (actualSearchPage + 1)
+      );
+      setPokemonsPerPage(newPoke);
+    } else {
+      getPokemonsPerPage(actualPage, limitPokemonPerPage);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [actualPage, getPokemonsPerPage, isSearching, actualSearchPage]);
 
   return (
     <PokemonContext.Provider
@@ -133,8 +125,10 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
         isLoading,
         totalPages,
         actualPage,
+        actualSearchPage,
         isSearching,
         setActualPage,
+        setActualSearchPage,
         inputSearch,
       }}
     >

@@ -6,10 +6,11 @@ export interface PokemonContextProps {
 
   isLoading: boolean;
   actualPage: number;
+  actualSearchPage: number;
   totalPages: number;
   isSearching: boolean;
   setActualPage: Dispatch<SetStateAction<number>>;
-
+  setActualSearchPage: Dispatch<SetStateAction<number>>;
   inputSearch: (value: string) => void;
 }
 
