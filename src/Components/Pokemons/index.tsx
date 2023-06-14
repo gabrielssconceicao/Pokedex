@@ -1,11 +1,11 @@
-import { AllPokemonsProps } from '../../Interfaces/allPokemons';
+import { PokemonsPerPage } from '../../Interfaces/allPokemons';
 import Loading from '../Loading';
 import { Pokemon } from '../Pokemon';
 import { PokemonContainer } from './pokemonsStyled';
 
 interface PokemonsProps {
   isLoading: boolean;
-  pokemons: AllPokemonsProps[];
+  pokemons: PokemonsPerPage[];
 }
 export function Pokemons({ isLoading, pokemons }: PokemonsProps) {
   return (

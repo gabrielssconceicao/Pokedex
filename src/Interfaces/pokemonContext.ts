@@ -3,7 +3,7 @@ import { PokemonsPerPage } from './allPokemons';
 
 export interface PokemonContextProps {
   pokemonsPerPage: PokemonsPerPage[];
-
+  filteredPokemons: PokemonsPerPage[];
   isLoading: boolean;
   actualPage: number;
   actualSearchPage: number;
