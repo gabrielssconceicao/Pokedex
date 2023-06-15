@@ -12,9 +12,10 @@ export function Pokemon({ pokemon }: PokemonProps) {
   return (
     <Container key={`${pokemon.name}-${pokemon.id}`}>
       <div className="desc">
-        <p>
-          {pokemon.id}-{pokemon.name.toUpperCase()}
-        </p>
+        <div className="name-id">
+          <p>{pokemon.id}</p>
+          <p>{pokemon.name.toUpperCase()}</p>
+        </div>
 
         <div className="types">
           {pokemon.types.map((type, index) => (

@@ -41,6 +41,16 @@ export function PokemonsDetails() {
 
         <div style={{ flex: '1' }}>
           <p>{pokemon.name}</p>
+          <div>
+            <img
+              src={
+                pokemon.sprites.other['official-artwork'].front_default
+                  ? pokemon.sprites.other['official-artwork'].front_default
+                  : pokemon.sprites.front_default
+              }
+              alt={pokemon.name}
+            />
+          </div>
         </div>
       </div>
     </section>

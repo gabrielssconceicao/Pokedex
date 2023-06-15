@@ -5,16 +5,16 @@ export const Container = styled.div`
   justify-content: center;
 
   width: 40%;
-  height: 12rem;
+  height: 14rem;
 
   border-radius: 10px;
   box-shadow: 5px 5px 5px #000;
+  background-color: #cdc;
 
   .desc {
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit;
     flex: 1;
-    background-color: #bbb;
 
     display: flex;
     flex-direction: column;
@@ -24,6 +24,16 @@ export const Container = styled.div`
     padding: 2px 4px;
     font-size: 1.7rem;
     font-weight: bold;
+
+    .name-id {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center;
+      p {
+        line-break: auto;
+      }
+    }
 
     .types {
       display: flex;
@@ -69,6 +79,8 @@ export const Container = styled.div`
   .img {
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
     width: 40%;
     display: flex;
     justify-content: center;
@@ -76,6 +88,8 @@ export const Container = styled.div`
 
     img {
       object-fit: contain;
+      font-size: 2rem;
+      color: #000;
     }
   }
 
