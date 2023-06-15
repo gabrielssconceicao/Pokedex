@@ -17,7 +17,6 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
   const [AllFilteredPokemons, setAllFilteredPokemons] = useState<
     PokemonsPerPage[]
   >([]);
-  // const [filterPokemons, setFilterPokemons] = useState<PokemonsPerPage[]>([]);
 
   const [totalPages, setTotalPages] = useState(0);
   const [actualPage, setActualPage] = useState(0);

@@ -69,8 +69,4 @@ export function Pagination({ isSearching }: PaginationProps) {
       </button>
     </Container>
   );
-  // ) : (
-  //   // eslint-disable-next-line react/jsx-no-useless-fragment
-  //   <></>
-  // );
 }
