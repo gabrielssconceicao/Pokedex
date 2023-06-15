@@ -79,10 +79,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
           .split('https://pokeapi.co/api/v2/pokemon/')[1]
           .slice(0, -1)
           .toString();
-        if (
-          result.name.includes(value.toLowerCase()) ||
-          id === value.toString()
-        ) {
+        if (result.name.includes(value.toLowerCase()) || id.includes(value)) {
           return result;
         }
       }
