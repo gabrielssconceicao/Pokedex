@@ -5,13 +5,17 @@ import { Container } from './pokedexStyled';
 import { Pagination } from '../../Components/Pagination';
 
 export default function Pokedex() {
-  const { allPokemons, isLoading, isSearching } = usePokemon();
+  const { pokemonsPerPage, filteredPokemons, isLoading, isSearching } =
+    usePokemon();
 
   return (
     <Container>
       <Nav />
 
-      <Pokemons isLoading={isLoading} pokemons={allPokemons} />
+      <Pokemons
+        isLoading={isLoading}
+        pokemons={isSearching ? filteredPokemons : pokemonsPerPage}
+      />
       <Pagination isSearching={isSearching} />
     </Container>
   );

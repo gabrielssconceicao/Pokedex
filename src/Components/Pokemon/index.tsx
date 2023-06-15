@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import {
-  AllPokemonsProps,
+  PokemonsPerPage,
   PokemonTypesColors,
 } from '../../Interfaces/allPokemons';
 import { Container } from './pokemonStyled';
 
 interface PokemonProps {
-  pokemon: AllPokemonsProps;
+  pokemon: PokemonsPerPage;
 }
 export function Pokemon({ pokemon }: PokemonProps) {
   return (

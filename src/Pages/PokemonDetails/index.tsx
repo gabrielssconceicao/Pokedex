@@ -1,11 +1,11 @@
 import { Link, useParams, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { searchPokemon } from '../../api';
-import { AllPokemonsProps } from '../../Interfaces/allPokemons';
+import { PokemonsPerPage } from '../../Interfaces/allPokemons';
 import Loading from '../../Components/Loading';
 
 export function PokemonsDetails() {
-  const [pokemon, setPokemon] = useState<AllPokemonsProps>();
+  const [pokemon, setPokemon] = useState<PokemonsPerPage>();
   const { id } = useParams();
   useEffect(() => {
     const getData = async (value: string) => {
