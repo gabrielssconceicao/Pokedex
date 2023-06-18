@@ -49,9 +49,8 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
         if (promiseValue.every((el) => el !== undefined)) {
           setPokemonsPerPage(promiseValue);
         }
-
-        setIsLoading(false);
       });
+      setIsLoading(false);
     } catch (error) {
       console.log('Erro Pkm per page');
     }
@@ -116,6 +115,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
 
   useEffect(() => {
     if (isSearching && AllFilteredPokemons.length > 0) {
+      setIsLoading(false);
       const prevPoke = [...AllFilteredPokemons];
       const newPoke = prevPoke.slice(
         actualSearchPage * 25,
