@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  padding: 1.5rem;
+  padding: ${({ theme }) => theme.fontSize.xs};
   justify-content: center;
   align-items: center;
-  gap: 2.5rem;
-  font-size: 1.5rem;
+  gap: ${({ theme }) => theme.fontSize.base};
+  font-size: ${({ theme }) => theme.fontSize.xs};
   button {
     width: 3rem;
     height: 3rem;
@@ -19,5 +19,6 @@ export const Container = styled.div`
   }
 
   .page_index {
+    font-size: ${({ theme }) => theme.fontSize.sm};
   }
 `;

@@ -45,4 +45,21 @@ export const theme: DefaultTheme = {
     '4xl': '5.5rem',
     '5xl': '6rem',
   },
+
+  components: {
+    pokemonNavDetails: {
+      width: '7rem',
+      mediaHeight: '6rem',
+      mediaWidth: '100vw',
+    },
+
+    pokemonContainer: {
+      width: '40%',
+      height: '16rem',
+      borderRadius: '2rem',
+      backgroundColor: '#ddd',
+
+      mediaWidth: '100%',
+    },
+  },
 };

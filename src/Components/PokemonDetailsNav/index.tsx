@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { Container } from './PokemonDetailsNav';
 
@@ -6,10 +6,14 @@ export default function PokemonDetailsNav() {
   return (
     <Container>
       <nav>
-        <NavLink to="/">
-          <BiArrowBack />
-          <span>Voltar</span>
-        </NavLink>
+        <ul>
+          <li>
+            <NavLink to="/">
+              <BiArrowBack />
+              <span>Voltar</span>
+            </NavLink>
+          </li>
+        </ul>
       </nav>
     </Container>
   );

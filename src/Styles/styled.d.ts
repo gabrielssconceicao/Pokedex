@@ -43,5 +43,21 @@ declare module 'styled-components' {
       '4xl': string;
       '5xl': string;
     };
+
+    components: {
+      pokemonNavDetails: {
+        width: string;
+        mediaHeight: string;
+        mediaWidth: string;
+      };
+
+      pokemonContainer: {
+        width: string;
+        height: string;
+        borderRadius: string;
+        backgroundColor: string;
+        mediaWidth: string;
+      };
+    };
   }
 }

@@ -4,12 +4,14 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
 
-  width: 40%;
-  height: 14rem;
+  width: ${({ theme }) => theme.components.pokemonContainer.width};
+  height: ${({ theme }) => theme.components.pokemonContainer.height};
 
-  border-radius: 10px;
+  border-radius: ${({ theme }) =>
+    theme.components.pokemonContainer.borderRadius};
   box-shadow: 5px 5px 5px #000;
-  background-color: #cdc;
+  background-color: ${({ theme }) =>
+    theme.components.pokemonContainer.backgroundColor};
 
   .desc {
     border-top-left-radius: inherit;
@@ -19,7 +21,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #000;
+    color: ${({ theme }) => theme.colors.gray900};
 
     padding: 2px 4px;
     font-size: 1.7rem;
@@ -94,6 +96,6 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: ${({ theme }) => theme.components.pokemonContainer.mediaWidth};
   }
 `;
