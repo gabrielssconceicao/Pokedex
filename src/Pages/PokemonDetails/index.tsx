@@ -7,48 +7,44 @@ import { Container, PokemonDetailsContainer } from './pokemonDetailsStyled';
 import PokemonDetailsNav from '../../Components/PokemonDetailsNav';
 
 export function PokemonsDetails() {
-  const [pokemon, setPokemon] = useState<PokemonsPerPage>();
+  const [pokemon, setPokemon] = useState<PokemonsPerPage | undefined>(
+    undefined
+  );
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
+
   useEffect(() => {
     const getData = async (value: string) => {
-      let data = {};
-
+      setLoading(true);
       try {
-        const p: PokemonsPerPage = await searchPokemon(value);
-        data = { ...p };
-      } catch (err) {
-        setPokemon(data);
-      } finally {
-        if (Object.entries(data).length > 0) {
-          setPokemon(data);
-        } else {
-          setPokemon({ name: 'pokemon not found' });
+        const data: PokemonsPerPage | undefined = await searchPokemon(value);
+        if (data === undefined) {
+          setPokemon(undefined);
+          return;
         }
+        setPokemon(data);
+      } catch (err) {
+        console.log('ERRO');
+      } finally {
+        setLoading(false);
       }
     };
 
     if (id) getData(id);
   }, [id]);
-
   return (
     <Container>
-      {pokemon ? (
+      {!loading ? (
         <PokemonDetailsContainer>
           <PokemonDetailsNav />
-
-          {Object.entries(pokemon).length === 1 ? (
-            <h1>{pokemon.name}</h1>
+          {pokemon === undefined ? (
+            <h1>Pokemon não encontrado</h1>
           ) : (
             <div style={{ flex: 1 }}>
               <h1>{pokemon.name}</h1>
               <img
-                src={
-                  pokemon.sprites.other['official-artwork']
-                    ? pokemon.sprites.other['official-artwork'].front_default
-                    : pokemon.sprites.front_default
-                }
+                src={pokemon.sprites.other['official-artwork'].front_default}
                 alt={pokemon.name}
-                style={{ height: '50rem' }}
               />
             </div>
           )}

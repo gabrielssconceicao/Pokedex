@@ -104,6 +104,7 @@ export function PokemonProvider({ children }: PokemonProviderProps) {
       });
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 

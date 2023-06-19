@@ -4,7 +4,7 @@ export const searchPokemon = async (pokemon: string) => {
     const response = await fetch(url);
     return await response.json();
   } catch (error) {
-    return error;
+    console.log(error);
   }
 };
 export const getPokemonData = async (url: string) => {
