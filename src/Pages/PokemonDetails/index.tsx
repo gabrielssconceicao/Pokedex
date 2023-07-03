@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { searchPokemon } from '../../api';
 import { PokemonsPerPage } from '../../Interfaces/allPokemons';
 import Loading from '../../Components/Loading';
 import { Container, PokemonDetailsContainer } from './pokemonDetailsStyled';
-import PokemonDetailsNav from '../../Components/PokemonDetailsNav';
+import { PokemonDetailsNav } from '../../Components/PokemonDetailsNav';
 
 export function PokemonsDetails() {
   const [pokemon, setPokemon] = useState<PokemonsPerPage | undefined>(
@@ -36,17 +36,15 @@ export function PokemonsDetails() {
     <Container>
       {!loading ? (
         <PokemonDetailsContainer>
-          <PokemonDetailsNav />
           {pokemon === undefined ? (
             <h1>Pokemon não encontrado</h1>
           ) : (
-            <div style={{ flex: 1 }}>
-              <h1>{pokemon.name}</h1>
-              <img
-                src={pokemon.sprites.other['official-artwork'].front_default}
-                alt={pokemon.name}
-              />
-            </div>
+            <>
+              <div className="container">
+                <Outlet context={pokemon} />
+              </div>
+              <PokemonDetailsNav />
+            </>
           )}
         </PokemonDetailsContainer>
       ) : (

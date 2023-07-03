@@ -33,7 +33,7 @@ export function Pokemon({ pokemon }: PokemonProps) {
         </div>
 
         <div className="link">
-          <Link to={`pokemon/${pokemon.name}`}>More info</Link>
+          <Link to={`pokemon/${pokemon.name}/info`}>More info</Link>
         </div>
       </div>
 

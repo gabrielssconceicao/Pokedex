@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const Container = styled.header`
+// Adicionar o active class
+export const Container = styled.div`
   width: ${({ theme }) => theme.components.pokemonNavDetails.width};
 
   background-color: red;
@@ -27,6 +28,7 @@ export const Container = styled.header`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       svg {
         height: ${({ theme }) => theme.fontSize.lg};
         width: ${({ theme }) => theme.fontSize.lg};
@@ -37,6 +39,15 @@ export const Container = styled.header`
         color: ${({ theme }) => theme.colors.black};
         font-weight: bold;
         color: #fff;
+      }
+
+      &.active {
+        svg {
+          fill: ${({ theme }) => theme.colors.indigo};
+        }
+        span {
+          color: ${({ theme }) => theme.colors.cyan};
+        }
       }
     }
   }

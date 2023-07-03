@@ -4,7 +4,7 @@ import { Nav } from '../../Components/Nav';
 import { Container } from './pokedexStyled';
 import { Pagination } from '../../Components/Pagination';
 
-export default function Pokedex() {
+export function Pokedex() {
   const { pokemonsPerPage, filteredPokemons, isLoading, isSearching } =
     usePokemon();
 
