@@ -3,6 +3,8 @@ export interface PokemonsPerPage {
   sprites: PokemonImage;
   types: PokemonTypes[];
   id: number;
+  height: number;
+  weight: number;
 }
 
 interface PokemonImage {
