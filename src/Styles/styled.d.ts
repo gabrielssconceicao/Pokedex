@@ -58,6 +58,11 @@ declare module 'styled-components' {
         backgroundColor: string;
         mediaWidth: string;
       };
+
+      pokeTitle: {
+        height: string;
+        mediaHeight: string;
+      };
     };
   }
 }

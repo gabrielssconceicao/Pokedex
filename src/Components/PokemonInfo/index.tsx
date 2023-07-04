@@ -10,23 +10,7 @@ export function PokemonInfo() {
   console.log(pokemon);
   return (
     <Container>
-      <div className="title">
-        <span> Nº{pokemon.id}</span>
-        <span>{pokemon.name}</span>
-        <div className="types">
-          {pokemon.types.map((type) => (
-            <div
-              key={type.type.name}
-              className="type"
-              style={{ background: PokemonTypesColors[type.type.name] }}
-            >
-              {type.type.name}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="species">
+      {/* <div className="species">
         <div className="image">
           <img
             src={
@@ -40,15 +24,25 @@ export function PokemonInfo() {
 
         <div className="specie">
           <div className="description">description</div>
-          <div className="height">Heigh: {pokemon.height / 10}m</div>
-          <div className="weight">Weight: {pokemon.weight / 10}Kg</div>
+          <div className="height-weight">
+            <p>Height-Weight</p>
+          </div>
+          <div className="weight" />
           <div className="abilities">Abylites</div>
         </div>
       </div>
 
       <div className="status" />
       <div className="location">Location</div>
-      <div className="evolution">Evolution </div>
+      <div className="evolution">Evolution </div> */}
+
+      <div className="image">Image</div>
+      <div className="description">Description</div>
+      <div className="weight-height">Height-Weight</div>
+      <div className="abilities">Abilities</div>
+      <div className="status">Status</div>
+      <div className="location">Location</div>
+      <div className="evolution">Evolution</div>
     </Container>
   );
 }

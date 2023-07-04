@@ -2,39 +2,45 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
-
-  .title {
-    background-color: ${({ theme }) => theme.colors.black};
-    padding: 1rem;
-    font-size: 2rem;
-    align-items: center;
-
-    display: flex;
-    gap: 1rem;
-
-    span {
-      text-transform: uppercase;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', 'Arial',
-        sans-serif;
-    }
-
-    .types {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 3rem;
-
-      .type {
-        width: 30%;
-        text-align: center;
-        padding: 0.5rem;
-      }
-    }
+  height: calc(100% - ${({ theme }) => theme.components.pokeTitle.height});
+  display: grid;
+  grid-template-areas:
+    'img  img  desc'
+    'img  img   hw'
+    'img  img   ab'
+    'loc  loc  loc '
+    'stts stts stts '
+    'evol evol evol';
+  .image {
+    grid-area: img;
+    background: red;
+  }
+  .description {
+    grid-area: desc;
+    background: blue;
+  }
+  .weight-height {
+    grid-area: hw;
+    background: purple;
   }
 
-  .species {
+  .abilities {
+    grid-area: ab;
+    background: green;
+  }
+  .status {
+    grid-area: stts;
+    background: pink;
+  }
+  .location {
+    grid-area: loc;
+    background: yellow;
+  }
+  .evolution {
+    grid-area: evol;
+    background: orange;
+  }
+  /* .species {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -55,7 +61,19 @@ export const Container = styled.div`
       }
       .height {
         grid-area: ft;
-        background-color: pink;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: ${({ theme }) => theme.fontSize.xs};
+
+        p {
+          width: 80%;
+          background-color: #fff;
+          text-align: center;
+          padding: 0.5rem 1rem;
+        }
       }
       .weight {
         grid-area: lb;
@@ -67,8 +85,13 @@ export const Container = styled.div`
   .image {
     width: 30rem;
     img {
-      background-color: #fff;
       width: inherit;
     }
+  } */
+
+  @media (max-width: 768px) {
+    height: calc(
+      100% - ${({ theme }) => theme.components.pokeTitle.mediaHeight}
+    );
   }
 `;

@@ -5,6 +5,7 @@ import { PokemonsPerPage } from '../../Interfaces/allPokemons';
 import Loading from '../../Components/Loading';
 import { Container, PokemonDetailsContainer } from './pokemonDetailsStyled';
 import { PokemonDetailsNav } from '../../Components/PokemonDetailsNav';
+import { PokeTitle } from '../../Components/PokeTitle';
 
 export function PokemonsDetails() {
   const [pokemon, setPokemon] = useState<PokemonsPerPage | undefined>(
@@ -41,6 +42,11 @@ export function PokemonsDetails() {
           ) : (
             <>
               <div className="container">
+                <PokeTitle
+                  name={pokemon.name}
+                  id={pokemon.id}
+                  types={pokemon.types}
+                />
                 <Outlet context={pokemon} />
               </div>
               <PokemonDetailsNav />

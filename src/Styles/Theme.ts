@@ -61,5 +61,10 @@ export const theme: DefaultTheme = {
 
       mediaWidth: '100%',
     },
+
+    pokeTitle: {
+      height: '7rem',
+      mediaHeight: '9rem',
+    },
   },
 };
