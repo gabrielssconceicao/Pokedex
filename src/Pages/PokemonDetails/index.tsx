@@ -1,7 +1,10 @@
 import { Outlet, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { searchPokemon } from '../../api';
-import { PokemonsPerPage } from '../../Interfaces/allPokemons';
+import {
+  PokemonDescription,
+  PokemonsPerPage,
+} from '../../Interfaces/allPokemons';
 import Loading from '../../Components/Loading';
 import { Container, PokemonDetailsContainer } from './pokemonDetailsStyled';
 import { PokemonDetailsNav } from '../../Components/PokemonDetailsNav';
@@ -11,7 +14,7 @@ export function PokemonsDetails() {
   const [pokemon, setPokemon] = useState<PokemonsPerPage | undefined>(
     undefined
   );
-  const [specie, setSpecie] = useState();
+  const [specie, setSpecie] = useState<PokemonDescription | undefined>();
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
@@ -42,7 +45,9 @@ export function PokemonsDetails() {
     };
     if (pokemon) {
       const { species } = pokemon;
+
       try {
+        setLoading(true);
         const response = getData(species.url);
         Promise.allSettled([response]).then((data) =>
           data[0].status === 'fulfilled'
@@ -50,7 +55,9 @@ export function PokemonsDetails() {
             : setSpecie(undefined)
         );
       } catch (error) {
-        console.log(error);
+        setSpecie(undefined);
+      } finally {
+        setLoading(false);
       }
     }
   }, [pokemon]);
@@ -58,7 +65,7 @@ export function PokemonsDetails() {
     <Container>
       {!loading ? (
         <PokemonDetailsContainer>
-          {pokemon === undefined ? (
+          {pokemon === undefined || specie === undefined ? (
             <h1>Pokemon não encontrado</h1>
           ) : (
             <>

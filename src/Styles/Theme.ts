@@ -66,5 +66,10 @@ export const theme: DefaultTheme = {
       height: '7rem',
       mediaHeight: '9rem',
     },
+
+    pokemonInfo: {
+      height: '35rem',
+      maxHeight: '50rem',
+    },
   },
 };

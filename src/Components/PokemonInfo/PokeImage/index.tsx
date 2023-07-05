@@ -1,18 +1,21 @@
+import { Container } from './styled';
+
 interface PokeImageProps {
-  className: string;
   defaultImg: string;
   alternativeImg: string;
   altImg: string;
+  bgColor: string;
 }
+
 export function PokeImage({
-  className,
   defaultImg,
   alternativeImg,
   altImg,
+  bgColor,
 }: PokeImageProps) {
   return (
-    <div className={className}>
+    <Container style={{ background: bgColor }}>
       <img src={defaultImg || alternativeImg} alt={altImg} />
-    </div>
+    </Container>
   );
 }

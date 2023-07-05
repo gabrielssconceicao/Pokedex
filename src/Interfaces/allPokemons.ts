@@ -5,7 +5,7 @@ export interface PokemonsPerPage {
   id: number;
   height: number;
   weight: number;
-  species: PokemonSpecie;
+  species: PokemonSpecieUrl;
 }
 
 interface PokemonImage {
@@ -30,7 +30,7 @@ export interface PokemonTypes {
   };
 }
 
-interface PokemonSpecie {
+interface PokemonSpecieUrl {
   url: string;
 }
 
@@ -73,4 +73,14 @@ export enum PokemonTypesColors {
   dark = '#705746',
   steel = '#B7B7CE',
   fairy = '#D685AD',
+}
+export interface PokemonDescription {
+  flavor_text_entries: FlavorTextEntries[];
+}
+
+export interface FlavorTextEntries {
+  flavor_text: string;
+  language: {
+    name: string;
+  };
 }

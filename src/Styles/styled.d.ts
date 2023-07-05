@@ -63,6 +63,11 @@ declare module 'styled-components' {
         height: string;
         mediaHeight: string;
       };
+
+      pokemonInfo: {
+        height: string;
+        maxHeight: string;
+      };
     };
   }
 }
