@@ -11,6 +11,7 @@ export function PokemonsDetails() {
   const [pokemon, setPokemon] = useState<PokemonsPerPage | undefined>(
     undefined
   );
+  const [specie, setSpecie] = useState();
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
@@ -33,6 +34,26 @@ export function PokemonsDetails() {
 
     if (id) getData(id);
   }, [id]);
+
+  useEffect(() => {
+    const getData = async (url: string) => {
+      const response = await fetch(url);
+      return response.json();
+    };
+    if (pokemon) {
+      const { species } = pokemon;
+      try {
+        const response = getData(species.url);
+        Promise.allSettled([response]).then((data) =>
+          data[0].status === 'fulfilled'
+            ? setSpecie(data[0].value)
+            : setSpecie(undefined)
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [pokemon]);
   return (
     <Container>
       {!loading ? (
@@ -47,7 +68,7 @@ export function PokemonsDetails() {
                   id={pokemon.id}
                   types={pokemon.types}
                 />
-                <Outlet context={pokemon} />
+                <Outlet context={[pokemon, specie]} />
               </div>
               <PokemonDetailsNav />
             </>

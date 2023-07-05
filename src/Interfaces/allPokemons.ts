@@ -5,6 +5,7 @@ export interface PokemonsPerPage {
   id: number;
   height: number;
   weight: number;
+  species: PokemonSpecie;
 }
 
 interface PokemonImage {
@@ -27,6 +28,10 @@ export interface PokemonTypes {
   type: {
     name: PokemonTypesNames;
   };
+}
+
+interface PokemonSpecie {
+  url: string;
 }
 
 type PokemonTypesNames =
