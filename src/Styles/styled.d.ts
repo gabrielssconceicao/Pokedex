@@ -65,8 +65,16 @@ declare module 'styled-components' {
       };
 
       pokemonInfo: {
-        height: string;
-        maxHeight: string;
+        pokeImg: {
+          height: string;
+          maxHeight: string;
+          width: string;
+        };
+        pokeDescription: {
+          height: string;
+          maxHeight: string;
+          width: string;
+        };
       };
     };
   }

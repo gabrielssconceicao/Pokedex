@@ -1,4 +1,4 @@
-import { FlavorTextEntries } from '../../../Interfaces/allPokemons';
+import { FlavorTextEntries } from '../../Interfaces/allPokemons';
 import { Container } from './styled';
 
 interface DescriptionProps {

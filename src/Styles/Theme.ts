@@ -68,8 +68,16 @@ export const theme: DefaultTheme = {
     },
 
     pokemonInfo: {
-      height: '35rem',
-      maxHeight: '50rem',
+      pokeImg: {
+        height: 'fi-content',
+        maxHeight: '50%',
+        width: '35%',
+      },
+      pokeDescription: {
+        height: 'fi-content',
+        maxHeight: '50%',
+        width: '65%',
+      },
     },
   },
 };

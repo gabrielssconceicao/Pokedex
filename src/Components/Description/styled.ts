@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: ${({ theme }) => theme.components.pokemonInfo.height};
-  max-height: ${({ theme }) => theme.components.pokemonInfo.maxHeight};
-  width: 60%;
+  height: ${({ theme }) => theme.components.pokemonInfo.pokeDescription.height};
+  max-height: ${({ theme }) =>
+    theme.components.pokemonInfo.pokeDescription.maxHeight};
+  width: ${({ theme }) => theme.components.pokemonInfo.pokeDescription.width};
   padding: 1rem 2rem;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   .desc {
     width: 100%;
     border-radius: 1.5rem;
