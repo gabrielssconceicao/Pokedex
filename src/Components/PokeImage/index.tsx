@@ -14,7 +14,7 @@ export function PokeImage({
   bgColor,
 }: PokeImageProps) {
   return (
-    <Container style={{ background: bgColor }}>
+    <Container bgColor={bgColor}>
       <img src={defaultImg || alternativeImg} alt={altImg} />
     </Container>
   );

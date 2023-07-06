@@ -1,10 +1,8 @@
 import { Outlet, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { searchPokemon } from '../../api';
-import {
-  PokemonDescription,
-  PokemonsPerPage,
-} from '../../Interfaces/allPokemons';
+import { PokemonsPerPage } from '../../Interfaces/allPokemons';
+import { PokemonDescription } from '../../Interfaces/pokemonDescription';
 import Loading from '../../Components/Loading';
 import { Container, PokemonDetailsContainer } from './pokemonDetailsStyled';
 import { PokemonDetailsNav } from '../../Components/PokemonDetailsNav';

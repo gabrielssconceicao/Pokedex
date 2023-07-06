@@ -27,5 +27,7 @@ module.exports = {
     'consistent-return': 0,
     'react/jsx-no-constructed-context-values': 0,
     'array-callback-return': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
   },
 };

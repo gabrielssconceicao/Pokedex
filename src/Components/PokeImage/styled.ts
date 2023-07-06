@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  bgColor: string;
+}
+export const Container = styled.div<ContainerProps>`
   width: ${({ theme }) => theme.components.pokemonInfo.pokeImg.width};
   height: ${({ theme }) => theme.components.pokemonInfo.pokeImg.height};
   max-height: ${({ theme }) => theme.components.pokemonInfo.pokeImg.maxHeight};
-  background-color: ${({ theme }) => theme.colors.gray400};
+  background-color: ${(props) => props.bgColor};
   display: flex;
   justify-content: center;
   align-items: center;

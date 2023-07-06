@@ -1,3 +1,5 @@
+import { PokeAbilities } from './pokemonDescription';
+
 export interface PokemonsPerPage {
   name: string;
   sprites: PokemonImage;
@@ -6,6 +8,7 @@ export interface PokemonsPerPage {
   height: number;
   weight: number;
   species: PokemonSpecieUrl;
+  abilities: PokeAbilities[];
 }
 
 interface PokemonImage {
@@ -73,14 +76,4 @@ export enum PokemonTypesColors {
   dark = '#705746',
   steel = '#B7B7CE',
   fairy = '#D685AD',
-}
-export interface PokemonDescription {
-  flavor_text_entries: FlavorTextEntries[];
-}
-
-export interface FlavorTextEntries {
-  flavor_text: string;
-  language: {
-    name: string;
-  };
 }

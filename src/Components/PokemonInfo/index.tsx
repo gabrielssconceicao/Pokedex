@@ -3,10 +3,10 @@ import { useOutletContext } from 'react-router-dom';
 import { Container } from './PokemonInfoStyled';
 import { PokeImage } from '../PokeImage';
 import {
-  PokemonDescription,
   PokemonsPerPage,
   PokemonTypesColors,
 } from '../../Interfaces/allPokemons';
+import { PokemonDescription } from '../../Interfaces/pokemonDescription';
 import { Description } from '../Description';
 import { Abilities } from '../Abilites';
 
@@ -26,7 +26,10 @@ export function PokemonInfo() {
         height={pokemon.height}
         weight={pokemon.weight}
       />
-      <Abilities />
+      <Abilities
+        abilities={pokemon.abilities}
+        bgColor={PokemonTypesColors[pokemon.types[0].type.name]}
+      />
       <div className="status">Status</div>
       <div className="location">Location</div>
       <div className="evolution">Evolution</div>
