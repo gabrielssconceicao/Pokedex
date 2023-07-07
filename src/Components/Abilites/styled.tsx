@@ -5,8 +5,8 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  width: 100%;
-  height: 35%;
+  width: ${({ theme }) => theme.components.pokemonInfo.pokeAbilities.width};
+  height: ${({ theme }) => theme.components.pokemonInfo.pokeAbilities.height};
   color: #000;
   background-color: ${(props) => props.bgColor};
   display: flex;

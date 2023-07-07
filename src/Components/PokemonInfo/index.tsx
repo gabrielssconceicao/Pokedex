@@ -31,7 +31,10 @@ export function PokemonInfo() {
         abilities={pokemon.abilities}
         bgColor={PokemonTypesColors[pokemon.types[0].type.name]}
       />
-      <Status status={pokemon.stats} />
+      <Status
+        status={pokemon.stats}
+        bgColor={PokemonTypesColors[pokemon.types[0].type.name]}
+      />
     </Container>
   );
 }

@@ -77,6 +77,14 @@ export const theme: DefaultTheme = {
         height: '60%',
         width: '60%',
       },
+      pokeAbilities: {
+        height: '35%',
+        width: '90%',
+      },
+      pokeStatus: {
+        height: '35%',
+        width: '90%',
+      },
     },
   },
 };

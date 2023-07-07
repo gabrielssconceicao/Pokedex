@@ -75,6 +75,14 @@ declare module 'styled-components' {
           height: string;
           width: string;
         };
+        pokeAbilities: {
+          height: string;
+          width: string;
+        };
+        pokeStatus: {
+          height: string;
+          width: string;
+        };
       };
     };
   }

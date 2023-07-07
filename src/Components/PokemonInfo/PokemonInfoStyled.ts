@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   overflow-y: auto;
-  gap: 1rem;
+  gap: 1.5rem;
   @media (max-width: 768px) {
     height: calc(
       100% - ${({ theme }) => theme.components.pokeTitle.mediaHeight}
