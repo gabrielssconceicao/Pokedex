@@ -9,6 +9,7 @@ export interface PokemonsPerPage {
   weight: number;
   species: PokemonSpecieUrl;
   abilities: PokeAbilities[];
+  stats: PokeStats[];
 }
 
 interface PokemonImage {
@@ -76,4 +77,11 @@ export enum PokemonTypesColors {
   dark = '#705746',
   steel = '#B7B7CE',
   fairy = '#D685AD',
+}
+
+export interface PokeStats {
+  base_stat: number;
+  stat: {
+    name: string;
+  };
 }

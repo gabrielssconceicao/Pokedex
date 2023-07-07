@@ -19,28 +19,38 @@ export const Container = styled.div`
     border-radius: 2rem;
     height: 2.5rem;
     background-color: ${({ theme }) => theme.colors.gray400};
-    cursor: pointer;
-    &:hover {
-      border: 2px solid #000;
-    }
   }
 
   .abilityDesc {
-    flex: 1;
-
-    padding: 1rem 0.5rem;
-
-    line-height: 2rem;
-    font-size: 1.4rem;
-
+    font-size: 1.5rem;
     overflow-y: auto;
+    width: 85%;
 
-    background-color: ${({ theme }) => theme.colors.gray400};
-    border-radius: 2rem;
-    transition: height 300ms ease;
+    &::-webkit-scrollbar-thumb {
+      background-color: #333;
+    }
+
+    /* Estiliza a área da barra de rolagem onde o thumb não está presente */
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb,
+    &::-webkit-scrollbar {
+      border-top-right-radius: 20rem;
+      border-bottom-right-radius: 20rem;
+    }
   }
 
   h3 {
     font-size: 2rem;
+    font-size: 1.4rem;
+  }
+
+  .abilityDesc,
+  h3 {
+    padding: 1rem 1.5rem;
+    line-height: 2.5rem;
+    flex: 1;
+    background-color: ${({ theme }) => theme.colors.gray400};
+    border-radius: 2rem;
+    box-shadow: 3px 2px 3px #000;
   }
 `;

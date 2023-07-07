@@ -13,7 +13,7 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   border-radius: 3rem;
   img {
-    width: 75%;
+    width: ${({ theme }) => theme.components.pokemonInfo.pokeImg.imgWidth};
     object-fit: contain;
     color: #000;
     font-size: 3rem;

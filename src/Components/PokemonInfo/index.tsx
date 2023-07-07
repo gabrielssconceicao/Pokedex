@@ -9,6 +9,7 @@ import {
 import { PokemonDescription } from '../../Interfaces/pokemonDescription';
 import { Description } from '../Description';
 import { Abilities } from '../Abilites';
+import { Status } from '../Status';
 
 export function PokemonInfo() {
   const [pokemon, specie]: [PokemonsPerPage, PokemonDescription] =
@@ -30,9 +31,7 @@ export function PokemonInfo() {
         abilities={pokemon.abilities}
         bgColor={PokemonTypesColors[pokemon.types[0].type.name]}
       />
-      <div className="status">Status</div>
-      <div className="location">Location</div>
-      <div className="evolution">Evolution</div>
+      <Status status={pokemon.stats} />
     </Container>
   );
 }

@@ -13,7 +13,7 @@ interface AbilitiesProps {
 }
 export function Abilities({ abilities, bgColor }: AbilitiesProps) {
   const [ability, setAbility] = useState<EffectEntries[]>([]);
-  console.log(ability);
+
   useEffect(() => {
     const promisseArray = abilities.map((abilit) =>
       getPokemonData(abilit.ability.url)

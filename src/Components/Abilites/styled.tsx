@@ -5,9 +5,8 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  width: 30%;
-  min-width: 20%;
-  height: 40%;
+  width: 100%;
+  height: 35%;
   color: #000;
   background-color: ${(props) => props.bgColor};
   display: flex;
@@ -16,6 +15,7 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   border-radius: 2rem;
   padding: 0.5rem 1rem;
+  align-self: center;
 
   h3 {
     text-align: center;
@@ -29,5 +29,7 @@ export const Container = styled.div<ContainerProps>`
     width: 100%;
     height: calc(100% - 3rem);
     gap: 1rem;
+    padding: 0.5rem 1rem;
+    text-align: justify;
   }
 `;

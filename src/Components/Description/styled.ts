@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: ${({ theme }) => theme.components.pokemonInfo.pokeDescription.height};
-  max-height: ${({ theme }) =>
-    theme.components.pokemonInfo.pokeDescription.maxHeight};
   width: ${({ theme }) => theme.components.pokemonInfo.pokeDescription.width};
   padding: 1rem 2rem;
   display: flex;

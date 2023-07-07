@@ -69,10 +69,10 @@ declare module 'styled-components' {
           height: string;
           maxHeight: string;
           width: string;
+          imgWidth: string;
         };
         pokeDescription: {
           height: string;
-          maxHeight: string;
           width: string;
         };
       };
