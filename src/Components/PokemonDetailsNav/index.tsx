@@ -12,7 +12,7 @@ export function PokemonDetailsNav() {
           <li>
             <Link to="/">
               <BiArrowBack />
-              <span>Voltar</span>
+              <span>Back</span>
             </Link>
           </li>
           <li>

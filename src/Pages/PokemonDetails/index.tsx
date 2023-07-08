@@ -7,6 +7,7 @@ import Loading from '../../Components/Loading';
 import { Container, PokemonDetailsContainer } from './pokemonDetailsStyled';
 import { PokemonDetailsNav } from '../../Components/PokemonDetailsNav';
 import { PokeTitle } from '../../Components/PokeTitle';
+import { PokemonNotFound } from '../../Components/PokemonNotFound';
 
 export function PokemonsDetails() {
   const [pokemon, setPokemon] = useState<PokemonsPerPage | undefined>(
@@ -27,7 +28,7 @@ export function PokemonsDetails() {
         }
         setPokemon(data);
       } catch (err) {
-        console.log('ERRO');
+        setPokemon(undefined);
       } finally {
         setLoading(false);
       }
@@ -63,8 +64,8 @@ export function PokemonsDetails() {
     <Container>
       {!loading ? (
         <PokemonDetailsContainer>
-          {pokemon === undefined || specie === undefined ? (
-            <h1>Pokemon não encontrado</h1>
+          {pokemon === undefined ? (
+            <PokemonNotFound />
           ) : (
             <>
               <div className="container">
@@ -73,7 +74,7 @@ export function PokemonsDetails() {
                   id={pokemon.id}
                   types={pokemon.types}
                 />
-                <Outlet context={[pokemon, specie]} />
+                {specie && <Outlet context={[pokemon, specie]} />}
               </div>
               <PokemonDetailsNav />
             </>
