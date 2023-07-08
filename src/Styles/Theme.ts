@@ -71,6 +71,7 @@ export const theme: DefaultTheme = {
         height: '60%',
         maxHeight: '60%',
         width: '35%',
+        mobileWidth: '100%',
         imgWidth: '60%',
       },
       pokeDescription: {
@@ -86,5 +87,9 @@ export const theme: DefaultTheme = {
         width: '90%',
       },
     },
+  },
+
+  deviceSize: {
+    tablet: '768px',
   },
 };

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // Adicionar o active class
 export const Container = styled.div`
   width: ${({ theme }) => theme.components.pokemonNavDetails.width};
-
+  height: 100vh;
   background-color: red;
   display: flex;
   flex-direction: column;

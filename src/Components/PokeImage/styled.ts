@@ -19,4 +19,7 @@ export const Container = styled.div<ContainerProps>`
     font-size: 3rem;
     font-family: Arial, Helvetica, sans-serif;
   }
+
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
+  }
 `;

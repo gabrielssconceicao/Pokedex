@@ -69,6 +69,7 @@ declare module 'styled-components' {
           height: string;
           maxHeight: string;
           width: string;
+          mobileWidth: string;
           imgWidth: string;
         };
         pokeDescription: {
@@ -84,6 +85,10 @@ declare module 'styled-components' {
           width: string;
         };
       };
+    };
+
+    deviceSize: {
+      tablet: string;
     };
   }
 }

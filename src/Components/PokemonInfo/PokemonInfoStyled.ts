@@ -9,11 +9,14 @@ export const Container = styled.div`
   flex-wrap: wrap;
   overflow-y: auto;
   gap: 1.5rem;
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     height: calc(
-      100% - ${({ theme }) => theme.components.pokeTitle.mediaHeight}
+      100vh -
+        calc(
+          ${({ theme }) => theme.components.pokeTitle.mediaHeight} +
+            ${({ theme }) => theme.components.pokemonNavDetails.mediaHeight}
+        )
     );
-
     .image {
       width: 100%;
     }
