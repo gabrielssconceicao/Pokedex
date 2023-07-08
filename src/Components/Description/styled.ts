@@ -57,4 +57,9 @@ export const Container = styled.div`
       }
     }
   }
+
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
+    flex: 1;
+    height: fit-content;
+  }
 `;
