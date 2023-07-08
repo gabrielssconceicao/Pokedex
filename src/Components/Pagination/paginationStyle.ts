@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.fontSize.base};
   font-size: ${({ theme }) => theme.fontSize.xs};
+  height: ${({ theme }) => theme.components.pagination.height};
   button {
     width: 3rem;
     height: 3rem;

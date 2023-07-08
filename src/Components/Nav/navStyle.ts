@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   padding: 1rem;
+  height: ${({ theme }) => theme.components.nav.height};
   nav {
     flex: 1;
     display: flex;

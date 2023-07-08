@@ -45,6 +45,12 @@ declare module 'styled-components' {
     };
 
     components: {
+      nav: {
+        height: string;
+      };
+      pagination: {
+        height: string;
+      };
       pokemonNavDetails: {
         width: string;
         mediaHeight: string;

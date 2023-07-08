@@ -47,6 +47,12 @@ export const theme: DefaultTheme = {
   },
 
   components: {
+    nav: {
+      height: '25%',
+    },
+    pagination: {
+      height: ' 7rem',
+    },
     pokemonNavDetails: {
       width: '7rem',
       mediaHeight: '6rem',
