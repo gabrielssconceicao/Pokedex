@@ -17,6 +17,9 @@ export const Container = styled.div`
             ${({ theme }) => theme.components.pokemonNavDetails.mediaHeight}
         )
     );
+
+    gap: 2rem;
+
     .image {
       width: 100%;
     }

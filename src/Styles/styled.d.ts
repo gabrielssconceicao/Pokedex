@@ -71,6 +71,7 @@ declare module 'styled-components' {
           width: string;
           mobileWidth: string;
           imgWidth: string;
+          mobileImgWidth: string;
         };
         pokeDescription: {
           height: string;

@@ -21,5 +21,12 @@ export const Container = styled.div<ContainerProps>`
   }
 
   @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
+    width: ${({ theme }) => theme.components.pokemonInfo.pokeImg.mobileWidth};
+
+    img {
+      width: ${({ theme }) =>
+        theme.components.pokemonInfo.pokeImg.mobileImgWidth};
+      height: fit-content;
+    }
   }
 `;

@@ -73,6 +73,7 @@ export const theme: DefaultTheme = {
         width: '35%',
         mobileWidth: '100%',
         imgWidth: '60%',
+        mobileImgWidth: '35%',
       },
       pokeDescription: {
         height: '60%',
