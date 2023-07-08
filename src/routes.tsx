@@ -9,6 +9,7 @@ export function PokedexRoutes() {
       <Route path="/pokemon/:id?" element={<PokemonsDetails />}>
         <Route path="info" element={<PokemonInfo />} />
         <Route path="moves" element={<h1>Moves</h1>} />
+        <Route path="evolutions" element={<h1>Evolutions</h1>} />
       </Route>
 
       <Route path="/" element={<Pokedex />} />
