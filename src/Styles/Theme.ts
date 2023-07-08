@@ -54,7 +54,7 @@ export const theme: DefaultTheme = {
       height: ' 7rem',
     },
     pokemonNavDetails: {
-      width: '7rem',
+      width: 'fit-content',
       mediaHeight: '6rem',
       mediaWidth: '100vw',
     },

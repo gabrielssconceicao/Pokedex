@@ -4,7 +4,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: ${({ theme }) => theme.components.pokemonNavDetails.width};
   height: 100vh;
+
   background-color: #000;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +14,7 @@ export const Container = styled.div`
 
   nav {
     height: 100%;
-
+    padding: 1rem;
     ul {
       display: flex;
       flex-direction: column;
@@ -60,6 +62,7 @@ export const Container = styled.div`
     nav {
       height: inherit;
       width: inherit;
+      padding: 0;
       ul {
         display: flex;
         flex-direction: row;
