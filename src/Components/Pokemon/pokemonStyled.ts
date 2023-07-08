@@ -95,7 +95,8 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     width: ${({ theme }) => theme.components.pokemonContainer.mediaWidth};
+    height: fit-content;
   }
 `;

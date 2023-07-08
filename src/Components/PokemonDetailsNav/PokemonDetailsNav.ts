@@ -52,7 +52,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     width: ${({ theme }) => theme.components.pokemonNavDetails.mediaWidth};
     height: ${({ theme }) => theme.components.pokemonNavDetails.mediaHeight};
     max-height: fit-content;

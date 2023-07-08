@@ -36,7 +36,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     flex-direction: column;
     height: ${({ theme }) => theme.components.pokeTitle.mediaHeight};
     .types {

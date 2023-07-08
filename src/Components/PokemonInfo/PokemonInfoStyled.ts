@@ -9,6 +9,7 @@ export const Container = styled.div`
   flex-wrap: wrap;
   overflow-y: auto;
   gap: 1.5rem;
+
   @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     height: calc(
       100vh -

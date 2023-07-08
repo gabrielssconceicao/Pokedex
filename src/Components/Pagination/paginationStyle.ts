@@ -21,4 +21,10 @@ export const Container = styled.div`
   .page_index {
     font-size: ${({ theme }) => theme.fontSize.sm};
   }
+
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
+    .page_index {
+      font-size: ${({ theme }) => theme.fontSize.xs};
+    }
+  }
 `;

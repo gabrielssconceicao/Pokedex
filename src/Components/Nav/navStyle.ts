@@ -14,7 +14,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 630px) {
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
