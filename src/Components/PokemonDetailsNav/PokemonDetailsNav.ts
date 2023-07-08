@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: ${({ theme }) => theme.components.pokemonNavDetails.width};
   height: 100vh;
-  background-color: red;
+  background-color: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,10 +43,10 @@ export const Container = styled.div`
 
       &.active {
         svg {
-          fill: ${({ theme }) => theme.colors.indigo};
+          fill: ${({ theme }) => theme.colors.darkPrimary};
         }
         span {
-          color: ${({ theme }) => theme.colors.cyan};
+          color: ${({ theme }) => theme.colors.darkSecundary};
         }
       }
     }
