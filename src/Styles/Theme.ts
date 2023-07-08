@@ -80,8 +80,12 @@ export const theme: DefaultTheme = {
         width: '60%',
       },
       pokeAbilities: {
-        height: '35%',
-        width: '90%',
+        height: 'fit-content',
+        width: '100%',
+        ability: {
+          abitilyDescWidth: ' 85%',
+          abitilyNameWidth: ' 75%',
+        },
       },
       pokeStatus: {
         height: '35%',

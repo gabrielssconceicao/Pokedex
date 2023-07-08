@@ -80,6 +80,10 @@ declare module 'styled-components' {
         pokeAbilities: {
           height: string;
           width: string;
+          ability: {
+            abitilyDescWidth: string;
+            abitilyNameWidth: string;
+          };
         };
         pokeStatus: {
           height: string;

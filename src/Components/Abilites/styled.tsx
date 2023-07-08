@@ -32,4 +32,13 @@ export const Container = styled.div<ContainerProps>`
     padding: 0.5rem 1rem;
     text-align: justify;
   }
+
+  @media (max-width: ${({ theme }) => theme.deviceSize.tablet}) {
+    width: 100%;
+    height: fit-content;
+    .abilities {
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
 `;
