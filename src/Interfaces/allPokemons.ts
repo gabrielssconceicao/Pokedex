@@ -10,6 +10,7 @@ export interface PokemonsPerPage {
   species: PokemonSpecieUrl;
   abilities: PokeAbilities[];
   stats: PokeStats[];
+  moves: PokeMove[];
 }
 
 interface PokemonImage {
@@ -85,3 +86,11 @@ export interface PokeStats {
     name: string;
   };
 }
+
+interface PokeMove {
+  move: {
+    name: string;
+    url: string;
+  };
+}
+// version_group_details
