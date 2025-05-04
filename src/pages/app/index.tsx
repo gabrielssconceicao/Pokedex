@@ -28,7 +28,17 @@ export function Home() {
           </Button>
         </form>
       </div>
-      <section className="flex-1">main</section>
+      <section className="grow basis-0 overflow-y-auto">
+        {Array.from({ length: 20 }, (_, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between border-b px-4 py-2"
+          >
+            <span className="text-sm">#{index + 1}</span>
+            <span className="text-sm">Pikachu</span>
+          </div>
+        ))}
+      </section>
       <footer className="flex items-center justify-between">
         <span className="text-muted-foreground text-sm">Total de 20 items</span>
         {/*Items per page? */}
