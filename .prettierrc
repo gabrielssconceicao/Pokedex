@@ -6,6 +6,6 @@
   "singleQuote": true,
   "endOfLine": "lf",
   "arrowParens": "avoid",
-  "bracketSpacing": true
-
+  "bracketSpacing": true,
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

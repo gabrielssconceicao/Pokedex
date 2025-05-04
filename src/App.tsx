@@ -1,7 +1,8 @@
+import './main.css';
+
 import { BrowserRouter } from 'react-router';
 
 import { Router } from './router';
-
 export default function App() {
   return (
     <BrowserRouter>
