@@ -4,20 +4,31 @@ import {
   CaretLeft,
   CaretRight,
 } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 
+import { getPokemons } from '@/api/get-pokemons';
 import { Button } from '@/components/ui/button';
 
 import { PokemonCard } from './pokemon-card';
 import { PokemonFilters } from './pokemon-filters';
 
 export function Home() {
+  const { data: pokemons, isLoading: isPokemonsLoading } = useQuery({
+    queryFn: getPokemons,
+    queryKey: ['pokemons'],
+  });
   return (
     <main className="flex h-full flex-1 flex-col gap-2">
       <PokemonFilters />
       <section className="flex grow basis-0 flex-wrap justify-evenly gap-3 overflow-y-auto">
-        {Array.from({ length: 10 }, (_, index) => (
-          <PokemonCard key={index} />
-        ))}
+        {isPokemonsLoading ? (
+          <span>Loading...</span>
+        ) : (
+          pokemons &&
+          pokemons.data.map(pokemon => (
+            <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          ))
+        )}
       </section>
       <footer className="flex items-center justify-between px-5 py-1">
         <span className="text-muted-foreground text-sm">Total de 20 items</span>
