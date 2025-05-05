@@ -3,31 +3,16 @@ import {
   CaretDoubleRight,
   CaretLeft,
   CaretRight,
-  MagnifyingGlass,
-  X,
 } from '@phosphor-icons/react';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+
+import { PokemonFilters } from './pokemon-filters';
 
 export function Home() {
   return (
     <main className="flex h-full flex-1 flex-col gap-2 px-4">
-      <div>
-        <form className="flex items-center gap-3 px-2 py-2">
-          <span className="text-sm font-bold">Filtros</span>
-          <Input placeholder="Pokemon Id" className="h-8 w-40" />
-          <Input placeholder="Pokemon Name" className="h-8 flex-1" />
-          <Button className="bg-red-500 dark:bg-red-400" size={'sm'}>
-            <MagnifyingGlass className="mr-2 h-3 w-3" />
-            Filtrar
-          </Button>
-          <Button variant={'outline'} size={'sm'}>
-            <X className="mr-2 h-3 w-3" />
-            Limpar Filtros
-          </Button>
-        </form>
-      </div>
+      <PokemonFilters />
       <section className="grow basis-0 overflow-y-auto">
         {Array.from({ length: 20 }, (_, index) => (
           <div

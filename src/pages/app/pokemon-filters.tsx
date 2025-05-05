@@ -1,0 +1,52 @@
+import { Funnel, MagnifyingGlass, X } from '@phosphor-icons/react';
+
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
+const TYPES = ['eletric', 'water', 'fire'];
+
+export function PokemonFilters() {
+  return (
+    <div>
+      <form className="flex items-center gap-3 px-2 py-2">
+        <span className="text-sm font-bold">Filtros</span>
+        <Input placeholder="Pokemon Id" className="h-8 w-20" />
+        <Input placeholder="Pokemon Name" className="h-8 flex-1" />
+        <DropdownMenu>
+          <DropdownMenuTrigger className="border-0">
+            <Button className="bg-primary" size={'sm'}>
+              <Funnel className="mr-2 h-3 w-3" />
+              Filters
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="flex flex-col space-y-1">
+            {TYPES.map(type => (
+              <div className="flex items-center gap-2" key={type}>
+                <Checkbox id={type} name="types" />
+                <Label htmlFor={type} className="flex-1">
+                  {type[0].toUpperCase() + type.slice(1)}
+                </Label>
+              </div>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <Button className="bg-primary" size={'sm'}>
+          <MagnifyingGlass className="mr-2 h-3 w-3" />
+          Filtrar
+        </Button>
+        <Button variant={'outline'} size={'sm'}>
+          <X className="mr-2 h-3 w-3" />
+          Limpar Filtros
+        </Button>
+      </form>
+      {/* Filter Types  */}
+    </div>
+  );
+}
