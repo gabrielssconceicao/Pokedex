@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router';
 
 import { AppLayout } from '@/pages/_layout/app';
-import { Home } from '@/pages/app';
+import { Home } from '@/pages/home';
 
 export function Router() {
   return (

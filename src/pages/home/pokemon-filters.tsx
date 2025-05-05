@@ -14,7 +14,7 @@ const TYPES = ['eletric', 'water', 'fire'];
 
 export function PokemonFilters() {
   return (
-    <div>
+    <div className="px-5">
       <form className="flex items-center gap-3 px-2 py-2">
         <span className="text-sm font-bold">Filtros</span>
         <Input placeholder="Pokemon Id" className="h-8 w-20" />

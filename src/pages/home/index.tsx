@@ -7,24 +7,19 @@ import {
 
 import { Button } from '@/components/ui/button';
 
+import { PokemonCard } from './pokemon-card';
 import { PokemonFilters } from './pokemon-filters';
 
 export function Home() {
   return (
-    <main className="flex h-full flex-1 flex-col gap-2 px-4">
+    <main className="flex h-full flex-1 flex-col gap-2">
       <PokemonFilters />
-      <section className="grow basis-0 overflow-y-auto">
-        {Array.from({ length: 20 }, (_, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between border-b px-4 py-2"
-          >
-            <span className="text-sm">#{index + 1}</span>
-            <span className="text-sm">Pikachu</span>
-          </div>
+      <section className="flex grow basis-0 flex-wrap justify-evenly gap-3 overflow-y-auto">
+        {Array.from({ length: 10 }, (_, index) => (
+          <PokemonCard key={index} />
         ))}
       </section>
-      <footer className="flex items-center justify-between">
+      <footer className="flex items-center justify-between px-5 py-1">
         <span className="text-muted-foreground text-sm">Total de 20 items</span>
         {/*Items per page? */}
         <div className="flex items-center gap-6 lg:gap-8">
