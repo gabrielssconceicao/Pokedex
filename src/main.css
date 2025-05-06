@@ -118,3 +118,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .pokemon-link {
+    @apply font-mono font-semibold transition-colors;
+    border-color: var(--type-color);
+    color: var(--type-color);
+  }
+
+  .pokemon-link:hover {
+    @apply text-accent-foreground;
+    background-color: var(--type-color);
+  }
+}

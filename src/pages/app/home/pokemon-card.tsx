@@ -37,8 +37,19 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
     getPokemonTypeColor(type, theme);
 
   return (
-    <Card className="min-w-3xs gap-3 p-0">
-      <CardHeader className="flex h-9 flex-row justify-between border-b-2 p-0">
+    <Card
+      className="min-w-3xs gap-3 p-0"
+      style={{
+        borderColor: setPokemonTypeColor(pokemon.types[0]),
+        boxShadow: `1px 1px 3px ${setPokemonTypeColor(pokemon.types[0])}B3`,
+      }}
+    >
+      <CardHeader
+        className="flex h-9 flex-row justify-between border-b-1 p-0"
+        style={{
+          borderBottomColor: setPokemonTypeColor(pokemon.types[0]),
+        }}
+      >
         <CardDescription
           className="text-accent top-0 left-0 rounded-tl-md px-2 py-2 text-sm font-bold"
           style={{
@@ -51,7 +62,12 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
           {captilizeFirstLetter(pokemon.name)}
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-1 flex-col items-center border-b-2 py-3">
+      <CardContent
+        className="flex flex-1 flex-col items-center border-b-1 py-3"
+        style={{
+          borderBottomColor: setPokemonTypeColor(pokemon.types[0]),
+        }}
+      >
         <img
           src={getPokemonImage()}
           alt={`${pokemon.name} image`}
@@ -77,8 +93,13 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
       </CardContent>
       <CardFooter className="flex items-center justify-center pb-3">
         <Link
-          className="border-accent-foreground text-card-foreground hover:bg-accent-foreground hover:text-card dark:hover:bg-accent-foreground dark:hover:text-card flex-1 rounded-lg border-2 px-2 py-1 text-center"
+          className="pokemon-link flex-1 rounded-lg border-2 px-2 py-1 text-center"
           to={`/pokemon/${pokemon.id}`}
+          style={
+            {
+              '--type-color': setPokemonTypeColor(pokemon.types[0]),
+            } as React.CSSProperties
+          }
         >
           See details
         </Link>
