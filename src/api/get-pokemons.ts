@@ -1,29 +1,10 @@
+import { PokemonTypes } from '@/interfaces/pokemon-types';
 import { api } from '@/lib/axios';
 
 export interface GetPokemonsResponse {
   count: number;
   results: { name: string }[];
 }
-
-export type PokemonTypes =
-  | 'normal'
-  | 'fire'
-  | 'fighting'
-  | 'water'
-  | 'flying'
-  | 'grass'
-  | 'poison'
-  | 'eletric'
-  | 'ground'
-  | 'psychic'
-  | 'rock'
-  | 'ice'
-  | 'bug'
-  | 'dragon'
-  | 'ghost'
-  | 'dark'
-  | 'steel'
-  | 'fairy';
 
 export interface GetPokemon {
   name: string;
@@ -39,17 +20,6 @@ export interface GetPokemon {
   types: PokemonTypes[];
 }
 interface PokemonResponse extends Omit<GetPokemon, 'types'> {
-  id: number;
-  name: string;
-  sprites: {
-    front_default: string;
-    other: {
-      'official-artwork': {
-        front_default: string;
-      };
-    };
-  };
-
   types: {
     type: {
       name: PokemonTypes;

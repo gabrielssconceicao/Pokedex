@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button';
 
 import { PokemonCard } from './pokemon-card';
 import { PokemonFilters } from './pokemon-filters';
-
 export function Home() {
   const { data: pokemons, isLoading: isPokemonsLoading } = useQuery({
     queryFn: getPokemons,
