@@ -42,6 +42,7 @@ const POKEMON_TYPES_COLORS: Record<
   fairy: { light: '#D685AD', dark: '#F8BBD0' },
 };
 
+export const TYPES = Object.keys(POKEMON_TYPES_COLORS) as PokemonTypes[];
 export const getPokemonTypeColor = (
   type: PokemonTypes,
   theme: 'light' | 'dark' | 'system'

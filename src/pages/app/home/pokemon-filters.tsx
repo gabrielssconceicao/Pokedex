@@ -9,8 +9,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-
-const TYPES = ['eletric', 'water', 'fire'];
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { TYPES } from '@/interfaces/pokemon-types';
 
 export function PokemonFilters() {
   return (
@@ -23,7 +29,7 @@ export function PokemonFilters() {
           <DropdownMenuTrigger className="border-0">
             <Button className="bg-primary" size={'sm'}>
               <Funnel className="mr-2 h-3 w-3" />
-              Filters
+              Tipagem
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="flex flex-col space-y-1">
@@ -37,6 +43,18 @@ export function PokemonFilters() {
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
+        <Select>
+          <SelectTrigger size="sm">
+            <SelectValue placeholder="Qtd por Página" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="10">10</SelectItem>
+            <SelectItem value="20">20</SelectItem>
+            <SelectItem value="25">25</SelectItem>
+            <SelectItem value="50">50</SelectItem>
+            <SelectItem value="100">100</SelectItem>
+          </SelectContent>
+        </Select>
         <Button className="bg-primary" size={'sm'}>
           <MagnifyingGlass className="mr-2 h-3 w-3" />
           Filtrar
@@ -46,7 +64,6 @@ export function PokemonFilters() {
           Limpar Filtros
         </Button>
       </form>
-      {/* Filter Types  */}
     </div>
   );
 }
