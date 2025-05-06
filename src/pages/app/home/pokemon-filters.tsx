@@ -1,4 +1,7 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Funnel, MagnifyingGlass, X } from '@phosphor-icons/react';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -18,7 +21,25 @@ import {
 } from '@/components/ui/select';
 import { TYPES } from '@/interfaces/pokemon-types';
 
+const pokemonsFilterSchema = z.object({
+  pokemonId: z.string().optional(),
+  pokemonName: z.string().optional(),
+  itemsPerPage: z.string().optional(),
+  // pokemonTypes: z.array().optional()
+});
+
+type PokemonsFilterSchema = z.infer<typeof pokemonsFilterSchema>;
+
 export function PokemonFilters() {
+  const { register, handleSubmit, reset, control } =
+    useForm<PokemonsFilterSchema>({
+      resolver: zodResolver(pokemonsFilterSchema),
+      defaultValues: {
+        pokemonId: '',
+        pokemonName: '',
+        itemsPerPage: '20',
+      },
+    });
   return (
     <div className="px-5">
       <form className="flex items-center gap-3 px-2 py-2">
