@@ -20,7 +20,7 @@ export function Home() {
   return (
     <main className="flex h-full flex-1 flex-col gap-2">
       <PokemonFilters />
-      <section className="flex grow basis-0 flex-wrap justify-evenly gap-3 overflow-y-auto">
+      <section className="flex grow basis-0 flex-wrap justify-evenly gap-4 overflow-y-auto px-4 py-2">
         {isPokemonsLoading ? (
           <span>Loading...</span>
         ) : (

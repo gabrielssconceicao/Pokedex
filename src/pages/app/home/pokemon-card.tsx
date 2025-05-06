@@ -2,47 +2,69 @@ import { Link } from 'react-router';
 
 import { GetPokemon } from '@/api/get-pokemons';
 import pokemonEgg from '@/assets/pokemon-egg.png';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 interface PokemonCardProps {
   pokemon: GetPokemon;
 }
+
 export function PokemonCard({ pokemon }: PokemonCardProps) {
   function getPokemonImage() {
     const pokeImgs = pokemon.sprites;
-    return pokeImgs.other['official-artwork'].front_default
-      ? pokeImgs.other['official-artwork'].front_default
-      : pokeImgs.front_default;
+    console.log({ pokeImgs });
+    return (
+      pokeImgs.other['official-artwork'].front_default ||
+      pokeImgs.front_default ||
+      pokemonEgg
+    );
+  }
+
+  function captilizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   return (
-    <div className="relative grid grid-cols-2 rounded-lg bg-red-300 px-3 py-2">
-      <span className="absolute top-0 right-0 rounded-tr-lg bg-black px-1 py-0.5 text-white">
-        #{pokemon.id}
-      </span>
-      <div className="w-36 rounded-md bg-white px-4 py-3 lg:w-44">
+    <Card className="min-w-3xs gap-3 p-0">
+      <CardHeader className="flex h-9 flex-row justify-between border-b-2 p-0">
+        <CardDescription className="bg-accent-foreground text-accent top-0 left-0 rounded-tl-md px-2 py-2 text-sm font-bold">
+          #{pokemon.id}
+        </CardDescription>
+        <CardTitle className="mr-2 flex h-9 flex-1 items-center justify-center text-lg">
+          {captilizeFirstLetter(pokemon.name)}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-1 flex-col items-center border-b-2 py-3">
         <img
-          src={getPokemonImage() || pokemonEgg}
+          src={getPokemonImage()}
           alt={`${pokemon.name} image`}
-          className="object-cover"
+          className="bg-accent-foreground flex h-36 flex-1 rounded-md object-contain px-4 py-2 text-white lg:w-44"
         />
-      </div>
-      <div className="flex flex-col gap-2 px-5 py-2">
-        <h2 className="text-center font-mono text-lg font-bold">
-          {pokemon.name}
-        </h2>
-        <div className="flex flex-1 flex-col items-center justify-center gap-2">
+
+        <div className="flex w-full gap-2 px-3 py-2">
           {pokemon.types.map(type => (
-            <span className="w-full rounded-md bg-slate-200 px-2 py-0.5 text-center">
+            <span
+              key={`${pokemon.name}-${type}`}
+              className="flex-1 rounded-2xl bg-pink-300 px-2 py-1 text-center font-mono text-sm font-bold text-pink-900 dark:bg-pink-900 dark:text-pink-300"
+            >
               {type}
             </span>
           ))}
         </div>
+      </CardContent>
+      <CardFooter className="flex items-center justify-center pb-3">
         <Link
+          className="border-accent-foreground text-card-foreground hover:bg-accent-foreground hover:text-card dark:hover:bg-accent-foreground dark:hover:text-card flex-1 rounded-lg border-2 px-2 py-1 text-center"
           to={`/pokemon/${pokemon.id}`}
-          className="mt-auto rounded-2xl border-2 border-gray-900 bg-transparent text-center text-gray-900 hover:bg-gray-900 hover:text-white"
         >
-          Ver detalhes
+          See details
         </Link>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 }
