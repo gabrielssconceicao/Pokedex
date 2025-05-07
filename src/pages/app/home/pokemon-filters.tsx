@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Funnel, MagnifyingGlass, X } from '@phosphor-icons/react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
@@ -31,12 +32,16 @@ const pokemonsFilterSchema = z.object({
 type PokemonsFilterSchema = z.infer<typeof pokemonsFilterSchema>;
 
 export function PokemonFilters() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const itemsPerPage = searchParams.get('itemsPerPage') || '20';
+
   const { handleSubmit, reset, control } = useForm<PokemonsFilterSchema>({
     resolver: zodResolver(pokemonsFilterSchema),
     defaultValues: {
       pokemonId: '',
       pokemonName: '',
-      itemsPerPage: '20',
+      itemsPerPage: itemsPerPage || '20',
       pokemonTypes: [],
     },
   });
@@ -48,6 +53,11 @@ export function PokemonFilters() {
     pokemonTypes,
   }: PokemonsFilterSchema) {
     console.log({ pokemonId, pokemonName, itemsPerPage, pokemonTypes });
+    setSearchParams(state => {
+      state.set('page', '1');
+      if (itemsPerPage) state.set('itemsPerPage', itemsPerPage);
+      return state;
+    });
   }
 
   function resetFilter() {

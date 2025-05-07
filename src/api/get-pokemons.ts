@@ -27,8 +27,15 @@ interface PokemonResponse extends Omit<GetPokemon, 'types'> {
   }[];
 }
 
-export const getPokemons = async () => {
-  const res = await api.get<GetPokemonsResponse>('/pokemon?limit=20&offset=0');
+interface GetPokemonsParams {
+  limit: number;
+  offset: number;
+}
+
+export const getPokemons = async ({ limit, offset }: GetPokemonsParams) => {
+  const res = await api.get<GetPokemonsResponse>(
+    `/pokemon?limit=${limit}&offset=${offset}`
+  );
   const { count, results } = res.data;
 
   const pokemons = await Promise.all(
