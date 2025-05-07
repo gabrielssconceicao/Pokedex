@@ -19,7 +19,6 @@ interface PokemonCardProps {
 export function PokemonCard({ pokemon }: PokemonCardProps) {
   function getPokemonImage(): string {
     const pokeImgs = pokemon.sprites;
-    console.log({ pokeImgs });
     return (
       pokeImgs.other['official-artwork'].front_default ||
       pokeImgs.front_default ||

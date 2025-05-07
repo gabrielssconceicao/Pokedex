@@ -40,7 +40,5 @@ export const getPokemons = async () => {
     })
   );
 
-  console.log(pokemons);
-
   return { count, data: pokemons };
 };
