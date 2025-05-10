@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router';
 import { z } from 'zod';
 
 import { getPokemons } from '@/api/get-pokemons';
+import { PokemonTypes } from '@/interfaces/pokemon-types';
 
 import { Pagination } from './pagination';
 import { PokemonCard } from './pokemon-card';
@@ -18,23 +19,31 @@ export function Home() {
     .parse(searchParams.get('itemsPerPage') ?? '20');
 
   const pokemonName = searchParams.get('pokemonName') || '';
-  const pokemonFilterTypes = searchParams.get('pokemonTypes')?.split('+') || [];
+  const pokemonFilterTypes = (searchParams.get('pokemonTypes')?.split('+') ||
+    []) as PokemonTypes[];
   const pokemonId = z.coerce
     .number()
     .parse(searchParams.get('pokemonId') || '0');
 
-  console.log({
-    pokemonFilterTypes,
-    pokemonName,
-    itemsPerPage,
-    pageIndex,
-    pokemonId,
-  });
-
   const { data: pokemons, isLoading: isPokemonsLoading } = useQuery({
     queryFn: () =>
-      getPokemons({ limit: itemsPerPage, offset: pageIndex * itemsPerPage }),
-    queryKey: ['pokemons', pageIndex, itemsPerPage],
+      getPokemons({
+        limit: itemsPerPage,
+        offset: pageIndex * itemsPerPage,
+        filters: {
+          name: pokemonName,
+          id: pokemonId,
+          types: pokemonFilterTypes,
+        },
+      }),
+    queryKey: [
+      'pokemons',
+      pageIndex,
+      itemsPerPage,
+      pokemonName,
+      pokemonId,
+      pokemonFilterTypes,
+    ],
   });
 
   function handlePagination(pageIndex: number) {
@@ -50,11 +59,12 @@ export function Home() {
       <section className="flex grow basis-0 flex-wrap justify-evenly gap-4 overflow-y-auto px-4 py-2">
         {isPokemonsLoading ? (
           <span>Loading...</span>
-        ) : (
-          pokemons &&
+        ) : pokemons && pokemons.data.length ? (
           pokemons.data.map(pokemon => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))
+        ) : (
+          <span>Nenhum pokemon encontrado</span>
         )}
       </section>
 

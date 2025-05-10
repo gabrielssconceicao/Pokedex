@@ -30,9 +30,18 @@ interface PokemonResponse extends Omit<GetPokemon, 'types'> {
 interface GetPokemonsParams {
   limit: number;
   offset: number;
+  filters: {
+    name: string;
+    id: number;
+    types: PokemonTypes[];
+  };
 }
 
-export const getPokemons = async ({ limit, offset }: GetPokemonsParams) => {
+export const getPokemons = async ({
+  limit,
+  offset,
+  filters,
+}: GetPokemonsParams) => {
   const res = await api.get<GetPokemonsResponse>(
     `/pokemon?limit=${limit}&offset=${offset}`
   );
@@ -49,3 +58,9 @@ export const getPokemons = async ({ limit, offset }: GetPokemonsParams) => {
 
   return { count, data: pokemons };
 };
+
+// function to filter pokemons By type
+
+// function to filter pokemons By id, checking if it was already filtered by type
+
+// function to filter pokemons By name checking if it was already filtered by id or type
