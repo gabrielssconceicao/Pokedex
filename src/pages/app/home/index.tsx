@@ -17,6 +17,20 @@ export function Home() {
     .number()
     .parse(searchParams.get('itemsPerPage') ?? '20');
 
+  const pokemonName = searchParams.get('pokemonName') || '';
+  const pokemonFilterTypes = searchParams.get('pokemonTypes')?.split('+') || [];
+  const pokemonId = z.coerce
+    .number()
+    .parse(searchParams.get('pokemonId') || '0');
+
+  console.log({
+    pokemonFilterTypes,
+    pokemonName,
+    itemsPerPage,
+    pageIndex,
+    pokemonId,
+  });
+
   const { data: pokemons, isLoading: isPokemonsLoading } = useQuery({
     queryFn: () =>
       getPokemons({ limit: itemsPerPage, offset: pageIndex * itemsPerPage }),

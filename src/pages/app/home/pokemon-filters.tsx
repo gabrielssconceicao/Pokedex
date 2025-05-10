@@ -54,8 +54,12 @@ export function PokemonFilters() {
   }: PokemonsFilterSchema) {
     console.log({ pokemonId, pokemonName, itemsPerPage, pokemonTypes });
     setSearchParams(state => {
-      state.set('page', '1');
       if (itemsPerPage) state.set('itemsPerPage', itemsPerPage);
+      state.set('page', '1');
+      if (pokemonId) state.set('pokemonId', pokemonId);
+      if (pokemonName) state.set('pokemonName', pokemonName);
+      if (pokemonTypes?.length)
+        state.set('pokemonTypes', pokemonTypes.join('+'));
       return state;
     });
   }

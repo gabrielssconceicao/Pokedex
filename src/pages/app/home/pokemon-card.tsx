@@ -55,7 +55,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
             backgroundColor: setPokemonTypeColor(pokemon.types[0]),
           }}
         >
-          #{pokemon.id}
+          Nº {pokemon.id.toFixed().padStart(4, '0')}
         </CardDescription>
         <CardTitle className="mr-2 flex h-9 flex-1 items-center justify-center text-lg">
           {captilizeFirstLetter(pokemon.name)}
