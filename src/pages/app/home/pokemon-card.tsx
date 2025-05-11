@@ -37,7 +37,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
 
   return (
     <Card
-      className="min-w-3xs gap-3 p-0"
+      className="min-w-72 gap-3 p-0"
       style={{
         borderColor: setPokemonTypeColor(pokemon.types[0]),
         boxShadow: `1px 1px 3px ${setPokemonTypeColor(pokemon.types[0])}B3`,
@@ -57,7 +57,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
         >
           Nº {pokemon.id.toFixed().padStart(4, '0')}
         </CardDescription>
-        <CardTitle className="mr-2 flex h-9 flex-1 items-center justify-center text-lg">
+        <CardTitle className="text-clamp mr-2 flex min-h-9 flex-1 items-center justify-center">
           {captilizeFirstLetter(pokemon.name)}
         </CardTitle>
       </CardHeader>
@@ -72,7 +72,10 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
           alt={`${pokemon.name} image`}
           className="flex h-36 min-h-36 flex-1 rounded-md object-contain px-4 py-2 text-white lg:w-44"
           style={{
-            backgroundColor: setPokemonTypeColor(pokemon.types[0]),
+            background:
+              pokemon.types.length > 1
+                ? `linear-gradient(to bottom right, ${setPokemonTypeColor(pokemon.types[0])}, ${setPokemonTypeColor(pokemon.types[1])})`
+                : setPokemonTypeColor(pokemon.types[0]),
           }}
         />
 

@@ -130,4 +130,8 @@
     @apply text-accent-foreground;
     background-color: var(--type-color);
   }
+
+  .text-clamp {
+    font-size: clamp(1rem, 0.5vw, 2rem);
+  }
 }

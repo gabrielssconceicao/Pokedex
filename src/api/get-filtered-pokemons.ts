@@ -105,7 +105,7 @@ const filterPokemonByName = async ({
 }) => {
   if (filteredPokemons.length) {
     const filteredPokemonsName = filteredPokemons.filter(pokemon =>
-      pokemon.name.includes(name)
+      pokemon.name.includes(name.toLocaleLowerCase())
     );
     return { filteredPokemonsName };
   }
@@ -113,7 +113,7 @@ const filterPokemonByName = async ({
   const res = await api.get('pokemon?limit=100000&offset=0');
   const { results }: { results: PokemonResponse['pokemon'][] } = res.data;
   const filteredPokemonsName = results.filter(pokemon =>
-    pokemon.name.includes(name)
+    pokemon.name.includes(name.toLocaleLowerCase())
   );
   return { filteredPokemonsName };
 };
