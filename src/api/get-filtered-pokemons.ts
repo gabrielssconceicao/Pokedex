@@ -17,29 +17,17 @@ export async function getFilteredPokemons({
 }: GetPokemonsParams) {
   let pokemons: PokemonResponse['pokemon'][] = [];
 
-  const hasTypeFilter = !!types.length;
-
-  if (hasTypeFilter) {
+  if (types.length) {
     const { filteredPokemons } = await filterPokemonsByType(types);
     pokemons = filteredPokemons;
   }
 
   if (id) {
-    if (hasTypeFilter) {
-      const filteredPokemonsByTypeAndName = pokemons.filter(pokemon =>
-        pokemon.url.split('/')[6].includes(id.toString())
-      );
-      pokemons = filteredPokemonsByTypeAndName;
-    } else {
-      const res = await api.get('pokemon?limit=100000&offset=0');
-      const { results }: { results: PokemonResponse['pokemon'][] } = res.data;
-      const filteredPokemonsById = results.filter(pokemon =>
-        pokemon.url.split('/')[6].includes(id.toString())
-      );
-      pokemons = filteredPokemonsById;
-    }
-
-    console.log({ filteredPokemonsById: pokemons });
+    const { filteredPokemonsById } = await filterPokemonById({
+      id,
+      filteredPokemons: pokemons,
+    });
+    pokemons = filteredPokemonsById;
   }
 }
 
@@ -71,6 +59,28 @@ const filterPokemonsByType = async (
 
   return { filteredPokemons };
 };
+
 // function to filter pokemons By id, checking if it was already filtered by type
+const filterPokemonById = async ({
+  id,
+  filteredPokemons,
+}: {
+  id: number;
+  filteredPokemons: PokemonResponse['pokemon'][];
+}) => {
+  if (filteredPokemons.length) {
+    const filteredPokemonsByTypeAndId = filteredPokemons.filter(pokemon =>
+      pokemon.url.split('/')[6].includes(id.toString())
+    );
+    return { filteredPokemonsById: filteredPokemonsByTypeAndId };
+  } else {
+    const res = await api.get('pokemon?limit=100000&offset=0');
+    const { results }: { results: PokemonResponse['pokemon'][] } = res.data;
+    const filteredPokemonsById = results.filter(pokemon =>
+      pokemon.url.split('/')[6].includes(id.toString())
+    );
+    return { filteredPokemonsById };
+  }
+};
 
 // function to filter pokemons By name checking if it was already filtered by id or type
