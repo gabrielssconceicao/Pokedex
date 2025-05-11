@@ -64,7 +64,11 @@ const filterPokemonsByType = async (
     }
   });
 
-  const filteredPokemons = Array.from(seen.values());
+  const filteredPokemons = Array.from(seen.values()).sort((a, b) => {
+    const idA = parseInt(a.url.split('/')[6]);
+    const idB = parseInt(b.url.split('/')[6]);
+    return idA - idB;
+  });
 
   return { filteredPokemons };
 };
