@@ -130,8 +130,40 @@
     @apply text-accent-foreground;
     background-color: var(--type-color);
   }
+}
 
+@layer utilities {
   .text-clamp {
     font-size: clamp(1rem, 0.5vw, 2rem);
+  }
+
+  .grid-layout {
+    grid-template-areas:
+      'text text text'
+      'pokemonId pokemonName pokemonFilter'
+      'pokemonQtdPerPage searchBtn  clearFilterBtn';
+    grid-template-colums: 1fr 1fr;
+  }
+
+  .grid-span-text {
+    grid-area: text;
+  }
+  .grid-pokemon-id {
+    grid-area: pokemonId;
+  }
+  .grid-pokemon-name {
+    grid-area: pokemonName;
+  }
+  .grid-pokemon-filter {
+    grid-area: pokemonFilter;
+  }
+  .grid-pokemon-qtd-per-pages {
+    grid-area: pokemonQtdPerPage;
+  }
+  .grid-search-btn {
+    grid-area: searchBtn;
+  }
+  .grid-clear-filter-btn {
+    grid-area: clearFilterBtn;
   }
 }

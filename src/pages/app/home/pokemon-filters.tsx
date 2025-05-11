@@ -34,15 +34,21 @@ type PokemonsFilterSchema = z.infer<typeof pokemonsFilterSchema>;
 export function PokemonFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const itemsPerPage = searchParams.get('itemsPerPage') || '20';
+  const itemsPerPageQuery = searchParams.get('itemsPerPage');
+
+  const pokemonTypesQuery = searchParams.get('pokemonTypes')?.split('+');
+
+  const pokemonNameQuery = searchParams.get('pokemonName');
+
+  const pokemonIdQuery = searchParams.get('pokemonId');
 
   const { handleSubmit, reset, control } = useForm<PokemonsFilterSchema>({
     resolver: zodResolver(pokemonsFilterSchema),
     defaultValues: {
-      pokemonId: '',
-      pokemonName: '',
-      itemsPerPage: itemsPerPage || '20',
-      pokemonTypes: [],
+      pokemonId: pokemonIdQuery || '',
+      pokemonName: pokemonNameQuery || '',
+      itemsPerPage: itemsPerPageQuery || '20',
+      pokemonTypes: pokemonTypesQuery || [],
     },
   });
 
@@ -52,7 +58,7 @@ export function PokemonFilters() {
     itemsPerPage,
     pokemonTypes,
   }: PokemonsFilterSchema) {
-    console.log({ pokemonId, pokemonName, itemsPerPage, pokemonTypes });
+    if (pokemonId && pokemonId !== '' && isNaN(parseInt(pokemonId))) return;
     setSearchParams(state => {
       if (itemsPerPage) state.set('itemsPerPage', itemsPerPage);
       state.set('page', '1');
@@ -65,7 +71,14 @@ export function PokemonFilters() {
   }
 
   function resetFilter() {
-    // setSearchParams({});
+    setSearchParams(state => {
+      state.delete('pokemonId');
+      state.delete('pokemonName');
+      state.delete('pokemonTypes');
+      state.set('itemsPerPage', '20');
+      state.set('page', '1');
+      return state;
+    });
     reset({
       pokemonId: '',
       pokemonName: '',
@@ -76,23 +89,32 @@ export function PokemonFilters() {
 
   return (
     <form
-      action=""
-      className="flex flex-wrap items-center justify-center gap-3 px-5 py-2"
+      className="grid-layout grid gap-2 px-5 py-2 md:flex md:flex-wrap md:items-center md:justify-center md:gap-3"
       onSubmit={handleSubmit(handleFilter)}
     >
-      <span className="text-sm font-bold">Filtros</span>
+      <span className="grid-span-text text-center text-sm font-bold">
+        Filtros
+      </span>
       <Controller
         control={control}
         name="pokemonId"
         render={({ field }) => (
-          <Input placeholder="Pokemon Id" className="h-8 w-20" {...field} />
+          <Input
+            placeholder="Pokemon Id"
+            className="grid-pokemon-id h-8 md:w-20"
+            {...field}
+          />
         )}
       />
       <Controller
         control={control}
         name="pokemonName"
         render={({ field }) => (
-          <Input placeholder="Pokemon Name" className="h-8 flex-1" {...field} />
+          <Input
+            placeholder="Pokemon Name"
+            className="grid-pokemon-name h-8 md:flex-1"
+            {...field}
+          />
         )}
       />
 
@@ -101,8 +123,8 @@ export function PokemonFilters() {
         control={control}
         render={({ field: { value, onChange } }) => (
           <DropdownMenu>
-            <DropdownMenuTrigger className="border-0">
-              <Button className="bg-primary" size={'sm'}>
+            <DropdownMenuTrigger className="grid-pokemon-filter border-0">
+              <Button className="bg-primary w-full" size={'sm'}>
                 <Funnel className="mr-2 h-3 w-3" />
                 Tipagem
               </Button>
@@ -146,7 +168,10 @@ export function PokemonFilters() {
             onValueChange={onChange}
             disabled={disabled}
           >
-            <SelectTrigger size="sm">
+            <SelectTrigger
+              size="sm"
+              className="grid-pokemon-qtd-per-pages w-full md:w-fit"
+            >
               <SelectValue placeholder="Qtd por Página" />
             </SelectTrigger>
             <SelectContent>
@@ -159,11 +184,16 @@ export function PokemonFilters() {
           </Select>
         )}
       />
-      <Button className="bg-primary" size={'sm'} type="submit">
+      <Button className="bg-primary grid-search-btn" size={'sm'} type="submit">
         <MagnifyingGlass className="mr-2 h-3 w-3" />
         Filtrar
       </Button>
-      <Button variant={'outline'} size={'sm'} onClick={resetFilter}>
+      <Button
+        className="grid-clear-filter-btn"
+        variant={'outline'}
+        size={'sm'}
+        onClick={resetFilter}
+      >
         <X className="mr-2 h-3 w-3" />
         Limpar Filtros
       </Button>
