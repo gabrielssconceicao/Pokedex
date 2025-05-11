@@ -45,22 +45,29 @@ export async function getPokemons({
   filters,
 }: GetPokemonsParams) {
   if (!!filters.name || !!filters.id || filters.types.length) {
-    getFilteredPokemons({ limit, offset, filters });
+    const { filteredPokemons, count } = await getFilteredPokemons({
+      limit,
+      offset,
+      filters,
+    });
+    const pokemons = await Promise.all(filteredPokemons.map(getPokemonData));
+    return { count, data: pokemons };
   }
 
   const res = await api.get<GetPokemonsResponse>(
     `/pokemon?limit=${limit}&offset=${offset}`
   );
+
   const { count, results } = res.data;
 
-  const pokemons = await Promise.all(
-    results.map(async pokemon => {
-      const {
-        data: { id, name, types, sprites },
-      } = await api.get<PokemonResponse>(`/pokemon/${pokemon.name}`);
-      return { id, name, sprites, types: types.map(type => type.type.name) };
-    })
-  );
+  const pokemons = await Promise.all(results.map(getPokemonData));
 
   return { count, data: pokemons };
 }
+
+const getPokemonData = async (pokemon: { name: string }) => {
+  const {
+    data: { id, name, types, sprites },
+  } = await api.get<PokemonResponse>(`/pokemon/${pokemon.name}`);
+  return { id, name, sprites, types: types.map(type => type.type.name) };
+};

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { api } from '@/lib/axios';
 
 import { GetPokemonsParams } from './get-pokemons';
@@ -29,6 +27,18 @@ export async function getFilteredPokemons({
     });
     pokemons = filteredPokemonsById;
   }
+
+  if (name) {
+    const { filteredPokemonsName } = await filterPokemonByName({
+      name,
+      filteredPokemons: pokemons,
+    });
+    pokemons = filteredPokemonsName;
+  }
+
+  const pokemonsWithPagination = pokemons.slice(offset, offset + limit);
+
+  return { filteredPokemons: pokemonsWithPagination, count: pokemons.length };
 }
 
 // function to filter pokemons By type
@@ -73,14 +83,34 @@ const filterPokemonById = async ({
       pokemon.url.split('/')[6].includes(id.toString())
     );
     return { filteredPokemonsById: filteredPokemonsByTypeAndId };
-  } else {
-    const res = await api.get('pokemon?limit=100000&offset=0');
-    const { results }: { results: PokemonResponse['pokemon'][] } = res.data;
-    const filteredPokemonsById = results.filter(pokemon =>
-      pokemon.url.split('/')[6].includes(id.toString())
-    );
-    return { filteredPokemonsById };
   }
+  const res = await api.get('pokemon?limit=100000&offset=0');
+  const { results }: { results: PokemonResponse['pokemon'][] } = res.data;
+  const filteredPokemonsById = results.filter(pokemon =>
+    pokemon.url.split('/')[6].includes(id.toString())
+  );
+  return { filteredPokemonsById };
 };
 
 // function to filter pokemons By name checking if it was already filtered by id or type
+const filterPokemonByName = async ({
+  name,
+  filteredPokemons,
+}: {
+  name: string;
+  filteredPokemons: PokemonResponse['pokemon'][];
+}) => {
+  if (filteredPokemons.length) {
+    const filteredPokemonsName = filteredPokemons.filter(pokemon =>
+      pokemon.name.includes(name)
+    );
+    return { filteredPokemonsName };
+  }
+
+  const res = await api.get('pokemon?limit=100000&offset=0');
+  const { results }: { results: PokemonResponse['pokemon'][] } = res.data;
+  const filteredPokemonsName = results.filter(pokemon =>
+    pokemon.name.includes(name)
+  );
+  return { filteredPokemonsName };
+};
