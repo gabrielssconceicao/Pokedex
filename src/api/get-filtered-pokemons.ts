@@ -56,7 +56,6 @@ const filterPokemonsByType = async (
   const pokemonsFromType = await Promise.all(pokemonsFromTypePromise);
 
   const pokemonsFromTypeFlat = pokemonsFromType.flat();
-  console.log({ pokemonsFromTypeFlat });
   const seen = new Map<string, PokemonResponse['pokemon']>();
 
   pokemonsFromTypeFlat.forEach(({ pokemon }) => {
