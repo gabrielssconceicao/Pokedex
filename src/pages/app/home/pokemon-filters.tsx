@@ -65,6 +65,7 @@ export function PokemonFilters() {
   }
 
   function resetFilter() {
+    // setSearchParams({});
     reset({
       pokemonId: '',
       pokemonName: '',

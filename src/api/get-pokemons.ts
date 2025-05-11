@@ -1,6 +1,8 @@
 import { PokemonTypes } from '@/interfaces/pokemon-types';
 import { api } from '@/lib/axios';
 
+import { getFilteredPokemons } from './get-filtered-pokemons';
+
 export interface GetPokemonsResponse {
   count: number;
   results: { name: string }[];
@@ -27,7 +29,7 @@ interface PokemonResponse extends Omit<GetPokemon, 'types'> {
   }[];
 }
 
-interface GetPokemonsParams {
+export interface GetPokemonsParams {
   limit: number;
   offset: number;
   filters: {
@@ -37,11 +39,15 @@ interface GetPokemonsParams {
   };
 }
 
-export const getPokemons = async ({
+export async function getPokemons({
   limit,
   offset,
   filters,
-}: GetPokemonsParams) => {
+}: GetPokemonsParams) {
+  if (!!filters.name || !!filters.id || filters.types.length) {
+    getFilteredPokemons({ limit, offset, filters });
+  }
+
   const res = await api.get<GetPokemonsResponse>(
     `/pokemon?limit=${limit}&offset=${offset}`
   );
@@ -57,10 +63,4 @@ export const getPokemons = async ({
   );
 
   return { count, data: pokemons };
-};
-
-// function to filter pokemons By type
-
-// function to filter pokemons By id, checking if it was already filtered by type
-
-// function to filter pokemons By name checking if it was already filtered by id or type
+}
