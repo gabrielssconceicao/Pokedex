@@ -89,7 +89,7 @@ export function PokemonFilters() {
 
   return (
     <form
-      className="grid-layout grid gap-2 px-5 py-2 md:flex md:flex-wrap md:items-center md:justify-center md:gap-3"
+      className="grid-layout grid gap-2 px-2 py-2 md:flex md:flex-wrap md:items-center md:justify-center md:gap-3 md:px-5"
       onSubmit={handleSubmit(handleFilter)}
     >
       <span className="grid-span-text text-center text-sm font-bold">

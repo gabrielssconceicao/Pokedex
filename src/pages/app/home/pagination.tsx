@@ -22,12 +22,12 @@ export function Pagination({
 }: PaginationProps) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   return (
-    <footer className="flex items-center justify-between px-5 py-2">
+    <footer className="flex flex-col items-center gap-2 px-5 py-2 sm:flex-row sm:justify-between">
       <span className="text-muted-foreground font-mono text-sm">
         Total de {totalItems} items
       </span>
       {/*Items per page? */}
-      <div className="flex items-center gap-6 lg:gap-8">
+      <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-6 lg:gap-8">
         <div className="text-muted-foreground text-md font-mono">
           Página {pageIndex + 1} de {totalPages}
         </div>
