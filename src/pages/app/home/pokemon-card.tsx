@@ -96,7 +96,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
       <CardFooter className="flex items-center justify-center pb-3">
         <Link
           className="pokemon-link flex-1 rounded-lg border-2 px-2 py-1 text-center"
-          to={`/pokemon/${pokemon.id}`}
+          to={`/pokemon/${pokemon.id}/info`}
           style={
             {
               '--type-color': setPokemonTypeColor(pokemon.types[0]),
