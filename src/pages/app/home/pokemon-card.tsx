@@ -40,7 +40,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
       className="min-w-72 gap-3 p-0"
       style={{
         borderColor: setPokemonTypeColor(pokemon.types[0]),
-        boxShadow: `1px 1px 3px ${setPokemonTypeColor(pokemon.types[0])}B3`,
+        boxShadow: `1px 1px 3px 1px ${setPokemonTypeColor(pokemon.types[0])}B3`,
       }}
     >
       <CardHeader
