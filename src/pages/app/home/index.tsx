@@ -7,6 +7,7 @@ import { PokemonTypes } from '@/interfaces/pokemon-types';
 
 import { Pagination } from './pagination';
 import { PokemonCard } from './pokemon-card';
+import { PokemonCardSkeleton } from './pokemon-card-skeleton';
 import { PokemonFilters } from './pokemon-filters';
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -56,9 +57,9 @@ export function Home() {
   return (
     <main className="flex h-full flex-1 flex-col gap-2">
       <PokemonFilters />
-      <section className="flex grow basis-0 flex-wrap justify-evenly gap-4 overflow-y-auto px-4 py-2">
+      <section className="flex grow basis-0 flex-wrap items-center justify-evenly gap-4 overflow-y-auto px-4 py-2">
         {isPokemonsLoading ? (
-          <span>Loading...</span>
+          <PokemonCardSkeleton />
         ) : pokemons && pokemons.data.length ? (
           pokemons.data.map(pokemon => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
@@ -68,12 +69,14 @@ export function Home() {
         )}
       </section>
 
-      <Pagination
-        totalItems={pokemons?.count || 0}
-        itemsPerPage={itemsPerPage}
-        pageIndex={pageIndex}
-        onPageChange={handlePagination}
-      />
+      {pokemons && (
+        <Pagination
+          totalItems={pokemons.count || 0}
+          itemsPerPage={itemsPerPage}
+          pageIndex={pageIndex}
+          onPageChange={handlePagination}
+        />
+      )}
     </main>
   );
 }
