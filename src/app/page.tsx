@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import { ThemeToggle } from '@/components/theme-toggle';
 
+import { FormInput } from './components/form-inputs';
+
 export default function Home() {
   return (
     <>
@@ -23,10 +25,10 @@ export default function Home() {
         </div>
       </header>
       <main>
-        <section>Content</section>
+        <FormInput />
+        <section>Data</section>
         <section>Pagination</section>
       </main>
-      <footer>Footer</footer>
     </>
   );
 }
