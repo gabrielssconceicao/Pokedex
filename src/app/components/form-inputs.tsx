@@ -1,9 +1,16 @@
 'use client';
 
 import { SelectItem } from '@radix-ui/react-select';
+import { FunnelIcon } from 'lucide-react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import {
@@ -12,6 +19,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
+const pokemonTypes = [
+  'Fire',
+  'Water',
+  'Grass',
+  'Electric',
+  'Bug',
+  'Normal',
+  'Psychic',
+  'Rock',
+  'Ground',
+  'Ice',
+  'Dragon',
+  'Dark',
+  'Fairy',
+  'Fighting',
+  'Ghost',
+  'Steel',
+  'Poison',
+  'Flying',
+];
 
 export function FormInput() {
   const form = useForm();
@@ -40,15 +68,42 @@ export function FormInput() {
                 </FormItem>
               )}
             />
-          </div>
 
-          <div>
-            {/* Select type filter */}
+            <Controller
+              name="pokemonType"
+              render={({ field }) => (
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex w-48 border-0">
+                    <Button className="bg-primary w-full" size={'sm'}>
+                      <FunnelIcon className="mr-2 h-3 w-3" />
+                      Tipagem
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-48">
+                    {pokemonTypes.map((type) => (
+                      <DropdownMenuCheckboxItem
+                        key={type}
+                        checked
+                        onSelect={(event) => event.preventDefault()}
+                        className="text-xs"
+                      >
+                        {type}
+                      </DropdownMenuCheckboxItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+            />
             <Controller
               name="itemsPerPage"
               render={({ field }) => (
-                <Select defaultValue="25">
-                  <SelectTrigger>
+                <Select
+                  defaultValue="25"
+                  name={field.name}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                >
+                  <SelectTrigger size="sm" className="w-40">
                     <SelectValue placeholder="Itens por página" />
                   </SelectTrigger>
                   <SelectContent>
