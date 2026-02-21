@@ -1,3 +1,4 @@
+'use client';
 import {
   Select,
   SelectContent,
@@ -9,7 +10,7 @@ import {
 export function PerPageSelect() {
   return (
     <Select defaultValue="25">
-      <SelectTrigger size="sm" className="w-32 md:w-48">
+      <SelectTrigger size="sm" className="w-32 flex-1 md:w-48">
         <SelectValue placeholder="Itens por página" />
       </SelectTrigger>
       <SelectContent>
