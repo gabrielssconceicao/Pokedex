@@ -7,26 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-const pokemonTypes = [
-  'Fire',
-  'Water',
-  'Grass',
-  'Electric',
-  'Bug',
-  'Normal',
-  'Psychic',
-  'Rock',
-  'Ground',
-  'Ice',
-  'Dragon',
-  'Dark',
-  'Fairy',
-  'Fighting',
-  'Ghost',
-  'Steel',
-  'Poison',
-  'Flying',
-];
+import { pokemonTypes } from '@/constants/pokemon-types';
 
 export function PokemonTypeFilter() {
   return (
@@ -38,13 +19,13 @@ export function PokemonTypeFilter() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-32">
-        {pokemonTypes.map((type) => (
+        {Object.entries(pokemonTypes).map(([key, type]) => (
           <DropdownMenuCheckboxItem
-            key={type}
+            key={key}
             onSelect={(event) => event.preventDefault()}
             className="text-xs"
           >
-            {type}
+            {type.label}
           </DropdownMenuCheckboxItem>
         ))}
       </DropdownMenuContent>
