@@ -1,3 +1,4 @@
+'use client';
 import { FunnelIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -18,7 +19,7 @@ export function PokemonTypeFilter() {
           Tipagem
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-32">
+      <DropdownMenuContent className="w-32 sm:w-40">
         {Object.entries(pokemonTypes).map(([key, type]) => (
           <DropdownMenuCheckboxItem
             key={key}
