@@ -1,5 +1,6 @@
 import { Filters } from './components/filters';
 import { Header } from './components/header';
+import { Pagination } from './components/pagination';
 import { PokemonCard } from './components/pokemon-card';
 
 export default function Home() {
@@ -13,8 +14,8 @@ export default function Home() {
             <PokemonCard key={index} />
           ))}
         </section>
-        <h3>2</h3>
       </main>
+      <Pagination />
     </div>
   );
 }
