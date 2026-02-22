@@ -61,7 +61,7 @@ export function PokemonCard() {
       </CardContent>
       <CardFooter>
         <Link
-          href=""
+          href="pokemon/pokemon/details"
           className="hover:text-accent-foreground flex-1 rounded-lg border-2 px-2 py-1 text-center font-mono text-sm font-semibold transition-colors"
         >
           See details
