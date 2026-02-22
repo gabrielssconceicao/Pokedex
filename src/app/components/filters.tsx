@@ -8,11 +8,11 @@ export function Filters() {
   return (
     <section className="border-b-foreground border-b px-2 py-3">
       <form action="" className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <div className="flex flex-row gap-3 space-y-2">
+        <div className="flex flex-row gap-3 sm:space-y-2">
           <Input placeholder="Id" className="w-20" />
           <Input placeholder="Pokemon" className="sm:flex-1" />
         </div>
-        <div className="flex flex-row gap-3 space-y-3 sm:flex-1">
+        <div className="flex flex-row gap-3 sm:flex-1 sm:space-y-3">
           <PerPageSelect />
           <PokemonTypeFilter />
         </div>
