@@ -1,13 +1,8 @@
 import Image from 'next/image';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+import { HabilitiesCardDespription } from './components/HabilitiesCardDescription';
 import { SpeciesCardDespription } from './components/SpeciesCardDescription';
 
 const species = {
@@ -17,6 +12,14 @@ const species = {
   weight: '10 lbs (4.5 kg)',
 };
 
+const habilities = [
+  {
+    name: 'Hability 1',
+    description:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt iste voluptates doloribus ipsa vel impedit suscipit, animi quod!',
+  },
+];
+
 export default function Details() {
   return (
     <section>
@@ -24,7 +27,7 @@ export default function Details() {
         <aside className="flex w-full items-center justify-center rounded-md bg-amber-400 p-3 sm:w-3/4">
           <Image src={'/pokemon-egg.png'} width={80} height={80} alt="1" />
         </aside>
-        <aside className="w-full px-3 py-4">
+        <aside className="w-full py-4">
           <Card className="py-2">
             <CardHeader className="border-b-2">
               <CardTitle className="text-center">Species</CardTitle>
@@ -40,6 +43,21 @@ export default function Details() {
             </CardContent>
           </Card>
         </aside>
+      </div>
+
+      <div>
+        <Card className="py-2">
+          <CardHeader className="border-b-2">
+            <CardTitle className="text-center">Evolution</CardTitle>
+          </CardHeader>
+          <CardContent className="grid grid-cols-2 gap-3">
+            <HabilitiesCardDespription
+              label="Description"
+              value={habilities[0].description}
+              colSpan={2}
+            />
+          </CardContent>
+        </Card>
       </div>
     </section>
   );
