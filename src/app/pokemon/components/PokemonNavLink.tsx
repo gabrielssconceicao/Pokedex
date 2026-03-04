@@ -22,6 +22,7 @@ function NavLink(props: NavLinkProps) {
 export function PokemonNavLink() {
   return (
     <nav className="border-t-foreground flex items-center justify-around border-t p-2">
+      <NavLink label="Home" href="/" icon={'home'} />
       <NavLink label="Details" href="details" icon={'info'} />
     </nav>
   );
