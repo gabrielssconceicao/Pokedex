@@ -2,10 +2,7 @@ import Image from 'next/image';
 
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Badge } from '@/components/ui/badge';
-import {
-  getPokemonBgColor,
-  getPokemonTextColor,
-} from '@/constants/pokemon-types';
+import { getPokemonColors } from '@/constants/pokemon-types';
 
 const pokemon = {
   name: 'Pikachu',
@@ -15,13 +12,14 @@ const pokemon = {
 };
 
 export function PokemonHeader() {
-  const color = getPokemonBgColor('fire');
-  const textColor = getPokemonTextColor('fire');
+  const { bg, border, text } = getPokemonColors('fire');
 
-  const textColorStyle = `text-${textColor.light} dark:text-${textColor.dark}`;
+  const textColorStyle = `${text.light} dark:${text.dark}`;
+  const bgColorStyle = `${bg.light} ${bg.dark}`;
+  const borderColorStyle = `${border.light} ${border.dark}`;
   return (
     <header
-      className={`bg-${color.light} dark:bg-${color.dark} flex items-stretch justify-between gap-2 rounded-2xl`}
+      className={`${bgColorStyle} flex items-stretch justify-between gap-2 rounded-2xl`}
     >
       <div className="flex flex-1 flex-col justify-around px-3 py-1">
         <div className="flex justify-between gap-2">
@@ -41,7 +39,7 @@ export function PokemonHeader() {
           {pokemon.types.map((type) => (
             <Badge
               key={type}
-              className={`flex-1 bg-transparent ${textColorStyle} border-2 border-${textColor.light} dark:border-${textColor.dark}`}
+              className={`flex-1 bg-transparent ${textColorStyle} border-2 ${borderColorStyle}`}
             >
               {type}
             </Badge>
@@ -49,7 +47,7 @@ export function PokemonHeader() {
         </div>
       </div>
       <div
-        className={`flex h-24 w-32 items-center justify-end rounded-l-[50%] rounded-r-2xl bg-${color.dark} px-2 dark:bg-${color.light}`}
+        className={`flex h-24 w-32 items-center justify-end rounded-l-[50%] rounded-r-2xl px-2 ${bg.dark} dark:${bg.light}`}
       >
         <Image
           src={'/pokemon-egg.png'}
