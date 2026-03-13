@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 
 import { ThemeToggle } from '@/components/theme-toggle';
