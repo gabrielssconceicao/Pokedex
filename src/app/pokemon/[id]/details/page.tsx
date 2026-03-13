@@ -1,4 +1,5 @@
 import { PokemonContainer } from '../../components/PokemonContainer';
+import { Species } from '../components/Species';
 
 const species = {
   description:
@@ -18,8 +19,8 @@ const habilities = [
 export default function Details() {
   return (
     <section>
-      <PokemonContainer title="123">
-        <h2>Details</h2>
+      <PokemonContainer title="Species">
+        <Species />
       </PokemonContainer>
     </section>
   );
