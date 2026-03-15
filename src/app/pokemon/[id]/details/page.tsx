@@ -1,4 +1,5 @@
 import { PokemonContainer } from '../../components/PokemonContainer';
+import { Evolution } from './components/Evolution';
 import { Species } from './components/Species';
 import { Status } from './components/Status';
 
@@ -11,7 +12,9 @@ export default function Details() {
       <PokemonContainer title="Status">
         <Status />
       </PokemonContainer>
-      <PokemonContainer title="Evolution">1</PokemonContainer>
+      <PokemonContainer title="Evolution">
+        <Evolution />
+      </PokemonContainer>
     </section>
   );
 }

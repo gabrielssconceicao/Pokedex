@@ -16,7 +16,8 @@ export function PokemonHeader() {
   const { bg, border, text } = getPokemonColors('fire');
 
   const textColorStyle = `${text.light} dark:${text.dark}`;
-  const bgColorStyle = `${bg.light} ${bg.dark}`;
+  const bgColorStyle = `${bg.light} dark:${bg.dark}`;
+  const bgReverseColorStyle = `dark:${bg.light} ${bg.dark}`;
   const borderColorStyle = `${border.light} ${border.dark}`;
   return (
     <header
@@ -48,7 +49,7 @@ export function PokemonHeader() {
         </div>
       </div>
       <div
-        className={`flex h-24 w-32 items-center justify-end rounded-l-[50%] rounded-r-2xl px-2 ${bg.dark} dark:${bg.light}`}
+        className={`flex h-24 w-32 items-center justify-end rounded-l-[50%] rounded-r-2xl ${bgReverseColorStyle} px-2`}
       >
         <Image
           src={'/pokemon-egg.png'}

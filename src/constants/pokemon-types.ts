@@ -3,12 +3,12 @@ export const pokemonTypes = {
     label: 'Fire',
     colors: {
       bg: {
-        light: 'bg-orange-100',
-        dark: 'bg-orange-900/40',
+        light: 'bg-blue-100',
+        dark: 'dark:bg-pink-900/40',
       },
       text: {
         light: 'text-orange-400',
-        dark: 'text-orange-300',
+        dark: 'dark:text-orange-300',
       },
       border: {
         light: 'border-orange-400',
@@ -39,7 +39,7 @@ export enum PokemonTypesColors {
   fairy = '#D685AD',
 }
 
-type PokemonType = keyof typeof pokemonTypes;
+export type PokemonType = keyof typeof pokemonTypes;
 
 export function getPokemonColors(type: PokemonType) {
   return pokemonTypes[type].colors;
