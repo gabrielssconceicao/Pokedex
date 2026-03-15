@@ -22,16 +22,19 @@ const Card: React.FC<CardProps> = ({ label, value, colSpan }) => {
   );
 };
 
+const species = {
+  description:
+    ' Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt iste voluptates doloribus ipsa vel impedit suscipit, animi quod!',
+  height: '2\'4\" (0.71 m)',
+  weight: '10 lbs (4.5 kg)',
+};
+
 export function Species() {
   return (
     <section className="grid grid-cols-2 gap-1 py-2">
-      <Card
-        label="Teste"
-        value="lorem ipsum dolor sit amet consectetur adipisicing elit . "
-        colSpan={2}
-      />
-      <Card label="Weight" value="245 lbs" />
-      <Card label="Height" value="5'7'' (1.7 m)" />
+      <Card label="Teste" value={species.description} colSpan={2} />
+      <Card label="Weight" value={species.weight} />
+      <Card label="Height" value={species.height} />
     </section>
   );
 }
