@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Badge } from '@/components/ui/badge';
 import { getPokemonColors } from '@/constants/pokemon-types';
+import { cn } from '@/lib/utils';
 
 const pokemon = {
   name: 'Pikachu',
@@ -13,24 +14,25 @@ const pokemon = {
 };
 
 export function PokemonHeader() {
-  const { bg, border, text } = getPokemonColors('fire');
+  const { bg, border, text, img } = getPokemonColors('fire');
 
-  const textColorStyle = `${text.light} dark:${text.dark}`;
-  const bgColorStyle = `${bg.light} dark:${bg.dark}`;
-  const bgReverseColorStyle = `dark:${bg.light} ${bg.dark}`;
-  const borderColorStyle = `${border.light} ${border.dark}`;
   return (
     <header
-      className={`${bgColorStyle} flex items-stretch justify-between gap-2 rounded-2xl`}
+      className={cn('flex items-stretch justify-between gap-2 rounded-2xl', bg)}
     >
-      <div className="flex flex-1 flex-col justify-around px-3 py-1">
-        <div className="flex justify-between gap-2">
-          <h1 className={`${textColorStyle} font-mono text-lg font-semibold`}>
+      <div className="flex flex-1 flex-col justify-around space-y-2 px-3 py-1">
+        <div className="flex flex-1 flex-col justify-between gap-2">
+          <h1
+            className={cn(
+              'flex-1 font-mono text-xl font-semibold break-all',
+              text
+            )}
+          >
             {pokemon.name}
           </h1>
 
           <div className="flex items-center justify-between gap-3">
-            <span className={`${textColorStyle} text-md font-mono`}>
+            <span className={'${textColorStyle} text-md font-mono'}>
               #{String(pokemon.id).padStart(3, '0')}
             </span>
             <ThemeToggle />
@@ -41,7 +43,7 @@ export function PokemonHeader() {
           {pokemon.types.map((type) => (
             <Badge
               key={type}
-              className={`flex-1 bg-transparent ${textColorStyle} border-2 ${borderColorStyle}`}
+              className={cn('flex-1 border-2 bg-transparent', text, border)}
             >
               {type}
             </Badge>
@@ -49,7 +51,10 @@ export function PokemonHeader() {
         </div>
       </div>
       <div
-        className={`flex h-24 w-32 items-center justify-end rounded-l-[50%] rounded-r-2xl ${bgReverseColorStyle} px-2`}
+        className={cn(
+          'flex min-h-24 w-24 items-center justify-end rounded-l-[50%] rounded-r-2xl px-2',
+          img
+        )}
       >
         <Image
           src={'/pokemon-egg.png'}

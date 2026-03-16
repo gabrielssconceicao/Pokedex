@@ -2,7 +2,8 @@
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
-import { PokemonType } from '@/constants/pokemon-types';
+import { getPokemonColors, PokemonType } from '@/constants/pokemon-types';
+import { cn } from '@/lib/utils';
 
 import { EvolutionCard } from './Evolution-card';
 
@@ -19,13 +20,20 @@ const alternativeForms: Array<{
 }));
 
 export function AlternativeForms() {
+  const { text } = getPokemonColors('fire');
+
   return (
     <section className="flex flex-wrap items-center justify-around gap-2 px-1 py-2">
       {alternativeForms.map(({ id, ...rest }) => (
         <EvolutionCard key={id} {...rest} />
       ))}
       {!alternativeForms.length && (
-        <p className="text-accent font-mono text-sm font-semibold">
+        <p
+          className={cn(
+            'text-accent text-center font-mono text-sm font-semibold',
+            text
+          )}
+        >
           There are no alternative forms
         </p>
       )}

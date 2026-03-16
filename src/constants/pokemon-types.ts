@@ -2,18 +2,12 @@ export const pokemonTypes = {
   fire: {
     label: 'Fire',
     colors: {
-      bg: {
-        light: 'bg-blue-100',
-        dark: 'dark:bg-pink-900/40',
-      },
-      text: {
-        light: 'text-orange-400',
-        dark: 'dark:text-orange-300',
-      },
-      border: {
-        light: 'border-orange-400',
-        dark: 'border-orange-300',
-      },
+      bg: 'bg-red-300 dark:bg-pink-900',
+      reverseBg: 'bg-pink-900 dark:bg-red-300',
+      img: 'bg-pink-900 dark:bg-red-300',
+      text: 'text-orange-600 dark:text-orange-300',
+      textReverse: 'dark:text-orange-600 text-orange-300',
+      border: 'border-orange-500 dark:border-orange-300',
     },
   },
 };

@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import { getPokemonColors, PokemonType } from '@/constants/pokemon-types';
+import { cn } from '@/lib/utils';
 
 type Props = {
   image: string;
@@ -12,31 +13,29 @@ type Props = {
 };
 
 export function EvolutionCard({ image, name, types }: Props) {
-  const { bg, border, text } = getPokemonColors('fire');
+  const { bg, border, text, img } = getPokemonColors('fire');
 
-  const textColorStyle = `${text.light} dark:${text.dark}`;
-  const bgColorStyle = `${bg.light} ${bg.dark}`;
-  const borderColorStyle = `${border.light} ${border.dark}`;
   return (
     <Link
       href={`/pokemon/${name}/details`}
-      className={`flex w-28 flex-col items-stretch gap-2 rounded-lg ${bgColorStyle}`}
+      className={cn('flex w-28 flex-col items-stretch gap-2 rounded-lg', bg)}
     >
       <div
-        className={`flex h-24 w-full items-center justify-center rounded-t-lg rounded-b-[50%] px-2 ${bg.dark} dark:${bg.light}`}
+        className={cn(
+          'flex h-24 w-full items-center justify-center rounded-t-lg rounded-b-[50%] px-2',
+          img
+        )}
       >
         <Image src={image} alt="Pokemon" width={60} height={60} />
       </div>
-      <span
-        className={`text-md text-center font-mono text-sm ${textColorStyle}`}
-      >
+      <span className={cn('text-md text-center font-mono text-sm', text)}>
         Charmander
       </span>
       <div className="flex gap-3 px-2 py-1">
         {types.map((type) => (
           <Badge
             key={type}
-            className={`flex-1 bg-transparent ${textColorStyle} border-2 ${borderColorStyle}`}
+            className={cn('flex-1 border-2 bg-transparent', border, text)}
           >
             {type}
           </Badge>

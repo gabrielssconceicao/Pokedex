@@ -38,7 +38,7 @@ const evolutionChain: Array<{
 
 export function Evolution() {
   return (
-    <section className="flex items-center justify-around gap-2 px-3 py-2">
+    <section className="max-xs:flex-col flex flex-row items-center justify-around gap-2 px-3 py-2">
       {evolutionChain.map(({ id, evolutionDetail, ...rest }) => (
         <React.Fragment key={id}>
           {evolutionDetail && (

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { cn } from '@/lib/utils';
+
 type CardProps = {
   label: string;
   value: string;
@@ -7,15 +9,17 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ label, value, colSpan }) => {
-  const gridColSpan = colSpan ? 'col-span-2' : 'col-span-1';
   return (
     <div
-      className={`${gridColSpan} flex flex-col items-center justify-center gap-0.5`}
+      className={cn(
+        'flex flex-col items-center justify-center gap-0.5',
+        colSpan === 2 ? 'col-span-2' : 'col-span-1'
+      )}
     >
-      <span className="rounded-md border-2 px-1 py-0.5 text-center text-xs text-gray-950">
+      <span className="rounded-md border-2 px-1 py-0.5 text-center font-mono text-xs font-semibold text-gray-950">
         {label}
       </span>
-      <div className="w-full rounded-md border border-gray-500/50 px-2 py-1 text-center text-sm text-gray-950">
+      <div className="xs:text-sm w-full rounded-md border border-gray-500/50 px-2 py-1 text-center text-xs text-gray-950">
         {value}
       </div>
     </div>
