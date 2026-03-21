@@ -2,8 +2,14 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { getPokemonColors } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
 
+const statusOptions = [
+  { value: 'base', label: 'Base Status' },
+  { value: 'min', label: 'Minimum Status' },
+  { value: 'max', label: 'Maximum Status' },
+];
+
 export function Status() {
-  const { text, textReverse, bg, reverseBg } = getPokemonColors('fire');
+  const { text, textInverse, bg, bgInverse, active } = getPokemonColors('fire');
   return (
     <div className="py-3">
       <ToggleGroup
@@ -14,15 +20,21 @@ export function Status() {
         spacing={2}
         className="mx-auto flex flex-wrap items-center justify-center gap-2"
       >
-        <ToggleGroupItem value="base" aria-label="Base Status">
-          Base Status
-        </ToggleGroupItem>
-        <ToggleGroupItem value="min" aria-label="Minimum Status">
-          Minimum Status
-        </ToggleGroupItem>
-        <ToggleGroupItem value="max" aria-label="Maximum Status">
-          Maximum Status
-        </ToggleGroupItem>
+        {statusOptions.map((option) => (
+          <ToggleGroupItem
+            key={option.value}
+            value={option.value}
+            aria-label={option.label}
+            className={cn(
+              'min-w-fit flex-1 px-1 font-mono font-semibold transition-colors',
+              bg,
+              text,
+              active
+            )}
+          >
+            {option.label}
+          </ToggleGroupItem>
+        ))}
       </ToggleGroup>
 
       <section className="flex flex-col gap-3 px-2 py-3">
@@ -40,8 +52,8 @@ export function Status() {
             <div
               className={cn(
                 'flex items-center justify-end rounded-r-2xl px-4',
-                reverseBg,
-                textReverse
+                bgInverse,
+                textInverse
               )}
               style={{
                 width: '40%',
