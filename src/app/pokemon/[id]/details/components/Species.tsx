@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({ label, value, colSpan }) => {
         colSpan === 2 ? 'col-span-2' : 'col-span-1'
       )}
     >
-      <span className="rounded-md border-2 px-1 py-0.5 text-center font-mono text-xs font-semibold text-gray-950">
+      <span className="rounded-md px-1 py-0.5 text-center font-mono text-xs font-semibold text-gray-950">
         {label}
       </span>
       <div className="xs:text-sm w-full rounded-md border border-gray-500/50 px-2 py-1 text-center text-xs text-gray-950">

@@ -63,12 +63,13 @@ export default function Moves() {
               <TableHead className="text-center text-xs" colSpan={2}>
                 Name
               </TableHead>
-              <TableHead className="w-6 text-center text-xs">Power</TableHead>
             </TableRow>
           </TableHeader>
 
-          <TableBody>
-            <PokemonTableRow />
+          <TableBody className="h-full">
+            {Array.from({ length: 10 }).map((_, index) => (
+              <PokemonTableRow key={index} />
+            ))}
           </TableBody>
         </Table>
       </PokemonContainer>
