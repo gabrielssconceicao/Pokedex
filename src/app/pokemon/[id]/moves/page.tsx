@@ -1,8 +1,17 @@
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { getPokemonColors } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
 
 import { PokemonContainer } from '../../components/PokemonContainer';
+import { PokemonTableRow } from './components/PokemonTableRow';
 
 const moveOptions = [
   { value: 'level-up', label: 'Level Up' },
@@ -40,6 +49,28 @@ export default function Moves() {
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
+      </PokemonContainer>
+
+      <PokemonContainer>
+        <Table>
+          <TableCaption>A list of pokemon moves</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-6"></TableHead>
+              <TableHead className="w-8 text-center text-xs" colSpan={1}>
+                Level
+              </TableHead>
+              <TableHead className="text-center text-xs" colSpan={2}>
+                Name
+              </TableHead>
+              <TableHead className="w-6 text-center text-xs">Power</TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            <PokemonTableRow />
+          </TableBody>
+        </Table>
       </PokemonContainer>
     </section>
   );
