@@ -45,7 +45,7 @@ export function PokemonNavLink() {
     <nav className="border-t-foreground flex items-center justify-around border-t p-2">
       <NavLink label="Home" href="/" icon={'home'} />
       <NavLink label="Details" href="details" icon={'info'} />
-      <NavLink label="Moves" href="moves" icon={'move-3d'} />
+      <NavLink label="Moves" href="moves" icon={'swords'} />
     </nav>
   );
 }
