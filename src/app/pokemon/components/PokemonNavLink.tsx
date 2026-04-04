@@ -46,6 +46,7 @@ export function PokemonNavLink() {
       <NavLink label="Home" href="/" icon={'home'} />
       <NavLink label="Details" href="details" icon={'info'} />
       <NavLink label="Moves" href="moves" icon={'swords'} />
+      <NavLink label="Weakness" href="weakness" icon={'shield-alert'} />
     </nav>
   );
 }
