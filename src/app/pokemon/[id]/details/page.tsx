@@ -2,6 +2,7 @@ import { PokemonContainer } from '../../components/PokemonContainer';
 import { AlternativeForms } from './components/AlternativeForms';
 import { EggGroups } from './components/EggGroups';
 import { Evolution } from './components/Evolution';
+import { Habilities } from './components/Habilities';
 import { Species } from './components/Species';
 import { Status } from './components/Status';
 
@@ -13,6 +14,9 @@ export default function Details() {
       </PokemonContainer>
       <PokemonContainer title="Status">
         <Status />
+      </PokemonContainer>
+      <PokemonContainer title="Habilities">
+        <Habilities />
       </PokemonContainer>
       <PokemonContainer title="Evolution">
         <Evolution />

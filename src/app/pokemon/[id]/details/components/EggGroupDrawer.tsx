@@ -21,7 +21,7 @@ const pokemons = Array(20).fill({
   evolutionDetail: 'Level',
 });
 
-export function EggGroupSelector() {
+export function EggGroupDrawer() {
   const { text, bg } = getPokemonColors('fire');
   return (
     <Drawer>
@@ -33,7 +33,9 @@ export function EggGroupSelector() {
             bg
           )}
         >
-          <span className="font-mono text-xs">Egg Group</span>
+          <span className="w-full text-center font-mono text-xs">
+            Egg Group
+          </span>
           <InfoIcon size={20} />
         </div>
       </DrawerTrigger>
