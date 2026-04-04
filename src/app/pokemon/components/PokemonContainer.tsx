@@ -1,11 +1,25 @@
-interface PokemonCardProps {
-  title?: string;
-  children: React.ReactNode;
-}
+import React from 'react';
 
-export function PokemonContainer({ children, title }: PokemonCardProps) {
+import { cn } from '@/lib/utils';
+
+type PokemonCardProps = {
+  title?: string;
+  className?: string;
+  children: React.ReactNode;
+};
+
+export function PokemonContainer({
+  children,
+  title,
+  className = '',
+}: PokemonCardProps) {
   return (
-    <div className="flex flex-col items-stretch justify-center gap-2 p-2">
+    <div
+      className={cn(
+        'flex flex-col items-stretch justify-center gap-2 p-2',
+        className
+      )}
+    >
       {title && (
         <h2 className="text-md text-center font-sans font-semibold">{title}</h2>
       )}

@@ -3,11 +3,15 @@ export const pokemonTypes = {
     label: 'Fire',
     colors: {
       bg: 'bg-red-300 dark:bg-pink-900',
-      reverseBg: 'bg-pink-900 dark:bg-red-300',
+      bgInverse: 'bg-pink-900 dark:bg-red-300',
       img: 'bg-pink-900 dark:bg-red-300',
       text: 'text-orange-600 dark:text-orange-300',
-      textReverse: 'dark:text-orange-600 text-orange-300',
+      textInverse: 'dark:text-orange-600 text-orange-300',
       border: 'border-orange-500 dark:border-orange-300',
+      active: `data-[state=on]:bg-pink-900 dark:data-[state=on]:bg-red-300 
+         data-[state=on]:text-red-300 dark:data-[state=on]:text-pink-900 
+         hover:bg-pink-900 dark:hover:bg-red-300 
+         hover:text-red-300 dark:hover:text-pink-900`,
     },
   },
 };
