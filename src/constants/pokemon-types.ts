@@ -2,7 +2,7 @@ export const pokemonTypes = {
   fire: {
     label: 'Fire',
     colors: {
-      bg: 'bg-red-300 dark:bg-pink-900',
+      bg: 'bg-red-300 dark:bg-red-900',
       bgInverse: 'bg-pink-900 dark:bg-red-300',
       img: 'bg-pink-900 dark:bg-red-300',
       text: 'text-orange-600 dark:text-orange-300',
