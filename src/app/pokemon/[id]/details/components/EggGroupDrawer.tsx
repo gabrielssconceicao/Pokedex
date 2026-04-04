@@ -26,7 +26,8 @@ export function EggGroupDrawer() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <div
+        <button
+          type="button"
           className={cn(
             'flex flex-1 items-center justify-center gap-2 rounded-lg px-1 py-2',
             text,
@@ -37,7 +38,7 @@ export function EggGroupDrawer() {
             Egg Group
           </span>
           <InfoIcon size={20} />
-        </div>
+        </button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
