@@ -4,7 +4,7 @@ import React from 'react';
 
 import { PokemonType } from '@/constants/pokemon-types';
 
-import { EvolutionCard } from './Evolution-card';
+import { PokemonCard } from '../../../components/PokemonCard';
 
 const evolutionChain: Array<{
   id: number;
@@ -47,7 +47,7 @@ export function Evolution() {
               <span>{evolutionDetail}</span>
             </div>
           )}
-          <EvolutionCard key={id} {...rest} />
+          <PokemonCard key={id} {...rest} />
         </React.Fragment>
       ))}
     </section>

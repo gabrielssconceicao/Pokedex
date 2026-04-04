@@ -12,7 +12,7 @@ type Props = {
   types: PokemonType[];
 };
 
-export function EvolutionCard({ image, name, types }: Props) {
+export function PokemonCard({ image, name, types }: Props) {
   const { bg, border, text, img } = getPokemonColors('fire');
 
   return (
