@@ -5,7 +5,7 @@ import React from 'react';
 import { getPokemonColors, PokemonType } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
 
-import { EvolutionCard } from './Evolution-card';
+import { PokemonCard } from '../../../components/PokemonCard';
 
 const alternativeForms: Array<{
   id: number;
@@ -25,7 +25,7 @@ export function AlternativeForms() {
   return (
     <section className="flex flex-wrap items-center justify-around gap-2 px-1 py-2">
       {alternativeForms.map(({ id, ...rest }) => (
-        <EvolutionCard key={id} {...rest} />
+        <PokemonCard key={id} {...rest} />
       ))}
       {!alternativeForms.length && (
         <p
