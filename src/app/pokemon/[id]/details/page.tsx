@@ -1,4 +1,4 @@
-import { PokemonContainer } from '../../components/PokemonContainer';
+import { PokemonContainer } from '../../components/pokemon-container';
 import { Abilities } from './components/Abilities';
 import { AlternativeForms } from './components/AlternativeForms';
 import { EggGroups } from './components/EggGroups';

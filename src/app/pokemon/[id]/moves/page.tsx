@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import { PokemonContainer } from '../../components/PokemonContainer';
+import { PokemonContainer } from '../../components/pokemon-container';
 import { MoveTypeSelector } from './components/MoveTypeSelector';
 import { PokemonTableRow } from './components/PokemonTableRow';
 

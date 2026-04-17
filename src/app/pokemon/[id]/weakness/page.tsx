@@ -1,6 +1,6 @@
 import { PokemonType } from '@/constants/pokemon-types';
 
-import { PokemonContainer } from '../../components/PokemonContainer';
+import { PokemonContainer } from '../../components/pokemon-container';
 import { DamageBadge } from './components/DamageBadge';
 
 const mockItem = (damage: 4 | 2 | 1 | 0.5 | 0.25) => ({
