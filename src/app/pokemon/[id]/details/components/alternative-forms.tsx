@@ -1,6 +1,4 @@
 'use client';
-import { ArrowRight } from 'lucide-react';
-import React from 'react';
 
 import { PokemonCard } from '@/components/pokemon-card';
 import { getPokemonColors, PokemonType } from '@/constants/pokemon-types';
@@ -36,7 +34,7 @@ export function AlternativeForms() {
       {!alternativeForms.length && (
         <p
           className={cn(
-            'text-accent text-center font-mono text-sm font-semibold',
+            'text-accent text-center font-mono text-sm font-semibold tracking-wider',
             text
           )}
         >
