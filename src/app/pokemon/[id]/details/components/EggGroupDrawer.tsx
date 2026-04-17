@@ -1,5 +1,6 @@
 import { InfoIcon } from 'lucide-react';
 
+import { PokemonCard } from '@/components/pokemon-card';
 import {
   Drawer,
   DrawerContent,
@@ -10,8 +11,6 @@ import {
 } from '@/components/ui/drawer';
 import { getPokemonColors } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
-
-import { PokemonCard } from '../../../components/PokemonCard';
 
 const pokemons = Array(20).fill({
   id: 3,
@@ -46,8 +45,15 @@ export function EggGroupDrawer() {
           <DrawerDescription>Pokemnons egg Group</DrawerDescription>
         </DrawerHeader>
         <div className="flex flex-wrap items-center justify-center gap-3 overflow-y-auto">
-          {pokemons.map((pokemon) => (
-            <PokemonCard key={pokemon.id} {...pokemon} />
+          {pokemons.map(({ id, image, name, types }) => (
+            <PokemonCard
+              key={id}
+              id={id}
+              img={image}
+              name={name}
+              types={types}
+              variant="card"
+            />
           ))}
         </div>
       </DrawerContent>

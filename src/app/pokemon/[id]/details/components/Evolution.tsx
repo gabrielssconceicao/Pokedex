@@ -2,9 +2,8 @@
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
+import { PokemonCard } from '@/components/pokemon-card';
 import { PokemonType } from '@/constants/pokemon-types';
-
-import { PokemonCard } from '../../../components/PokemonCard';
 
 const evolutionChain: Array<{
   id: number;
@@ -39,7 +38,7 @@ const evolutionChain: Array<{
 export function Evolution() {
   return (
     <section className="max-xs:flex-col flex flex-row items-center justify-around gap-2 px-3 py-2">
-      {evolutionChain.map(({ id, evolutionDetail, ...rest }) => (
+      {evolutionChain.map(({ id, evolutionDetail, image, name, types }) => (
         <React.Fragment key={id}>
           {evolutionDetail && (
             <div className="flex flex-col items-center justify-center gap-3">
@@ -47,7 +46,14 @@ export function Evolution() {
               <span>{evolutionDetail}</span>
             </div>
           )}
-          <PokemonCard key={id} {...rest} />
+          <PokemonCard
+            key={id}
+            id={id}
+            img={image}
+            name={name}
+            types={types}
+            variant="card"
+          />
         </React.Fragment>
       ))}
     </section>

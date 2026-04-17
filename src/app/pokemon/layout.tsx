@@ -1,5 +1,5 @@
-import { PokemonHeader } from './components/PokemonHeader';
-import { PokemonNavLink } from './components/PokemonNavLink';
+import { PokemonHeader } from './components/pokemon-header';
+import { PokemonNavLink } from './components/pokemon-nav-link';
 
 export default function PokemonLayout({
   children,

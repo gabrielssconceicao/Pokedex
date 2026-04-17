@@ -6,19 +6,22 @@ type Props = {
   name: string;
   id: number;
   textColor: string;
-  variant: Variant;
+  variant?: Variant | 'header';
 };
-export function PokemonNameTitle({ name, id, textColor, variant }: Props) {
-  const isCard = variant === 'card';
+export function PokemonNameTitle({
+  name,
+  id,
+  textColor,
+  variant = 'default',
+}: Props) {
+  const variantStyles: Record<Variant | 'header', string> = {
+    default: 'flex-row items-center justify-between px-2',
+    card: 'flex-col items-center justify-center gap-0.5',
+    header:
+      'flex-1 justify-between xs:flex-row xs:text-xl xs:font-semibold break-all flex-col items-center',
+  };
   return (
-    <div
-      className={cn(
-        'flex',
-        isCard
-          ? 'flex-col items-center justify-center gap-0.5'
-          : 'flex-row items-center justify-between px-2'
-      )}
-    >
+    <div className={cn('flex', variantStyles[variant])}>
       <span className={cn('text-md font-mono', textColor)}>
         #{String(id).padStart(3, '0')}
       </span>
