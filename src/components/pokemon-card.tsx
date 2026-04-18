@@ -35,7 +35,7 @@ export function PokemonCard({
         'flex items-stretch rounded-2xl',
         bg,
         isCard
-          ? 'h-56 w-28 flex-col justify-between overflow-hidden'
+          ? 'h-56 w-28 min-w-fit flex-col justify-between overflow-hidden'
           : 'min-w-60 flex-1 gap-1 transition-transform hover:scale-[1.02]'
       )}
     >

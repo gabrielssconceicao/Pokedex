@@ -1,7 +1,7 @@
 import { PokemonContainer } from '../../components/pokemon-container';
-import { Abilities } from './components/Abilities';
+import { Abilities } from './components/abilities';
 import { AlternativeForms } from './components/alternative-forms';
-import { EggGroups } from './components/EggGroups';
+import { EggGroups } from './components/egg-group';
 import { Evolution } from './components/evolution';
 import { Species } from './components/species';
 import { Status } from './components/status';

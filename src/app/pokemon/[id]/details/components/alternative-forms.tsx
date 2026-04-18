@@ -9,7 +9,7 @@ const alternativeForms: Array<{
   image: string;
   name: string;
   types: PokemonType[];
-}> = Array.from({ length: 0 }).map((_, index) => ({
+}> = Array.from({ length: 4 }).map((_, index) => ({
   id: index + 1,
   image: '/pokemon-egg.png',
   name: 'Charmander',
@@ -22,14 +22,7 @@ export function AlternativeForms() {
   return (
     <section className="flex flex-wrap items-center justify-around gap-2 px-1 py-2">
       {alternativeForms.map(({ id, image, name, types }) => (
-        <PokemonCard
-          key={id}
-          id={id}
-          img={image}
-          name={name}
-          types={types}
-          variant="card"
-        />
+        <PokemonCard key={id} id={id} img={image} name={name} types={types} />
       ))}
       {!alternativeForms.length && (
         <p
