@@ -9,7 +9,7 @@ export function Filters() {
     <section className="border-b-foreground border-b px-2 py-3">
       <form action="" className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <div className="flex flex-row gap-3 sm:space-y-2">
-          <Input placeholder="Id" className="w-20" />
+          <Input placeholder="Id" className="w-14 sm:w-20 sm:flex-1" />
           <Input placeholder="Pokemon" className="sm:flex-1" />
         </div>
         <div className="flex flex-row gap-3 sm:flex-1 sm:space-y-3">

@@ -1,61 +1,46 @@
 import { PokemonType } from '@/constants/pokemon-types';
 
-import { PokemonContainer } from '../../components/PokemonContainer';
-import { DamageBadge } from './components/DamageBadge';
+import { PokemonContainer } from '../../components/pokemon-container';
+import { DamageBadge, DamageValues } from './components/damage-badge';
 
-const mockItem = (damage: 4 | 2 | 1 | 0.5 | 0.25) => ({
-  type: 'fire',
+const mockItem = (damage: DamageValues) => ({
+  type: 'fire' as PokemonType,
   damage,
 });
 
+type WeaknessType = 'weakTo' | 'resistantTo' | 'normalDamage';
+
 const weaknesses: Record<
-  'weakTo' | 'resistantTo' | 'normalDamage',
-  Array<{ type: PokemonType; damage: 4 | 2 | 1 | 0.5 | 0.25 }>
+  WeaknessType,
+  Array<{ type: PokemonType; damage: DamageValues }>
 > = {
-  weakTo: [...Array(4).fill(mockItem(4)), ...Array(4).fill(mockItem(2))],
-  resistantTo: [
-    ...Array(4).fill(mockItem(0.5)),
-    ...Array(4).fill(mockItem(0.25)),
-  ],
-  normalDamage: Array(4).fill(mockItem(1)),
+  weakTo: Array.from({ length: 5 }).map((_, index) =>
+    mockItem(index % 2 === 0 ? 4 : 2)
+  ),
+  resistantTo: Array.from({ length: 3 }).map((_, index) =>
+    mockItem(index % 2 === 0 ? 0.5 : 0.25)
+  ),
+  normalDamage: Array(6).fill(mockItem(1)),
+};
+
+const weaknessMap: Record<WeaknessType, string> = {
+  normalDamage: 'Takes normal damage from',
+  weakTo: 'Weak to',
+  resistantTo: 'Resistant to',
 };
 
 export default function Weakness() {
   return (
     <section>
-      <PokemonContainer title="Weak to">
-        <div className="flex flex-row flex-wrap items-center justify-center gap-1 px-2 py-1">
-          {weaknesses.weakTo.map((item) => (
-            <DamageBadge
-              key={`${item.type}-${item.damage}`}
-              type={item.type}
-              damage={item.damage}
-            />
-          ))}
-        </div>
-      </PokemonContainer>
-      <PokemonContainer title="Resistant to">
-        <div className="flex flex-row flex-wrap items-center justify-center gap-2 px-2 py-1">
-          {weaknesses.resistantTo.map((item) => (
-            <DamageBadge
-              key={`${item.type}-${item.damage}`}
-              type={item.type}
-              damage={item.damage}
-            />
-          ))}
-        </div>
-      </PokemonContainer>
-      <PokemonContainer title="Takes normal damage from">
-        <div className="flex flex-row flex-wrap items-center justify-center gap-2 px-2 py-1">
-          {weaknesses.normalDamage.map((item) => (
-            <DamageBadge
-              key={`${item.type}-${item.damage}`}
-              type={item.type}
-              damage={item.damage}
-            />
-          ))}
-        </div>
-      </PokemonContainer>
+      {Object.entries(weaknesses).map(([key, values]) => (
+        <PokemonContainer title={weaknessMap[key as WeaknessType]} key={key}>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-1 px-2 py-1">
+            {values.map(({ type, damage }) => (
+              <DamageBadge key={`${type}`} type={type} damage={damage} />
+            ))}
+          </div>
+        </PokemonContainer>
+      ))}
     </section>
   );
 }

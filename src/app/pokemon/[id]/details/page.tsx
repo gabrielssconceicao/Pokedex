@@ -1,10 +1,10 @@
-import { PokemonContainer } from '../../components/PokemonContainer';
-import { Abilities } from './components/Abilities';
-import { AlternativeForms } from './components/AlternativeForms';
-import { EggGroups } from './components/EggGroups';
-import { Evolution } from './components/Evolution';
-import { Species } from './components/Species';
-import { Status } from './components/Status';
+import { PokemonContainer } from '../../components/pokemon-container';
+import { Abilities } from './components/abilities';
+import { AlternativeForms } from './components/alternative-forms';
+import { EggGroups } from './components/egg-group';
+import { Evolution } from './components/evolution';
+import { Species } from './components/species';
+import { Status } from './components/status';
 
 export default function Details() {
   return (
