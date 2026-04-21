@@ -14,6 +14,23 @@ export const pokemonTypes = {
          hover:text-red-300 dark:hover:text-pink-900`,
     },
   },
+  normal: { label: 'Normal' },
+  water: { label: 'Water' },
+  electric: { label: 'Electric' },
+  grass: { label: 'Grass' },
+  ice: { label: 'Ice' },
+  fighting: { label: 'Fighting' },
+  poison: { label: 'Poison' },
+  ground: { label: 'ground' },
+  flying: { label: 'flying' },
+  psychic: { label: 'psychic' },
+  bug: { label: 'bug' },
+  rock: { label: 'rock' },
+  ghost: { label: 'ghost' },
+  dragon: { label: 'dragon' },
+  dark: { label: 'dark' },
+  steel: { label: 'steel' },
+  fairy: { label: 'fairy' },
 };
 
 export enum PokemonTypesColors {
