@@ -1,31 +1,38 @@
-import { PokemonCard } from '@/components/pokemon-card';
+'use server';
+
 import { PokemonType } from '@/constants/pokemon-types';
 
 import { Filters } from './components/filters';
 import { Header } from './components/header';
 import { Pagination } from './components/pagination';
+import { PokemonList } from './components/pokemon-list';
 
-const pokemons = Array.from({ length: 20 }).map((_, index) => ({
-  id: index + 1,
-  name: 'pikachu',
-  img: '/pokemon-egg.png',
-  types:
-    (index + 1) % 2 === 0
-      ? (['fire', 'water'] as PokemonType[])
-      : (['fire'] as PokemonType[]),
-}));
+type HomeProps = {
+  searchParams: Promise<{
+    id?: string;
+    name?: string;
+    perPage?: string;
+    type?: PokemonType | PokemonType[];
+  }>;
+};
 
-export default function Home() {
+export default async function Home({ searchParams }: HomeProps) {
+  const { id, name, perPage = '25', type } = await searchParams;
+
+  const types = Array.isArray(type) ? type : type ? [type] : [];
+  const parsedPerPage = Number(perPage);
+  const filterOptions = {
+    id: id && !isNaN(Number(id)) ? Number(id) : undefined,
+    name,
+    perPage: perPage && !isNaN(parsedPerPage) ? parsedPerPage : 25,
+    types,
+  };
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex h-full flex-1 flex-col">
         <Filters />
-        <section className="flex grow basis-0 flex-wrap items-center justify-between gap-4 overflow-y-auto px-4 py-2">
-          {pokemons.map(({ id, img, name, types }) => (
-            <PokemonCard key={id} id={id} name={name} img={img} types={types} />
-          ))}
-        </section>
+        <PokemonList filterOptions={filterOptions} />
       </main>
       <Pagination />
     </div>

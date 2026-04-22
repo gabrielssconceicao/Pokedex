@@ -27,13 +27,7 @@ export function Filters() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const {
-    register,
-    reset,
-    control,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<SearchParamsForm>({
+  const { register, reset, control, handleSubmit } = useForm<SearchParamsForm>({
     defaultValues: {
       id: searchParams.get('id') ?? '',
       name: searchParams.get('name') ?? '',
@@ -50,7 +44,7 @@ export function Filters() {
       params.set('id', id);
     }
     if (name) {
-      params.set('id', name);
+      params.set('name', name);
     }
     if (perPage) {
       params.set('perPage', String(perPage));
@@ -109,13 +103,16 @@ export function Filters() {
           />
         </div>
         <div className="flex flex-row gap-3 sm:flex-1">
-          <Button type="submit" className="bg-primary flex-1">
+          <Button
+            type="submit"
+            className="hover:bg-primary/60 flex-1 cursor-pointer"
+          >
             Buscar
           </Button>
           <Button
             type="button"
             variant={'secondary'}
-            className="flex-1"
+            className="flex-1 cursor-pointer"
             onClick={onResetForm}
           >
             Limpar
