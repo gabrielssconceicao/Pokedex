@@ -18,13 +18,13 @@ type HomeProps = {
 };
 
 export default async function Home({ searchParams }: HomeProps) {
-  const { id, name, type, perPage = '25', page = '0' } = await searchParams;
+  const { id, name, type, perPage = '25', page = '1' } = await searchParams;
 
   const types = Array.isArray(type) ? type : type ? [type] : [];
   const parsedPerPage = Number(perPage);
   const filterOptions = {
     id: id && !isNaN(Number(id)) ? Number(id) : undefined,
-    page: page && !isNaN(Number(id)) ? Number(page) : 1,
+    page: page && !isNaN(Number(page)) ? Number(page) : 1,
     perPage: perPage && !isNaN(parsedPerPage) ? parsedPerPage : 25,
     name,
     types,

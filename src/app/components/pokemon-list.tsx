@@ -1,6 +1,5 @@
 'use client';
 import { PokemonCard } from '@/components/pokemon-card';
-import { PokemonType } from '@/constants/pokemon-types';
 import { PokemonFilters, usePokemons } from '@/hooks/use-pokemons';
 
 interface PokemonListProps {

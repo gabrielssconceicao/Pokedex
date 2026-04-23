@@ -19,7 +19,7 @@ export function usePokemons({
 }: PokemonFilters) {
   const pagination = {
     limit: perPage,
-    offset: page,
+    page,
   };
   const filters = {
     id,

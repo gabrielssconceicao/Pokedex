@@ -10,7 +10,7 @@ import {
 interface FetchPokemonsParams {
   pagination: {
     limit: number;
-    offset: number;
+    page: number;
   };
   filters: {
     id?: number;
@@ -30,7 +30,7 @@ type FetcherResponse = {
 };
 
 export async function fetchPokemons({
-  pagination,
+  pagination: { limit, page },
   filters,
 }: FetchPokemonsParams): Promise<FetchPokemonsResponse> {
   if (!Object.keys(filters).length) {
@@ -38,7 +38,10 @@ export async function fetchPokemons({
   }
 
   const { count, results } = await fetcher<FetcherResponse>(
-    createUrl('pokemon', pagination)
+    createUrl('pokemon', {
+      limit,
+      offset: limit * (page - 1),
+    })
   );
 
   const resultPromises = results.map((r) =>
