@@ -3,7 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
-import { ThemeProvider } from '@/provider/theme-provider';
+import { Providers } from '@/provider/providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,14 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Providers>
           <div className="mx-auto w-full max-w-5xl px-4">{children}</div>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

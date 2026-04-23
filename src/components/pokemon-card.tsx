@@ -26,7 +26,7 @@ export function PokemonCard({
   variant = 'default',
 }: Props) {
   const isCard = variant === 'card';
-  const { bg, border, text, img: Img } = getPokemonColors(types[0]);
+  const { bg, border, text, img: Img } = getPokemonColors('fire');
 
   return (
     <Link

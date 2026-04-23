@@ -11,20 +11,22 @@ type HomeProps = {
   searchParams: Promise<{
     id?: string;
     name?: string;
+    page?: string;
     perPage?: string;
     type?: PokemonType | PokemonType[];
   }>;
 };
 
 export default async function Home({ searchParams }: HomeProps) {
-  const { id, name, perPage = '25', type } = await searchParams;
+  const { id, name, type, perPage = '25', page = '0' } = await searchParams;
 
   const types = Array.isArray(type) ? type : type ? [type] : [];
   const parsedPerPage = Number(perPage);
   const filterOptions = {
     id: id && !isNaN(Number(id)) ? Number(id) : undefined,
-    name,
+    page: page && !isNaN(Number(id)) ? Number(page) : 1,
     perPage: perPage && !isNaN(parsedPerPage) ? parsedPerPage : 25,
+    name,
     types,
   };
   return (
@@ -32,7 +34,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <Header />
       <main className="flex h-full flex-1 flex-col">
         <Filters />
-        <PokemonList filterOptions={filterOptions} />
+        <PokemonList filters={filterOptions} />
       </main>
       <Pagination />
     </div>
