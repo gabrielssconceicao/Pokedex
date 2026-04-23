@@ -33,11 +33,12 @@ export async function fetchPokemons({
   pagination: { limit, page },
   filters,
 }: FetchPokemonsParams): Promise<FetchPokemonsResponse> {
-  let count: number;
-  let pokemons: FormatFetchPokemonParams[];
-  const offset = (page - 1) * limit;
+  let count = 0;
+  let pokemons: FormatFetchPokemonParams[] = [];
+
   const { id, name, types } = filters;
   const hasFilters = id || name || types.length > 0;
+
   if (hasFilters) {
     const { id, name, types } = filters;
     let filtered: FetcherResponse['results'];
@@ -54,7 +55,6 @@ export async function fetchPokemons({
       filtered = filtered.filter((result) => {
         const parts = result.url.split('/').filter(Boolean);
         const pokemonId = parts[parts.length - 1];
-
         return Number(pokemonId) === id || pokemonId.includes(String(id));
       });
     }
@@ -65,37 +65,26 @@ export async function fetchPokemons({
       );
     }
 
-    if (types.length !== 0) {
-      const resultPromises = filtered.map((r) =>
-        fetcher<FormatFetchPokemonParams>(r.url)
-      );
+    const resultPromises = filtered.map((r) =>
+      fetcher<FormatFetchPokemonParams>(r.url)
+    );
+
+    let resolved = await Promise.all(resultPromises);
+
+    if (types.length > 0) {
       const typeSet = new Set(types);
-      const resultResolve = await Promise.all(resultPromises);
-      const filteredPokemons = resultResolve.filter((r) =>
-        r.types.some(({ type }) => typeSet.has(type.name))
+      resolved = resolved.filter((pokemon) =>
+        pokemon.types.some((t) => typeSet.has(t.type.name))
       );
-
-      count = filteredPokemons.length;
-      const start = offset;
-      const end = start + limit;
-
-      pokemons = filteredPokemons.slice(start, end);
-    } else {
-      const resultPromises = filtered.map((r) =>
-        fetcher<FormatFetchPokemonParams>(r.url)
-      );
-
-      const resultResolve = await Promise.all(resultPromises);
-      count = resultResolve.length;
-      const start = offset;
-      const end = start + limit;
-      pokemons = resultResolve.slice(start, end);
     }
+
+    const start = (page - 1) * limit;
+    pokemons = resolved.slice(start, start + limit);
   } else {
     const { count: resultCount, results } = await fetcher<FetcherResponse>(
       createUrl('pokemon', {
         limit,
-        offset,
+        offset: (page - 1) * limit,
       })
     );
 
