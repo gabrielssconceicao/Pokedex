@@ -2,6 +2,8 @@
 import { PokemonCard } from '@/components/pokemon-card';
 import { PokemonFilters, usePokemons } from '@/hooks/use-pokemons';
 
+import { PokemonListSkeleton } from './pokemon-list-skeleton';
+
 interface PokemonListProps {
   filters: PokemonFilters;
 }
@@ -10,7 +12,7 @@ export function PokemonList({ filters }: PokemonListProps) {
   const { data, isLoading } = usePokemons(filters);
   return (
     <section className="flex grow basis-0 flex-wrap items-center justify-between gap-4 overflow-y-auto px-4 py-2">
-      {isLoading && <h2>Carregando</h2>}
+      {isLoading && <PokemonListSkeleton />}
       {data &&
         data.pokemons.length > 0 &&
         data.pokemons.map(({ id, sprites, name, types }) => (

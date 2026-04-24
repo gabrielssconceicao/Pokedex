@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 import { PokemonFilters, usePokemons } from '@/hooks/use-pokemons';
 
+import { PaginationSkeleton } from '../pagination-skeleton';
 import { PaginationButton } from './pagination-button';
 
 interface PaginationProps {
@@ -134,6 +135,6 @@ export function Pagination({ filters }: PaginationProps) {
       </div>
     </nav>
   ) : (
-    <h2>Carregando...</h2>
+    <PaginationSkeleton />
   );
 }
