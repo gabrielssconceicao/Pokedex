@@ -1,9 +1,12 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useIsFetching } from '@tanstack/react-query';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { getPokemonSearchParams } from '@/app/utils/get-pokemom-search-params';
+import { parsePokemonSearchParams } from '@/app/utils/parse-pokemon-search-params';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PokemonType, pokemonTypes } from '@/constants/pokemon-types';
@@ -12,9 +15,13 @@ import { PerPageSelect } from './per-page-select';
 import { PokemonTypeFilter } from './pokemon-type-filter';
 
 const searchParamsForm = z.object({
-  id: z.string(),
-  name: z.string(),
-  perPage: z.number(),
+  id: z.string().refine((val) => {
+    if (!val) return true;
+    const num = Number(val);
+    return !isNaN(num) && num > 0;
+  }, 'ID must be a positive number'),
+  name: z.string().optional(),
+  perPage: z.number().positive(),
   types: z.array(
     z.enum(Object.keys(pokemonTypes) as [PokemonType, ...PokemonType[]])
   ),
@@ -24,19 +31,32 @@ type SearchParamsForm = z.infer<typeof searchParamsForm>;
 
 export function Filters() {
   const searchParams = useSearchParams();
+  const { id, name, page, perPage, types } = parsePokemonSearchParams(
+    getPokemonSearchParams(searchParams)
+  );
   const router = useRouter();
   const pathname = usePathname();
 
-  const { register, reset, control, handleSubmit } = useForm<SearchParamsForm>({
+  const {
+    register,
+    reset,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SearchParamsForm>({
     defaultValues: {
-      id: searchParams.get('id') ?? '',
-      name: searchParams.get('name') ?? '',
-      types: searchParams.getAll('type') as PokemonType[],
-      perPage: Number(searchParams.get('perPage') ?? 25),
+      id: String(id) ?? '',
+      name: name ?? '',
+      types: types as PokemonType[],
+      perPage: Number(perPage ?? 25),
     },
     resolver: zodResolver(searchParamsForm),
   });
 
+  const isFetching = useIsFetching({
+    queryKey: ['pokemon', page, perPage, id, name, types.join(',')],
+  });
+  const isLoading = isFetching > 0;
   function onSubmitForm({ id, name, perPage, types }: SearchParamsForm) {
     const params = new URLSearchParams();
 
@@ -72,11 +92,15 @@ export function Filters() {
         className="flex flex-col gap-3 sm:flex-row sm:flex-wrap"
       >
         <div className="flex flex-row gap-3 sm:space-y-2">
-          <Input
-            placeholder="Id"
-            className="w-14 sm:w-20 sm:flex-1"
-            {...register('id')}
-          />
+          <div className="flex flex-col">
+            <Input placeholder="Id" {...register('id')} />
+
+            {errors.id && (
+              <span className="mt-1 text-center text-xs text-red-500">
+                {errors.id.message}
+              </span>
+            )}
+          </div>
           <Input
             placeholder="Pokemon"
             className="sm:flex-1"
@@ -105,9 +129,10 @@ export function Filters() {
         <div className="flex flex-row gap-3 sm:flex-1">
           <Button
             type="submit"
-            className="hover:bg-primary/60 flex-1 cursor-pointer"
+            disabled={isLoading}
+            className="hover:bg-primary/60 flex-1 cursor-pointer font-mono font-semibold tracking-wider disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Buscar
+            {isLoading ? 'Carregando... ' : 'Buscar'}
           </Button>
           <Button
             type="button"

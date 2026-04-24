@@ -27,7 +27,7 @@ export function usePokemons({
     types,
   };
   return useQuery({
-    queryKey: ['pokemon', page, perPage, id, name, types],
+    queryKey: ['pokemon', page, perPage, id, name, types.join(',')],
     queryFn: () => fetchPokemons({ pagination, filters }),
   });
 }

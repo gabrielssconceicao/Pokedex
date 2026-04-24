@@ -6,7 +6,7 @@ import { Filters } from './components/filters';
 import { Header } from './components/header';
 import { Pagination } from './components/pagination';
 import { PokemonList } from './components/pokemon-list';
-
+import { parsePokemonSearchParams } from './utils/parse-pokemon-search-params';
 type HomeProps = {
   searchParams: Promise<{
     id?: string;
@@ -20,15 +20,13 @@ type HomeProps = {
 export default async function Home({ searchParams }: HomeProps) {
   const { id, name, type, perPage = '25', page = '1' } = await searchParams;
 
-  const types = Array.isArray(type) ? type : type ? [type] : [];
-  const parsedPerPage = Number(perPage);
-  const filterOptions = {
-    id: id && !isNaN(Number(id)) ? Number(id) : undefined,
-    page: page && !isNaN(Number(page)) ? Number(page) : 1,
-    perPage: perPage && !isNaN(parsedPerPage) ? parsedPerPage : 25,
+  const filterOptions = parsePokemonSearchParams({
+    id,
     name,
-    types,
-  };
+    type,
+    page,
+    perPage,
+  });
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
