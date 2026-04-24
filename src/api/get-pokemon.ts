@@ -79,6 +79,7 @@ export async function fetchPokemons({
     }
 
     const start = (page - 1) * limit;
+    count = resolved.length;
     pokemons = resolved.slice(start, start + limit);
   } else {
     const { count: resultCount, results } = await fetcher<FetcherResponse>(

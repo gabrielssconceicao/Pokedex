@@ -45,7 +45,7 @@ export function Filters() {
     formState: { errors },
   } = useForm<SearchParamsForm>({
     defaultValues: {
-      id: String(id) ?? '',
+      id: id ? String(id) : '',
       name: name ?? '',
       types: types as PokemonType[],
       perPage: Number(perPage ?? 25),
@@ -60,11 +60,11 @@ export function Filters() {
   function onSubmitForm({ id, name, perPage, types }: SearchParamsForm) {
     const params = new URLSearchParams();
 
+    if (name) {
+      params.set('q', name);
+    }
     if (id) {
       params.set('id', id);
-    }
-    if (name) {
-      params.set('name', name);
     }
     if (perPage) {
       params.set('perPage', String(perPage));
@@ -130,7 +130,7 @@ export function Filters() {
           <Button
             type="submit"
             disabled={isLoading}
-            className="hover:bg-primary/60 flex-1 cursor-pointer font-mono font-semibold tracking-wider disabled:cursor-not-allowed disabled:opacity-50"
+            className="hover:bg-primary/60 text-accent-foreground flex-1 cursor-pointer font-mono font-semibold tracking-wider disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isLoading ? 'Carregando... ' : 'Buscar'}
           </Button>

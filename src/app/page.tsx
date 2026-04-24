@@ -10,7 +10,7 @@ import { parsePokemonSearchParams } from './utils/parse-pokemon-search-params';
 type HomeProps = {
   searchParams: Promise<{
     id?: string;
-    name?: string;
+    q?: string;
     page?: string;
     perPage?: string;
     type?: PokemonType | PokemonType[];
@@ -18,11 +18,11 @@ type HomeProps = {
 };
 
 export default async function Home({ searchParams }: HomeProps) {
-  const { id, name, type, perPage = '25', page = '1' } = await searchParams;
+  const { id, q, type, perPage = '25', page = '1' } = await searchParams;
 
   const filterOptions = parsePokemonSearchParams({
     id,
-    name,
+    name: q,
     type,
     page,
     perPage,
@@ -34,7 +34,7 @@ export default async function Home({ searchParams }: HomeProps) {
         <Filters />
         <PokemonList filters={filterOptions} />
       </main>
-      <Pagination />
+      <Pagination filters={filterOptions} />
     </div>
   );
 }
