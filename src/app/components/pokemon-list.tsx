@@ -15,14 +15,8 @@ export function PokemonList({ filters }: PokemonListProps) {
       {isLoading && <PokemonListSkeleton />}
       {data &&
         data.pokemons.length > 0 &&
-        data.pokemons.map(({ id, sprites, name, types }) => (
-          <PokemonCard
-            key={id}
-            id={id}
-            name={name}
-            img={'/pokemon-egg.png'}
-            types={types}
-          />
+        data.pokemons.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
       {data && data.pokemons.length === 0 && (
         <h2 className="flex-1 text-center text-2xl">No pokemon found</h2>

@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 
-import { PokemonType } from '@/constants/pokemon-types';
+import { FetchPokemon } from '@/interface/fetch-pokemon';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
@@ -12,22 +12,18 @@ import { PokemonTypeBadge } from './pokemon-type-badge';
 export type Variant = 'default' | 'card';
 
 type Props = {
-  id: number;
-  img: string;
-  name: string;
-  types: PokemonType[];
+  pokemon: FetchPokemon;
   variant?: Variant;
 };
 
-export function PokemonCard({
-  id,
-  img,
-  name,
-  types,
-  variant = 'default',
-}: Props) {
+export function PokemonCard({ pokemon, variant = 'default' }: Props) {
   const isCard = variant === 'card';
-  const { bg, border, text, img: Img } = getPokemonColors(types[0]);
+  const { id, name, sprites, types } = pokemon;
+  const sprite =
+    sprites.other['official-artwork'].front_default ||
+    sprites.front_default ||
+    '/pokemon-egg.png';
+  const { bg, border, text, img } = getPokemonColors(types[0]);
 
   return (
     <Link
@@ -40,7 +36,7 @@ export function PokemonCard({
           : 'min-w-60 flex-1 gap-1 transition-transform hover:scale-[1.02]'
       )}
     >
-      <PokemonImage src={img} alt={name} bgColor={Img} variant={variant} />
+      <PokemonImage src={sprite} alt={name} bgColor={img} variant={variant} />
       <div
         className={cn(
           'flex flex-1 flex-col justify-between gap-2',

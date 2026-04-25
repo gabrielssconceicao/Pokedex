@@ -18,9 +18,6 @@ export function PokemonImage({
   bgColor,
   variant = 'default',
 }: Props) {
-  const isCard = variant === 'card';
-  const cardSize = isCard ? 50 : 60;
-
   const variantStyle: Record<HeaderVariant, string> = {
     default: 'w-1/3 rounded-l-lg rounded-r-[50%]',
     card: 'w-full rounded-t-lg rounded-b-[50%]',
@@ -31,12 +28,18 @@ export function PokemonImage({
   return (
     <div
       className={cn(
-        'flex h-24 items-center justify-center px-2',
+        'relative flex h-24 items-center justify-center px-2',
         bgColor,
         variantStyle[variant]
       )}
     >
-      <Image src={src} alt={alt} width={cardSize} height={cardSize} />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw, 200px"
+        className="object-contain py-1"
+      />
     </div>
   );
 }

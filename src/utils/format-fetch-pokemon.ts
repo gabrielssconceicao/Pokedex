@@ -15,7 +15,10 @@ export function formatFetchPokemon(
   return {
     id: pokemon.id,
     name: pokemon.name,
-    sprites: pokemon.sprites,
+    sprites: {
+      front_default: pokemon.sprites.front_default,
+      other: pokemon.sprites.other,
+    },
     types: pokemon.types.map((t) => t.type.name),
   };
 }
