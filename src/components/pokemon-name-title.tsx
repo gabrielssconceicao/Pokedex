@@ -26,7 +26,14 @@ export function PokemonNameTitle({
       <span className={cn('xs:text-md font-mono text-sm', textColor)}>
         #{String(id).padStart(3, '0')}
       </span>
-      <h2 className={cn('text-md text-center font-mono', textColor)}>{name}</h2>
+      <h2
+        className={cn(
+          'text-md text-center font-mono font-semibold capitalize',
+          textColor
+        )}
+      >
+        {name}
+      </h2>
     </div>
   );
 }
