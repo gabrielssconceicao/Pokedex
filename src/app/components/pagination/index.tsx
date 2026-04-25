@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 import { PokemonFilters, usePokemons } from '@/hooks/use-pokemons';
 
-import { PaginationSkeleton } from '../pagination-skeleton';
 import { PaginationButton } from './pagination-button';
 
 interface PaginationProps {
@@ -94,47 +93,47 @@ export function Pagination({ filters }: PaginationProps) {
     }
   }, [safePage, totalPages, data]);
 
-  return data ? (
-    <nav
-      className="border-t-foreground flex flex-col items-center justify-between gap-3 border-t py-1 sm:flex-row"
-      aria-label="Pagination"
-    >
-      <p className="text-muted-foreground font-mono text-sm font-semibold tracking-wider">
-        <span>
-          Total of <span className="text-primary">{data.count}</span> items
-        </span>
-      </p>
-
-      <div className="xs:justify-around xs:px-2 flex w-full flex-1 flex-row items-center justify-between gap-2 sm:gap-6 lg:gap-8">
-        <p className="text-muted-foreground flex items-center justify-center gap-1 font-mono text-sm font-semibold tracking-wider">
-          <span className="max-xs:hidden">Página</span>
-          <span className="text-accent-foreground">{safePage}</span>
-          de
-          <span className="text-primary">{totalPages}</span>
+  return (
+    data && (
+      <nav
+        className="border-t-foreground flex flex-col items-center justify-between gap-3 border-t py-1 sm:flex-row"
+        aria-label="Pagination"
+      >
+        <p className="text-muted-foreground font-mono text-sm font-semibold tracking-wider">
+          <span>
+            Total of <span className="text-primary">{data.count}</span> items
+          </span>
         </p>
 
-        <div className="flex items-center justify-center gap-2">
-          {panginationButtons.map(({ label, icon, action }) => {
-            const disabled =
-              isLoading ||
-              (action === 'first' && isFirstPage) ||
-              (action === 'prev' && isFirstPage) ||
-              (action === 'next' && isLastPage) ||
-              (action === 'last' && isLastPage);
-            return (
-              <PaginationButton
-                key={action}
-                disabled={disabled}
-                onClick={() => handlePageChange(action)}
-                label={label}
-                icon={icon}
-              />
-            );
-          })}
+        <div className="xs:justify-around xs:px-2 flex w-full flex-1 flex-row items-center justify-between gap-2 sm:gap-6 lg:gap-8">
+          <p className="text-muted-foreground flex items-center justify-center gap-1 font-mono text-sm font-semibold tracking-wider">
+            <span className="max-xs:hidden">Página</span>
+            <span className="text-accent-foreground">{safePage}</span>
+            de
+            <span className="text-primary">{totalPages}</span>
+          </p>
+
+          <div className="flex items-center justify-center gap-2">
+            {panginationButtons.map(({ label, icon, action }) => {
+              const disabled =
+                isLoading ||
+                (action === 'first' && isFirstPage) ||
+                (action === 'prev' && isFirstPage) ||
+                (action === 'next' && isLastPage) ||
+                (action === 'last' && isLastPage);
+              return (
+                <PaginationButton
+                  key={action}
+                  disabled={disabled}
+                  onClick={() => handlePageChange(action)}
+                  label={label}
+                  icon={icon}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </nav>
-  ) : (
-    <PaginationSkeleton />
+      </nav>
+    )
   );
 }

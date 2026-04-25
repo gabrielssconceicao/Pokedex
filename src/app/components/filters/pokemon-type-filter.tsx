@@ -33,14 +33,12 @@ export function PokemonTypeFilter({ onChange, value }: PokemonTypeFilterProps) {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-32 sm:w-40">
-        {Object.keys(pokemonTypes).map((key) => {
-          const typedKey = key as PokemonType;
-
+        {pokemonTypes.map((key) => {
           return (
             <DropdownMenuCheckboxItem
-              key={typedKey}
-              checked={value.includes(typedKey)}
-              onCheckedChange={() => handleToggle(typedKey)}
+              key={key}
+              checked={value.includes(key)}
+              onCheckedChange={() => handleToggle(key)}
               onSelect={(event) => event.preventDefault()}
               className="text-xs"
             >

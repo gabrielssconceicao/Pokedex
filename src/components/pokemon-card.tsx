@@ -1,8 +1,9 @@
 'use client';
 import Link from 'next/link';
 
-import { getPokemonColors, PokemonType } from '@/constants/pokemon-types';
+import { PokemonType } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { PokemonImage } from './pokemon-image';
 import { PokemonNameTitle } from './pokemon-name-title';
@@ -26,14 +27,14 @@ export function PokemonCard({
   variant = 'default',
 }: Props) {
   const isCard = variant === 'card';
-  const { bg, border, text, img: Img } = getPokemonColors('fire');
+  const { bg, border, text, img: Img } = getPokemonColors(types[0]);
 
   return (
     <Link
       href={`/pokemon/${name}/details`}
       className={cn(
         'flex items-stretch rounded-2xl',
-        bg,
+        bg.default,
         isCard
           ? 'h-56 w-28 min-w-fit flex-col justify-between overflow-hidden'
           : 'min-w-60 flex-1 gap-1 transition-transform hover:scale-[1.02]'
@@ -49,7 +50,7 @@ export function PokemonCard({
         <PokemonNameTitle
           name={name}
           id={id}
-          textColor={text}
+          textColor={text.default}
           variant={variant}
         />
 
@@ -58,7 +59,7 @@ export function PokemonCard({
             <PokemonTypeBadge
               key={type}
               type={type}
-              textColor={text}
+              textColor={text.default}
               borderCoor={border}
             />
           ))}

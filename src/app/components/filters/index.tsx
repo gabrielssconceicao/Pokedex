@@ -22,9 +22,7 @@ const searchParamsForm = z.object({
   }, 'ID must be a positive number'),
   name: z.string().optional(),
   perPage: z.number().positive(),
-  types: z.array(
-    z.enum(Object.keys(pokemonTypes) as [PokemonType, ...PokemonType[]])
-  ),
+  types: z.array(z.enum(pokemonTypes as [PokemonType, ...PokemonType[]])),
 });
 
 type SearchParamsForm = z.infer<typeof searchParamsForm>;
