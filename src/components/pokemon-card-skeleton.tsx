@@ -21,7 +21,7 @@ export function PokemonCardSkeleton({ variant = 'default' }: Props) {
           : 'min-w-60 flex-1 gap-1 p-1'
       )}
     >
-      <PokemonImageSkeleton variant={variant} />
+      <PokemonImageSkeleton />
 
       <div
         className={cn(

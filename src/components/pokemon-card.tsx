@@ -25,15 +25,18 @@ export function PokemonCard({ pokemon, variant = 'default' }: Props) {
     '/pokemon-egg.png';
   const { bg, border, text, img } = getPokemonColors(types[0]);
 
+  const variantStyle: Record<Variant, string> = {
+    default: 'min-w-60 flex-1 gap-1 transition-transform hover:scale-[1.02]',
+    card: 'h-56 w-28 min-w-fit flex-col justify-between overflow-hidden',
+  };
+
   return (
     <Link
       href={`/pokemon/${name}/details`}
       className={cn(
-        'flex items-stretch rounded-2xl',
+        'shadow-accent-foreground flex items-stretch rounded-2xl shadow',
         bg.default,
-        isCard
-          ? 'h-56 w-28 min-w-fit flex-col justify-between overflow-hidden'
-          : 'min-w-60 flex-1 gap-1 transition-transform hover:scale-[1.02]'
+        variantStyle[variant]
       )}
     >
       <PokemonImage src={sprite} alt={name} bgColor={img} variant={variant} />
