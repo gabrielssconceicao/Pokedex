@@ -15,10 +15,8 @@ export function PokemonCardSkeleton({ variant = 'default' }: Props) {
   return (
     <div
       className={cn(
-        'flex items-stretch rounded-2xl',
-        isCard
-          ? 'h-56 w-28 min-w-fit flex-col overflow-hidden'
-          : 'min-w-60 flex-1 gap-1 p-1'
+        'flex items-stretch',
+        isCard ? 'h-56 w-28 flex-col' : 'min-w-60 flex-1 gap-1 p-1'
       )}
     >
       <PokemonImageSkeleton />

@@ -12,7 +12,7 @@ export function PokemonNameTitleSkeleton({ variant = 'default' }: Props) {
   return (
     <div
       className={cn(
-        'flex items-center justify-between',
+        'flex items-center justify-between px-2',
         isCard && 'flex-col gap-2'
       )}
     >

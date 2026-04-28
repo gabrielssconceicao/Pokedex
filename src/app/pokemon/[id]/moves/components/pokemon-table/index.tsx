@@ -6,8 +6,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { getPokemonColors } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { PokemonTableRow } from './pokemon-table-row';
 
@@ -47,17 +47,17 @@ const moves = Array.from({ length: 10 }).map((_, index) => ({
 }));
 
 export function PokemonTable() {
-  const { bg, bgInverse, text, textInverse } = getPokemonColors('fire');
+  const { bg, text } = getPokemonColors('fire');
   return (
     <Table>
       <TableCaption>A list of pokemon moves</TableCaption>
       <TableHeader>
-        <TableRow className={cn('border-b', bgInverse)}>
+        <TableRow className={cn('border-b', bg.inverse)}>
           <TableHead className="w-6 first:rounded-tl-lg"></TableHead>
           <TableHead
             className={cn(
               'w-8 text-center font-mono text-xs font-bold tracking-wide uppercase',
-              textInverse
+              text.inverse
             )}
           >
             Level
@@ -65,7 +65,7 @@ export function PokemonTable() {
           <TableHead
             className={cn(
               'text-center font-mono text-xs font-bold tracking-wide uppercase last:rounded-tr-lg',
-              textInverse
+              text.inverse
             )}
           >
             Name

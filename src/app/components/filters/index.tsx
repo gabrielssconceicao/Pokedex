@@ -90,7 +90,7 @@ export function Filters() {
         className="flex flex-col gap-3 sm:flex-row sm:flex-wrap"
       >
         <div className="flex flex-row gap-3 sm:space-y-2">
-          <div className="flex flex-col">
+          <div className="flex w-24 flex-col">
             <Input placeholder="Id" {...register('id')} />
 
             {errors.id && (
@@ -101,7 +101,7 @@ export function Filters() {
           </div>
           <Input
             placeholder="Pokemon"
-            className="sm:flex-1"
+            className="flex-1"
             {...register('name')}
           />
         </div>

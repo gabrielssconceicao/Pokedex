@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchPokemons } from '@/api/get-pokemon';
+import { fetchPokemons } from '@/api/fetch-pokemons';
 import { PokemonType } from '@/constants/pokemon-types';
 
 export type PokemonFilters = {
@@ -27,7 +27,7 @@ export function usePokemons({
     types,
   };
   return useQuery({
-    queryKey: ['pokemon', page, perPage, id, name, types.join(',')],
+    queryKey: ['pokemon-fetch', page, perPage, id, name, types.join(',')],
     queryFn: () => fetchPokemons({ pagination, filters }),
   });
 }

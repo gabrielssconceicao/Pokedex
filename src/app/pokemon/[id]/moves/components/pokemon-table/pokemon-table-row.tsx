@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { TableCell, TableRow } from '@/components/ui/table';
-import { getPokemonColors } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { MoveStatusCard } from './move-status-card';
 import { BagdeCard } from './type-badge-card';
@@ -26,7 +26,7 @@ export function PokemonTableRow({
   types,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const { text, textInverse, border, bgInverse, bg } = getPokemonColors('fire');
+  const { text, border, bg } = getPokemonColors('fire');
 
   const toggleOpenStatus = () => {
     setIsOpen((prevState) => !prevState);
@@ -49,7 +49,7 @@ export function PokemonTableRow({
         </TableCell>
       </TableRow>
 
-      <TableRow className={cn(textInverse, bgInverse)}>
+      <TableRow className={cn(text.inverse, bg.inverse)}>
         <TableCell colSpan={5} className="p-0">
           <div
             className={cn(
@@ -66,7 +66,7 @@ export function PokemonTableRow({
                     key={`${name}-${label}`}
                     label={label}
                     type={value}
-                    textColor={textInverse}
+                    textColor={text.inverse}
                     borderColor={border}
                   />
                 ))}
@@ -79,7 +79,7 @@ export function PokemonTableRow({
                     label={label}
                     value={value}
                     border={border}
-                    text={textInverse}
+                    text={text.inverse}
                   />
                 ))}
                 <MoveStatusCard
@@ -87,7 +87,7 @@ export function PokemonTableRow({
                   value={description}
                   gridColumn={3}
                   border={border}
-                  text={textInverse}
+                  text={text.inverse}
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { getPokemonColors } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 const moveOptions = [
   { value: 'level-up', label: 'Level Up' },
