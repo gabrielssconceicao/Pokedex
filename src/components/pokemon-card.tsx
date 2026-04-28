@@ -19,10 +19,7 @@ type Props = {
 export function PokemonCard({ pokemon, variant = 'default' }: Props) {
   const isCard = variant === 'card';
   const { id, name, sprites, types } = pokemon;
-  const sprite =
-    sprites.other['official-artwork'].front_default ||
-    sprites.front_default ||
-    '/pokemon-egg.png';
+
   const { bg, border, text, img } = getPokemonColors(types[0]);
 
   const variantStyle: Record<Variant, string> = {
@@ -39,7 +36,12 @@ export function PokemonCard({ pokemon, variant = 'default' }: Props) {
         variantStyle[variant]
       )}
     >
-      <PokemonImage src={sprite} alt={name} bgColor={img} variant={variant} />
+      <PokemonImage
+        sprites={sprites}
+        alt={name}
+        bgColor={img}
+        variant={variant}
+      />
       <div
         className={cn(
           'flex flex-1 flex-col justify-between gap-2',
@@ -59,7 +61,7 @@ export function PokemonCard({ pokemon, variant = 'default' }: Props) {
               key={type}
               type={type}
               textColor={text.default}
-              borderCoor={border}
+              borderColor={border}
             />
           ))}
         </div>

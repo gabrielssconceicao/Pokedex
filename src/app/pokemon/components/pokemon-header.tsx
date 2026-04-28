@@ -8,13 +8,16 @@ import { PokemonTypeBadge } from '@/components/pokemon-type-badge';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { cn } from '@/lib/utils';
-import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 export function PokemonHeader() {
-  const { bg, border, text, img } = getPokemonColors('fire');
   const { id } = useParams<{ id: string }>();
 
-  const { data: pokemon } = usePokemon({ pokemon: id });
+  const { data } = usePokemon({ pokemon: id });
+  if (!data) return null;
+  const {
+    pokemon,
+    typeColors: { bg, text, border, img },
+  } = data;
   return (
     pokemon && (
       <header
@@ -34,12 +37,12 @@ export function PokemonHeader() {
             />
           </div>
 
-          <div className="flex gap-3 px-2 py-1">
+          <div className="flex flex-col gap-3 px-2 py-1">
             {pokemon.types.map((type) => (
               <PokemonTypeBadge
                 key={type}
                 type={type}
-                borderCoor={border}
+                borderColor={border}
                 textColor={text.default}
               />
             ))}
@@ -47,7 +50,7 @@ export function PokemonHeader() {
         </div>
         <PokemonImage
           alt={pokemon.name}
-          src={pokemon.sprites.other['official-artwork'].front_default}
+          sprites={pokemon.sprites}
           bgColor={img}
           variant="header"
         />

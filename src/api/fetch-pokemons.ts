@@ -1,11 +1,9 @@
 import { PokemonType } from '@/constants/pokemon-types';
 import { FetchPokemon } from '@/interface/fetch-pokemon';
+import { FormatPokemonParams } from '@/interface/format-pokemon';
 import { createUrl } from '@/utils/create-url';
 import { fetcher } from '@/utils/fetcher';
-import {
-  formatFetchPokemon,
-  FormatFetchPokemonParams,
-} from '@/utils/format-fetch-pokemon';
+import { formatPokemon } from '@/utils/format-pokemon';
 
 interface FetchPokemonsParams {
   pagination: {
@@ -34,7 +32,7 @@ export async function fetchPokemons({
   filters,
 }: FetchPokemonsParams): Promise<FetchPokemonsResponse> {
   let count = 0;
-  let pokemons: FormatFetchPokemonParams[] = [];
+  let pokemons: FormatPokemonParams[] = [];
 
   const { id, name, types } = filters;
   const hasFilters = id || name || types.length > 0;
@@ -66,7 +64,7 @@ export async function fetchPokemons({
     }
 
     const resultPromises = filtered.map((r) =>
-      fetcher<FormatFetchPokemonParams>(r.url)
+      fetcher<FormatPokemonParams>(r.url)
     );
 
     let resolved = await Promise.all(resultPromises);
@@ -90,7 +88,7 @@ export async function fetchPokemons({
     );
 
     const resultPromises = results.map((r) =>
-      fetcher<FormatFetchPokemonParams>(r.url)
+      fetcher<FormatPokemonParams>(r.url)
     );
 
     pokemons = await Promise.all(resultPromises);
@@ -98,6 +96,6 @@ export async function fetchPokemons({
   }
   return {
     count,
-    pokemons: pokemons.map((pokemon) => formatFetchPokemon(pokemon)),
+    pokemons: pokemons.map((pokemon) => formatPokemon(pokemon)),
   };
 }

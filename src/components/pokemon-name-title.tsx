@@ -21,15 +21,24 @@ export function PokemonNameTitle({
     header:
       'flex-1 justify-between xs:flex-row xs:text-xl xs:font-semibold break-all flex-col items-center',
   };
+
+  const isHeader = variant === 'header';
   return (
     <div className={cn('flex', variantStyles[variant])}>
-      <span className={cn('xs:text-md font-mono text-sm', textColor)}>
+      <span
+        className={cn(
+          'xs:text-md font-mono text-sm',
+          textColor,
+          isHeader && 'text-md'
+        )}
+      >
         #{String(id).padStart(3, '0')}
       </span>
       <h2
         className={cn(
           'text-md text-center font-mono font-semibold capitalize',
-          textColor
+          textColor,
+          isHeader && 'text-sm'
         )}
       >
         {name}
