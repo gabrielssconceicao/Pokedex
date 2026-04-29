@@ -5,6 +5,8 @@ import { PokemonSprite } from './pokemon-sprite';
 export interface Pokemon {
   name: string;
   id: number;
+  weight: number;
+  height: number;
   types: PokemonType[];
   sprites: PokemonSprite;
 }
