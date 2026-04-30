@@ -9,4 +9,5 @@ export interface Pokemon {
   height: number;
   types: PokemonType[];
   sprites: PokemonSprite;
+  stats: Array<{ base_stat: number; name: string }>;
 }

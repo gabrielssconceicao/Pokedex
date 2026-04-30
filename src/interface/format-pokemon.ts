@@ -9,4 +9,5 @@ export interface FormatPokemonParams {
   height: number;
   sprites: PokemonSprite;
   types: Array<{ type: { name: PokemonType } }>;
+  stats: Array<{ base_stat: number; stat: { name: string } }>;
 }
