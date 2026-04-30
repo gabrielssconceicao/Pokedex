@@ -1,7 +1,4 @@
-'use client';
-import { useParams } from 'next/navigation';
-
-import { usePokemon } from '@/hooks/use-pokemon';
+'use server';
 import { PokemonParamId } from '@/interface/pokemon-param-id';
 
 import { PokemonContainer } from '../../components/pokemon-container';
@@ -11,18 +8,18 @@ import { EggGroups } from './components/egg-group';
 import { Evolution } from './components/evolution';
 import { Species } from './components/species';
 import { Status } from './components/status';
-export default function Details() {
-  const { id } = useParams<PokemonParamId>();
-  const { data } = usePokemon({ pokemon: id });
 
-  if (!data) return null;
+type DetailsProps = {
+  params: Promise<PokemonParamId>;
+};
 
-  const { pokemon, typeColors } = data;
+export default async function Details({ params }: DetailsProps) {
+  const { id } = await params;
 
   return (
-    <section>
-      <PokemonContainer title="Species">
-        <Species height={pokemon.height} weight={pokemon.weight} />
+    <section className="space-y-2">
+      <PokemonContainer title="Species" pokemomId={id}>
+        <Species id={id} />
       </PokemonContainer>
     </section>
   );

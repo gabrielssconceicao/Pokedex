@@ -1,7 +1,7 @@
-import { FetchPokemon } from '@/interface/fetch-pokemon';
 import { FormatPokemonParams } from '@/interface/format-pokemon';
+import { Pokemon } from '@/interface/pokemon';
 
-export function formatPokemon(pokemon: FormatPokemonParams): FetchPokemon {
+export function formatPokemon(pokemon: FormatPokemonParams): Pokemon {
   return {
     id: pokemon.id,
     name: pokemon.name,

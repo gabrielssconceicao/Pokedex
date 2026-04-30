@@ -1,6 +1,6 @@
 import { PokemonType } from '@/constants/pokemon-types';
-import { FetchPokemon } from '@/interface/fetch-pokemon';
 import { FormatPokemonParams } from '@/interface/format-pokemon';
+import { Pokemon } from '@/interface/pokemon';
 import { createUrl } from '@/utils/create-url';
 import { fetcher } from '@/utils/fetcher';
 import { formatPokemon } from '@/utils/format-pokemon';
@@ -19,7 +19,7 @@ interface FetchPokemonsParams {
 
 interface FetchPokemonsResponse {
   count: number;
-  pokemons: FetchPokemon[];
+  pokemons: Pokemon[];
 }
 
 type FetcherResponse = {

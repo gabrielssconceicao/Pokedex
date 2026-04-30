@@ -9,23 +9,24 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { PokemonParamId } from '@/interface/pokemon-param-id';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { PokemonHeaderSkeleton } from './pokemon-header-skeleton';
 
 export function PokemonHeader() {
   const { id } = useParams<PokemonParamId>();
 
-  const { data, isLoading } = usePokemon({ pokemon: id });
+  const { data: pokemon, isLoading } = usePokemon({ pokemon: id });
 
   if (isLoading) return <PokemonHeaderSkeleton />;
 
-  if (!data) return null;
-  const {
-    pokemon,
-    typeColors: { bg, text, border, img },
-  } = data;
+  if (!pokemon) return null;
 
-  return (
+  const { bg, text, border, img } = getPokemonColors(pokemon.types[0]);
+
+  return isLoading ? (
+    <PokemonHeaderSkeleton />
+  ) : (
     <header
       className={cn(
         'flex items-stretch justify-between gap-2 rounded-2xl',

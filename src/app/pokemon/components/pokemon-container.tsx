@@ -1,19 +1,44 @@
+'use client';
 import React from 'react';
 
+import { PokemonType } from '@/constants/pokemon-types';
+import { usePokemon } from '@/hooks/use-pokemon';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 type PokemonCardProps = {
   title?: string;
+  pokemomId: string;
   children: React.ReactNode;
 };
 
-export function PokemonContainer({ children, title }: PokemonCardProps) {
+export function PokemonContainer({
+  children,
+  title,
+  pokemomId,
+}: PokemonCardProps) {
+  const { data } = usePokemon({ pokemon: pokemomId });
+  if (!data) return null;
+  const { text, bg } = getPokemonColors(data.types[0] as PokemonType);
   return (
     <div className={cn('flex flex-col items-stretch justify-center gap-2 p-2')}>
       {title && (
-        <h3 className="text-md text-center font-sans font-semibold">{title}</h3>
+        <h3
+          className={cn(
+            'text-md text-center font-sans font-semibold',
+            text.default
+          )}
+        >
+          {title}
+        </h3>
       )}
-      <section className="rounded-lg bg-slate-100 px-2 py-1 text-gray-800 shadow-md">
+      <section
+        className={cn(
+          'rounded-lg bg-slate-100 px-2 py-1 text-gray-800 shadow-md',
+          bg.default,
+          text.default
+        )}
+      >
         {children}
       </section>
     </div>

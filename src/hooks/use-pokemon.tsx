@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { getPokemon } from '@/api/get-pokemon';
-import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 type Props = {
   pokemon: string;
@@ -17,10 +16,7 @@ export function usePokemon({ pokemon }: Props) {
       try {
         const res = await getPokemon({ pokemon });
 
-        return {
-          pokemon: res,
-          typeColors: getPokemonColors(res.types[0]),
-        };
+        return res;
       } catch {
         router.push('not-found');
       }
