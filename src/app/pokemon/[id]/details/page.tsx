@@ -24,6 +24,9 @@ export default async function Details({ params }: DetailsProps) {
       <PokemonContainer title="Status" pokemomId={id}>
         <Status id={id} />
       </PokemonContainer>
+      <PokemonContainer title="Abilities" pokemomId={id}>
+        <Abilities id={id} />
+      </PokemonContainer>
     </section>
   );
 }

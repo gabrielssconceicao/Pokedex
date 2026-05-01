@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 
-import { FetchPokemon } from '@/interface/fetch-pokemon';
+import { Pokemon } from '@/interface/pokemon';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
@@ -12,7 +12,7 @@ import { PokemonTypeBadge } from './pokemon-type-badge';
 export type Variant = 'default' | 'card';
 
 type Props = {
-  pokemon: FetchPokemon;
+  pokemon: Pokemon;
   variant?: Variant;
 };
 

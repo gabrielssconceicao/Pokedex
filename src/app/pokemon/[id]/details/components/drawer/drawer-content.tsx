@@ -24,8 +24,10 @@ export function DrawerContent({
   return (
     <Content className={cn(bgColor)}>
       <DrawerHeader>
-        <DrawerTitle className={cn('text-xl', textColor)}>{title}</DrawerTitle>
-        <DrawerDescription className={cn(textColor)}>
+        <DrawerTitle className={cn('text-xl capitalize', textColor)}>
+          {title}
+        </DrawerTitle>
+        <DrawerDescription className={cn('capitalize', textColor)}>
           {description}
         </DrawerDescription>
       </DrawerHeader>

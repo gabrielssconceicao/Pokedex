@@ -25,7 +25,7 @@ export function DrawerTrigger({
       <button
         type="button"
         className={cn(
-          'flex flex-1 items-stretch justify-center gap-2 rounded-lg border',
+          'flex flex-1 cursor-pointer items-stretch justify-center gap-2 rounded-lg border-2',
           isHidden ? textInverse : text,
           !isHidden && bg,
           isHidden && border
@@ -40,11 +40,11 @@ export function DrawerTrigger({
               border
             )}
           >
-            Hidden
+            hidden
           </div>
         )}
         <div className="flex flex-1 items-center justify-between px-2 py-1">
-          <span className="flex-1 text-center font-mono text-sm font-semibold">
+          <span className="flex-1 text-center font-mono text-sm font-semibold capitalize">
             {children}
           </span>
           <InfoIcon size={20} />

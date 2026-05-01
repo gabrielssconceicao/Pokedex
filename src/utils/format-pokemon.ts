@@ -16,5 +16,9 @@ export function formatPokemon(pokemon: FormatPokemonParams): Pokemon {
       base_stat: s.base_stat,
       name: s.stat.name,
     })),
+    abilities: pokemon.abilities.map((a) => ({
+      abilityUrl: a.ability.url,
+      is_hidden: a.is_hidden,
+    })),
   };
 }
