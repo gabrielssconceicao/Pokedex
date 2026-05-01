@@ -1,8 +1,12 @@
 'use client';
 
 import { PokemonCard } from '@/components/pokemon-card';
-import { getPokemonColors, PokemonType } from '@/constants/pokemon-types';
+import { PokemonCardSkeleton } from '@/components/pokemon-card-skeleton';
+import { PokemonType } from '@/constants/pokemon-types';
+import { usePokemon } from '@/hooks/use-pokemon';
+import { usePokemonSpecies } from '@/hooks/use-pokemon-species';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 const alternativeForms: Array<{
   id: number;
@@ -16,19 +20,27 @@ const alternativeForms: Array<{
   types: ['fire'],
 }));
 
-export function AlternativeForms() {
-  const { text } = getPokemonColors('fire');
+type AlternativeFormProps = {
+  id: string;
+};
+
+export function AlternativeForms({ id }: AlternativeFormProps) {
+  const { data: poke } = usePokemon({ pokemon: id });
+  const { data: species, isLoading } = usePokemonSpecies({ id: poke?.id });
+  const { text } = getPokemonColors(poke?.types[0] as PokemonType);
 
   return (
     <section className="flex flex-wrap items-center justify-around gap-2 px-1 py-2">
-      {alternativeForms.map(({ id, image, name, types }) => (
-        <PokemonCard key={id} id={id} img={image} name={name} types={types} />
-      ))}
-      {!alternativeForms.length && (
+      {isLoading && <PokemonCardSkeleton variant="card" />}
+      {species &&
+        species.varieties.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} variant="card" />
+        ))}
+      {species && !species.varieties.length && (
         <p
           className={cn(
             'text-accent text-center font-mono text-sm font-semibold tracking-wider',
-            text
+            text.default
           )}
         >
           There are no alternative forms

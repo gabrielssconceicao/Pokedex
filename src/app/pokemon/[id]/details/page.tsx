@@ -27,30 +27,22 @@ export default async function Details({ params }: DetailsProps) {
       <PokemonContainer title="Abilities" pokemomId={id}>
         <Abilities id={id} />
       </PokemonContainer>
+      <PokemonContainer title="Alternative Forms" pokemomId={id}>
+        <AlternativeForms id={id} />
+      </PokemonContainer>
+      <PokemonContainer title="Egg GGroups" pokemomId={id}>
+        <EggGroups id={id} />
+      </PokemonContainer>
     </section>
   );
 }
 // export default function Details() {
 //   return (
 //     <section>
-//       <PokemonContainer title="Species">
-//         <Species />
-//       </PokemonContainer>
-//       <PokemonContainer title="Status">
-//         <Status />
-//       </PokemonContainer>
-//       <PokemonContainer title="Habilities">
-//         <Abilities />
-//       </PokemonContainer>
+
 //       <PokemonContainer title="Evolution">
 //         <Evolution />
 //       </PokemonContainer>
-//       <PokemonContainer title="Alternative Forms">
-//         <AlternativeForms />
-//       </PokemonContainer>
-//       <PokemonContainer title="Egg Groups">
-//         <EggGroups />
-//       </PokemonContainer>
-//     </section>
+
 //   );
 // }
