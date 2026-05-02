@@ -2,6 +2,7 @@
 import { PokemonCard } from '@/components/pokemon-card';
 import { PokemonCardSkeleton } from '@/components/pokemon-card-skeleton';
 import { Drawer } from '@/components/ui/drawer';
+import { Skeleton } from '@/components/ui/skeleton';
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemonSpecies } from '@/hooks/use-pokemon-species';
@@ -16,8 +17,15 @@ export function EggGroups({ id }: PokemonParamId) {
   const { data: pokemon } = usePokemon({ pokemon: id });
   const { data: species, isLoading } = usePokemonSpecies({ id: pokemon?.id });
   const { text, bg } = getPokemonColors(pokemon?.types[0] as PokemonType);
+
+  if (species) {
+    console.log(species);
+  }
+
   return (
     <section className="flex flex-wrap items-center justify-around gap-3 px-1 py-2">
+      {isLoading && <Skeleton className="h-12 w-full" />}
+
       {species &&
         species.egg_groups.map(({ id, name, pokemons }) => (
           <Drawer key={id}>

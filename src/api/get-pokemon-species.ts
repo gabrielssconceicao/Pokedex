@@ -29,16 +29,23 @@ export async function getPokemonSpecies({
   const eggGroupPokemons = eggGroupsResponse.map(async (egg) => {
     const { id, name, pokemon_species } = egg;
 
-    const pokemon = pokemon_species.map(
-      async (p) => await getPokemon({ pokemon: p.name })
-    );
+    const pokemon = pokemon_species.map(async (p) => {
+      try {
+        return await getPokemon({ pokemon: p.name });
+      } catch {
+        return null;
+      }
+    });
 
     const pokemonData = await Promise.all(pokemon);
 
     return { id, name, pokemons: pokemonData };
   });
 
-  const eggGroups = await Promise.all(eggGroupPokemons);
+  const eggGroups = (await Promise.all(eggGroupPokemons)).map((e) => {
+    const { id, name, pokemons } = e;
+    return { id, name, pokemons: pokemons.filter((p) => p !== null) };
+  });
 
   return {
     flavor_text:
