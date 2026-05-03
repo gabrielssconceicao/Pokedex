@@ -1,7 +1,9 @@
 'use client';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import { Pokemon } from '@/interface/pokemon';
+import { saveReturnUrl } from '@/lib/navigation';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
@@ -28,9 +30,18 @@ export function PokemonCard({ pokemon, variant = 'default' }: Props) {
     card: 'min-h-56 w-28 flex-col justify-between overflow-hidden',
   };
 
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  function handleClick() {
+    const url = `${pathname}?${searchParams.toString()}`;
+    saveReturnUrl(url);
+  }
+
   return (
     <Link
       href={`/pokemon/${name}/details`}
+      onClick={handleClick}
       className={cn(
         'shadow-accent-foreground flex items-stretch rounded-2xl shadow',
         bg.default,
