@@ -25,7 +25,7 @@ export function PokemonCard({ pokemon, variant = 'default' }: Props) {
   const variantStyle: Record<Variant, string> = {
     default:
       'min-w-60 max-w-78  flex-1 gap-1 transition-transform hover:scale-[1.02]',
-    card: 'h-56 w-24 flex-col justify-between overflow-hidden',
+    card: 'min-h-56 w-28 flex-col justify-between overflow-hidden',
   };
 
   return (

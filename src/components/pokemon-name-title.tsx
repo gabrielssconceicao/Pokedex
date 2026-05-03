@@ -17,7 +17,7 @@ export function PokemonNameTitle({
   const variantStyles: Record<Variant | 'header', string> = {
     default:
       'flex-row items-center xs:justify-between xs:flex-row px-2 flex-col ',
-    card: 'flex-col items-center justify-center gap-0.5',
+    card: 'flex-col items-center justify-center gap-0.5 text-sm',
     header:
       'flex-1 justify-between xs:flex-row xs:text-xl xs:font-semibold break-all flex-col items-center',
   };

@@ -1,6 +1,9 @@
 'use client';
+import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemonSpecies } from '@/hooks/use-pokemon-species';
+import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { SpeciesCard } from './species-card';
 import { SpeciesSkeleton } from './species-skeleton';
@@ -23,9 +26,21 @@ export function Species({ id }: SpeciesProps) {
     id: pokemon?.id,
   });
 
+  const { text } = getPokemonColors(pokemon?.types[0] as PokemonType);
+
   return (
     <section className="grid grid-cols-2 gap-1 py-2">
       {(isPokemonLoading || isSpeciesLoading) && <SpeciesSkeleton />}
+      {!species && (
+        <p
+          className={cn(
+            'text-accent col-span-2 text-center font-mono tracking-wider',
+            text.default
+          )}
+        >
+          This pokemon does not have a description
+        </p>
+      )}
       {pokemon && species && (
         <>
           <SpeciesCard

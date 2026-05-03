@@ -5,6 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemomAbilities } from '@/hooks/use-pokemon-abilities';
+import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { DrawerContainer } from './drawer/drawer-container';
@@ -27,7 +28,16 @@ export function Abilities({ id }: AbilityProps) {
   return (
     <section className="flex flex-wrap items-stretch gap-3 px-1 py-2">
       {isLoading && <Skeleton className="h-8 w-full" />}
-
+      {!abilities && (
+        <p
+          className={cn(
+            'text-accent tracking-wides flex-1 text-center font-mono',
+            text.default
+          )}
+        >
+          This pokemon has no abilities
+        </p>
+      )}
       {pokemon &&
         abilities &&
         abilities.map(({ effect_entries, id, is_hidden, name, pokemons }) => (
@@ -35,8 +45,7 @@ export function Abilities({ id }: AbilityProps) {
             <DrawerTrigger
               bg={bg.default}
               border={border}
-              text={text.default}
-              textInverse={text.inverse}
+              text={text}
               isHidden={is_hidden}
             >
               {name}
@@ -67,9 +76,13 @@ export function Abilities({ id }: AbilityProps) {
                     color={text.default}
                     title="Pokmeons with the same ability"
                   >
-                    <div className="flex flex-1 flex-wrap items-center justify-center gap-3 px-4 py-3">
+                    <div className="flex flex-1 flex-wrap items-stretch justify-center gap-3 px-4 py-3">
                       {pokemons.map((pokemon) => (
-                        <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                        <PokemonCard
+                          key={pokemon.id}
+                          pokemon={pokemon}
+                          variant="card"
+                        />
                       ))}
                     </div>
                   </DrawerContainer>

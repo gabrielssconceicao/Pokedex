@@ -7,6 +7,7 @@ import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemonSpecies } from '@/hooks/use-pokemon-species';
 import { PokemonParamId } from '@/interface/pokemon-param-id';
+import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { DrawerContainer } from './drawer/drawer-container';
@@ -18,22 +19,23 @@ export function EggGroups({ id }: PokemonParamId) {
   const { data: species, isLoading } = usePokemonSpecies({ id: pokemon?.id });
   const { text, bg } = getPokemonColors(pokemon?.types[0] as PokemonType);
 
-  if (species) {
-    console.log(species);
-  }
-
   return (
     <section className="flex flex-wrap items-center justify-around gap-3 px-1 py-2">
       {isLoading && <Skeleton className="h-12 w-full" />}
-
+      {!species && (
+        <p
+          className={cn(
+            'text-accent tracking-wides flex-1 text-center font-mono',
+            text.default
+          )}
+        >
+          This pokemon does not have egg groups
+        </p>
+      )}
       {species &&
         species.egg_groups.map(({ id, name, pokemons }) => (
           <Drawer key={id}>
-            <DrawerTrigger
-              bg={bg.default}
-              text={text.default}
-              textInverse={text.inverse}
-            >
+            <DrawerTrigger bg={bg.default} text={text}>
               {name}
             </DrawerTrigger>
             <DrawerContent

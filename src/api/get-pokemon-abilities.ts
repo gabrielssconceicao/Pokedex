@@ -1,3 +1,4 @@
+import { FetchAbilily } from '@/interface/fet-pokemon-abilities';
 import { Pokemon } from '@/interface/pokemon';
 import { fetcher } from '@/utils/fetcher';
 
@@ -6,17 +7,6 @@ import { getPokemon } from './get-pokemon';
 type Props = {
   abilities: Pokemon['abilities'];
 };
-
-interface FetchAbilily {
-  effect_entries: Array<{
-    effect: string;
-    language: { name: string };
-    short_effect: string;
-  }>;
-  id: number;
-  name: string;
-  pokemon: Array<{ pokemon: { name: string } }>;
-}
 
 export async function getPokemonAbilities({ abilities }: Props) {
   const abibitiesPromise = abilities.map(async (ability) => {

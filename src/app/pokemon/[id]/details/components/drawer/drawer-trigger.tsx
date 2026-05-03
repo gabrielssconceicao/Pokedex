@@ -5,9 +5,8 @@ import { cn } from '@/lib/utils';
 
 interface Props {
   isHidden?: boolean;
-  text: string;
+  text: { default: string; inverse: string };
   bg: string;
-  textInverse: string;
   border?: string;
   children: string;
 }
@@ -15,7 +14,6 @@ interface Props {
 export function DrawerTrigger({
   bg,
   text,
-  textInverse,
   border = '',
   isHidden = false,
   children,
@@ -25,8 +23,8 @@ export function DrawerTrigger({
       <button
         type="button"
         className={cn(
-          'flex flex-1 cursor-pointer items-stretch justify-center gap-2 rounded-lg border-2',
-          isHidden ? textInverse : text,
+          'flex min-w-fit flex-1 cursor-pointer items-stretch justify-center gap-2 rounded-lg border-2',
+          isHidden ? text.inverse : text,
           !isHidden && bg,
           isHidden && border
         )}
@@ -43,8 +41,8 @@ export function DrawerTrigger({
             hidden
           </div>
         )}
-        <div className="flex flex-1 items-center justify-between px-2 py-1">
-          <span className="flex-1 text-center font-mono text-sm font-semibold capitalize">
+        <div className="flex flex-1 items-center justify-between gap-1 px-2 py-1">
+          <span className="flex-1 text-center font-mono text-xs font-semibold capitalize sm:text-sm">
             {children}
           </span>
           <InfoIcon size={20} />

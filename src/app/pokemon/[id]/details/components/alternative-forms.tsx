@@ -31,10 +31,20 @@ export function AlternativeForms({ id }: AlternativeFormProps) {
 
   return (
     <section className="flex flex-wrap items-center justify-around gap-2 px-1 py-2">
-      {isLoading && <PokemonCardSkeleton variant="card" />}
+      {isLoading && <PokemonCardSkeleton />}
+      {!species && (
+        <p
+          className={cn(
+            'text-accent tracking-wides flex-1 text-center font-mono',
+            text.default
+          )}
+        >
+          This pokemon does not have alternative forms
+        </p>
+      )}
       {species &&
         species.varieties.map((pokemon) => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} variant="card" />
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
       {species && !species.varieties.length && (
         <p
