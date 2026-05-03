@@ -8,6 +8,7 @@ export interface Pokemon {
   weight: number;
   height: number;
   types: PokemonType[];
+  typesId: number[];
   sprites: PokemonSprite;
   stats: Array<{ base_stat: number; name: string }>;
   abilities: Array<{ abilityUrl: string; is_hidden: boolean }>;

@@ -12,6 +12,9 @@ export function formatPokemon(pokemon: FormatPokemonParams): Pokemon {
       other: pokemon.sprites.other,
     },
     types: pokemon.types.map((t) => t.type.name),
+    typesId: pokemon.types.map((t) =>
+      Number(t.type.url.split('/').filter(Boolean).pop())
+    ),
     stats: pokemon.stats.map((s) => ({
       base_stat: s.base_stat,
       name: s.stat.name,

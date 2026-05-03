@@ -122,7 +122,7 @@ const ice = {
   },
 
   text: {
-    default: 'text-[#0C2625] dark:text-[#081B1A]',
+    default: 'text-[#0C2625] dark:text-[#E8FFFF]',
     inverse: 'text-[#E8FFFF] dark:text-[#0C2625]',
   },
 
@@ -307,7 +307,7 @@ const ghost = {
 
   text: {
     default: 'text-[#2A1F3A] dark:text-[#E6DFF3]',
-    inverse: 'text-[#1A1324] dark:text-[#2A1F3A]',
+    inverse: 'text-[#E6DFF3] dark:text-[#2A1F3A]',
   },
 
   border: 'border-[#5A4378] dark:border-[#C7BBDD]',
@@ -330,7 +330,7 @@ const dragon = {
 
   text: {
     default: 'text-[#2A1A5A] dark:text-[#E9E1FF]',
-    inverse: 'text-[#1A0F3A] dark:text-[#2A1A5A]',
+    inverse: 'text-[#E9E1FF] dark:text-[#2A1A5A]',
   },
 
   border: 'border-[#5428BD] dark:border-[#C4B5FD]',
@@ -353,7 +353,7 @@ const dark = {
 
   text: {
     default: 'text-[#2E231C] dark:text-[#E8E0D9]',
-    inverse: 'text-[#1F1813] dark:text-[#2E231C]',
+    inverse: 'text-[#E8E0D9] dark:text-[#2E231C]',
   },
 
   border: 'border-[#574334] dark:border-[#CBB8AA]',

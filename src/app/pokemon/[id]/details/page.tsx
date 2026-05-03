@@ -1,19 +1,14 @@
 'use server';
-import { PokemonParamId } from '@/interface/pokemon-param-id';
 
 import { PokemonContainer } from '../../components/pokemon-container';
+import { PageProps } from '../../interface/page-props';
 import { Abilities } from './components/abilities';
 import { AlternativeForms } from './components/alternative-forms';
 import { EggGroups } from './components/egg-group';
 import { Evolution } from './components/evolution';
 import { Species } from './components/species';
 import { Status } from './components/status';
-
-type DetailsProps = {
-  params: Promise<PokemonParamId>;
-};
-
-export default async function Details({ params }: DetailsProps) {
+export default async function Details({ params }: PageProps) {
   const { id } = await params;
 
   return (

@@ -5,6 +5,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemomAbilities } from '@/hooks/use-pokemon-abilities';
+import { Pokemon } from '@/interface/pokemon';
+import { PokemonParamId } from '@/interface/pokemon-param-id';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
@@ -12,14 +14,10 @@ import { DrawerContainer } from './drawer/drawer-container';
 import { DrawerContent } from './drawer/drawer-content';
 import { DrawerTrigger } from './drawer/drawer-trigger';
 
-type AbilityProps = {
-  id: string;
-};
-
-export function Abilities({ id }: AbilityProps) {
+export function Abilities({ id }: PokemonParamId) {
   const { data: pokemon } = usePokemon({ pokemon: id });
   const { data: abilities, isLoading } = usePokemomAbilities({
-    abilities: pokemon?.abilities,
+    abilities: pokemon?.abilities as Pokemon['abilities'],
   });
   const { bg, text, border } = getPokemonColors(
     pokemon?.types[0] as PokemonType

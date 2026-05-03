@@ -11,5 +11,6 @@ export async function getPokemon({ pokemon }: Props): Promise<Pokemon> {
   const data = await fetcher<FormatPokemonParams>(
     createUrl(`pokemon/${pokemon}`)
   );
+
   return formatPokemon(data);
 }

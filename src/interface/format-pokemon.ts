@@ -9,6 +9,6 @@ export interface FormatPokemonParams {
   height: number;
   sprites: PokemonSprite;
   abilities: Array<{ ability: { url: string }; is_hidden: boolean }>;
-  types: Array<{ type: { name: PokemonType } }>;
+  types: Array<{ type: { name: PokemonType; url: string } }>;
   stats: Array<{ base_stat: number; stat: { name: string } }>;
 }

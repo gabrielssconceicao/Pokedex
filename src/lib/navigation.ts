@@ -7,5 +7,6 @@ export function saveReturnUrl(url: string) {
 }
 
 export function getReturnUrl() {
+  if (!sessionStorage.getItem(RETURN_KEY)) return '';
   return sessionStorage.getItem(RETURN_KEY);
 }

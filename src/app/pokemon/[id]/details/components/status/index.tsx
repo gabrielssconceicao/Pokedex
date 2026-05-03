@@ -1,16 +1,13 @@
 'use client';
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
+import { PokemonParamId } from '@/interface/pokemon-param-id';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { SpeciesSkeleton } from './status-skeleton';
 
-type StatusProps = {
-  id: string;
-};
-
-export function Status({ id }: StatusProps) {
+export function Status({ id }: PokemonParamId) {
   const { data: pokemon, isLoading } = usePokemon({ pokemon: id });
   const { text, bg, border } = getPokemonColors(
     pokemon?.types[0] as PokemonType

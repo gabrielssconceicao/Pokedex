@@ -16,7 +16,9 @@ import { DrawerTrigger } from './drawer/drawer-trigger';
 
 export function EggGroups({ id }: PokemonParamId) {
   const { data: pokemon } = usePokemon({ pokemon: id });
-  const { data: species, isLoading } = usePokemonSpecies({ id: pokemon?.id });
+  const { data: species, isLoading } = usePokemonSpecies({
+    id: pokemon?.id as number,
+  });
   const { text, bg } = getPokemonColors(pokemon?.types[0] as PokemonType);
 
   return (

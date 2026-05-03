@@ -2,15 +2,12 @@
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemonSpecies } from '@/hooks/use-pokemon-species';
+import { PokemonParamId } from '@/interface/pokemon-param-id';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { SpeciesCard } from './species-card';
 import { SpeciesSkeleton } from './species-skeleton';
-
-interface SpeciesProps {
-  id: string;
-}
 
 const formatWeight = (weight: number) =>
   `${(weight * 0.1).toFixed(1)} kg (${((weight / 10) * 2.20462).toFixed(2)} lbs)`;
@@ -18,19 +15,19 @@ const formatWeight = (weight: number) =>
 const formatHeight = (height: number) =>
   `${(height / 10).toFixed(2)} m (${((height / 10) * 3.28084).toFixed(2).toString().replace('.', "'")}")`;
 
-export function Species({ id }: SpeciesProps) {
-  const { data: pokemon, isLoading: isPokemonLoading } = usePokemon({
+export function Species({ id }: PokemonParamId) {
+  const { data: pokemon } = usePokemon({
     pokemon: id,
   });
-  const { data: species, isLoading: isSpeciesLoading } = usePokemonSpecies({
-    id: pokemon?.id,
+  const { data: species, isLoading } = usePokemonSpecies({
+    id: pokemon?.id as number,
   });
 
   const { text } = getPokemonColors(pokemon?.types[0] as PokemonType);
 
   return (
     <section className="grid grid-cols-2 gap-1 py-2">
-      {(isPokemonLoading || isSpeciesLoading) && <SpeciesSkeleton />}
+      {isLoading && <SpeciesSkeleton />}
       {!species && (
         <p
           className={cn(

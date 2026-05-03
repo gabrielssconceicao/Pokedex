@@ -5,29 +5,16 @@ import { PokemonCardSkeleton } from '@/components/pokemon-card-skeleton';
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemonSpecies } from '@/hooks/use-pokemon-species';
+import { PokemonParamId } from '@/interface/pokemon-param-id';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
-const alternativeForms: Array<{
-  id: number;
-  image: string;
-  name: string;
-  types: PokemonType[];
-}> = Array.from({ length: 4 }).map((_, index) => ({
-  id: index + 1,
-  image: '/pokemon-egg.png',
-  name: 'Charmander',
-  types: ['fire'],
-}));
-
-type AlternativeFormProps = {
-  id: string;
-};
-
-export function AlternativeForms({ id }: AlternativeFormProps) {
-  const { data: poke } = usePokemon({ pokemon: id });
-  const { data: species, isLoading } = usePokemonSpecies({ id: poke?.id });
-  const { text } = getPokemonColors(poke?.types[0] as PokemonType);
+export function AlternativeForms({ id }: PokemonParamId) {
+  const { data: pokemon } = usePokemon({ pokemon: id });
+  const { data: species, isLoading } = usePokemonSpecies({
+    id: pokemon?.id as number,
+  });
+  const { text } = getPokemonColors(pokemon?.types[0] as PokemonType);
 
   return (
     <section className="flex flex-wrap items-center justify-around gap-2 px-1 py-2">
