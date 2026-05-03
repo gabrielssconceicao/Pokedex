@@ -8,16 +8,16 @@ import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 type PokemonCardProps = {
   title?: string;
-  pokemomId: string;
+  pokemonId: string;
   children: React.ReactNode;
 };
 
 export function PokemonContainer({
   children,
   title,
-  pokemomId,
+  pokemonId,
 }: PokemonCardProps) {
-  const { data } = usePokemon({ pokemon: pokemomId });
+  const { data } = usePokemon({ pokemon: pokemonId });
   if (!data) return null;
   const { text, bg } = getPokemonColors(data.types[0] as PokemonType);
   return (

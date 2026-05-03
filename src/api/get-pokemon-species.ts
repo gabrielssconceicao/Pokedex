@@ -1,7 +1,9 @@
 import { FetchPokemonSpecies } from '@/interface/fetch-pokemon-species';
+import { EvolutionChainResponse } from '@/interface/pokemon-evolution';
 import { EggGroup, PokemonSpecies } from '@/interface/pokemon-species';
 import { createUrl } from '@/utils/create-url';
 import { fetcher } from '@/utils/fetcher';
+import { getEvolutionChain } from '@/utils/format-evolution-chain';
 
 import { getPokemon } from './get-pokemon';
 
@@ -12,7 +14,7 @@ type Props = {
 export async function getPokemonSpecies({
   id,
 }: Props): Promise<PokemonSpecies> {
-  const { varieties, flavor_text_entries, egg_groups } =
+  const { varieties, flavor_text_entries, egg_groups, evolution_chain } =
     await fetcher<FetchPokemonSpecies>(createUrl(`pokemon-species/${id}`));
 
   const variatesPromise = varieties
@@ -47,6 +49,10 @@ export async function getPokemonSpecies({
     return { id, name, pokemons: pokemons.filter((p) => p !== null) };
   });
 
+  const evolution = await fetcher<EvolutionChainResponse>(evolution_chain.url);
+
+  const chain = await getEvolutionChain(evolution);
+
   return {
     flavor_text:
       flavor_text_entries.find(
@@ -55,5 +61,6 @@ export async function getPokemonSpecies({
       )?.flavor_text || '',
     varieties: varietiesResponse,
     egg_groups: eggGroups,
+    evolution_chain: chain,
   };
 }
