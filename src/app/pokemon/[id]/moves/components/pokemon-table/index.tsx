@@ -1,3 +1,4 @@
+'use client';
 import {
   Table,
   TableBody,
@@ -6,6 +7,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { PokemonType } from '@/constants/pokemon-types';
+import { usePokemon } from '@/hooks/use-pokemon';
+import { LearnMove } from '@/interface/pokemon-moves';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
@@ -46,8 +50,14 @@ const moves = Array.from({ length: 10 }).map((_, index) => ({
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatibus. Lorem ipsum dolor sit amet ',
 }));
 
-export function PokemonTable() {
-  const { bg, text } = getPokemonColors('fire');
+type PokemonTableProps = {
+  pokemonId: string;
+  query: string;
+};
+
+export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
+  const { data: pokemon } = usePokemon({ pokemon: pokemonId });
+  const { bg, text } = getPokemonColors(pokemon?.types[0] as PokemonType);
   return (
     <Table>
       <TableCaption>A list of pokemon moves</TableCaption>

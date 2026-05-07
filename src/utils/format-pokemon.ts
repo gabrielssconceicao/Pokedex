@@ -23,5 +23,6 @@ export function formatPokemon(pokemon: FormatPokemonParams): Pokemon {
       abilityUrl: a.ability.url,
       is_hidden: a.is_hidden,
     })),
+    moves: pokemon.moves,
   };
 }

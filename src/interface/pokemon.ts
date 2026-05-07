@@ -1,5 +1,6 @@
 import { PokemonType } from '@/constants/pokemon-types';
 
+import { FetchPokemonMove } from './pokemon-moves';
 import { PokemonSprite } from './pokemon-sprite';
 
 export interface Pokemon {
@@ -12,4 +13,5 @@ export interface Pokemon {
   sprites: PokemonSprite;
   stats: Array<{ base_stat: number; name: string }>;
   abilities: Array<{ abilityUrl: string; is_hidden: boolean }>;
+  moves: FetchPokemonMove[];
 }
