@@ -52,7 +52,7 @@ const moves = Array.from({ length: 10 }).map((_, index) => ({
 
 type PokemonTableProps = {
   pokemonId: string;
-  query: string;
+  query: LearnMove;
 };
 
 export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
@@ -70,7 +70,7 @@ export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
               text.inverse
             )}
           >
-            Level
+            {query}
           </TableHead>
           <TableHead
             className={cn(
