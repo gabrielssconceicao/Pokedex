@@ -1,10 +1,11 @@
+import { ContestType, DamageClass } from '@/constants/move-types';
 import { PokemonType } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
 
 import { Badge } from './ui/badge';
 
 type Props = {
-  type: PokemonType;
+  type: PokemonType | DamageClass | ContestType;
   borderColor: string;
   textColor: string;
 };

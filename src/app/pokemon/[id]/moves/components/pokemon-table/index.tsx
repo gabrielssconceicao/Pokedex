@@ -16,41 +16,6 @@ import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { PokemonTableRow } from './pokemon-table-row';
 
-const moves = Array.from({ length: 10 }).map((_, index) => ({
-  level: index + 1,
-  name: `Move ${index + 1}`,
-  types: [
-    {
-      label: 'Type',
-      value: 'Normal',
-    },
-    {
-      label: 'Competition',
-      value: 'Tought',
-    },
-    {
-      label: 'Category',
-      value: 'Physical',
-    },
-  ],
-  status: [
-    {
-      label: 'Power',
-      value: 100,
-    },
-    {
-      label: 'Accuracy',
-      value: 100,
-    },
-    {
-      label: 'PP',
-      value: 50,
-    },
-  ],
-  description:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, voluptatibus. Lorem ipsum dolor sit amet ',
-}));
-
 type PokemonTableProps = {
   pokemonId: string;
   query: LearnMove;
@@ -58,7 +23,7 @@ type PokemonTableProps = {
 
 export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
   const { data: pokemon } = usePokemon({ pokemon: pokemonId });
-  const { data: movesa } = usePokemonMoves({
+  const { data: moves, isLoading } = usePokemonMoves({
     id: pokemonId,
     learnMethod: query,
     moves: pokemon?.moves,
@@ -91,9 +56,17 @@ export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
       </TableHeader>
 
       <TableBody>
-        {moves.map((move) => (
-          <PokemonTableRow key={move.name} {...move} />
-        ))}
+        {moves &&
+          !isLoading &&
+          moves.map((move) => (
+            <PokemonTableRow
+              key={move.id}
+              move={move}
+              learnMethod={query}
+              bgColor={bg}
+              textColor={text}
+            />
+          ))}
       </TableBody>
     </Table>
   );

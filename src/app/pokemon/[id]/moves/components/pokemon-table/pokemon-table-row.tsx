@@ -4,29 +4,27 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { TableCell, TableRow } from '@/components/ui/table';
+import { LearnMove, Move } from '@/interface/pokemon-moves';
 import { cn } from '@/lib/utils';
-import { getPokemonColors } from '@/utils/get-pokemon-colors';
+import { getColor } from '@/utils/get-pokemon-colors';
 
 import { MoveStatusCard } from './move-status-card';
 import { BagdeCard } from './type-badge-card';
 
 interface Props {
-  name: string;
-  level: number;
-  types: Array<{ label: string; value: string }>;
-  status: Array<{ label: string; value: number | string }>;
-  description: string;
+  move: Move;
+  learnMethod: LearnMove;
+  bgColor: { inverse: string; default: string };
+  textColor: { inverse: string; default: string };
 }
 
 export function PokemonTableRow({
-  name,
-  description,
-  level,
-  status,
-  types,
+  move,
+  learnMethod,
+  bgColor,
+  textColor,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const { text, border, bg } = getPokemonColors('fire');
 
   const toggleOpenStatus = () => {
     setIsOpen((prevState) => !prevState);
@@ -36,21 +34,36 @@ export function PokemonTableRow({
     <>
       <TableRow
         onClick={toggleOpenStatus}
-        className={cn('font-bold', text, bg)}
+        className={cn(
+          'font-mono font-bold hover:bg-white/30',
+          textColor.default,
+          bgColor.default
+        )}
       >
         <TableCell>
-          <Button className="h-6 w-6">
+          <Button
+            className={cn('h-6 w-6', textColor.inverse, bgColor.inverse)}
+            variant={'outline'}
+          >
             {isOpen ? <MinusIcon size={20} /> : <PlusIcon size={20} />}
           </Button>
         </TableCell>
-        <TableCell className="text-xs">{level}</TableCell>
-        <TableCell className="text-center text-xs" colSpan={2}>
-          {name}
+        <TableCell className="text-center text-xs">
+          {move.learn[learnMethod]}
+        </TableCell>
+        <TableCell className="text-center text-sm tracking-wide" colSpan={2}>
+          {move.name.split('-').join(' ')}
         </TableCell>
       </TableRow>
 
-      <TableRow className={cn(text.inverse, bg.inverse)}>
-        <TableCell colSpan={5} className="p-0">
+      <TableRow
+        className={cn(
+          'hover:bg-transparent',
+          textColor.inverse,
+          bgColor.inverse
+        )}
+      >
+        <TableCell colSpan={5} className={'bg-accent-foreground/45 p-0'}>
           <div
             className={cn(
               'overflow-hidden transition-all duration-300 ease-in-out',
@@ -61,33 +74,33 @@ export function PokemonTableRow({
           >
             <div className={cn('space-y-2 px-3 py-2')}>
               <div className="flex flex-row flex-wrap gap-2">
-                {Object.values(types).map(({ value, label }) => (
+                {Object.entries(move.types).map(([key, value]) => (
                   <BagdeCard
-                    key={`${name}-${label}`}
-                    label={label}
+                    key={key}
+                    label={key}
                     type={value}
-                    textColor={text.inverse}
-                    borderColor={border}
+                    textColor={getColor(key, value).text.inverse}
+                    borderColor={getColor(key, value).border}
                   />
                 ))}
               </div>
 
               <div className="grid grid-cols-3 justify-center gap-2">
-                {Object.values(status).map(({ label, value }) => (
+                {Object.entries(move.status).map(([key, value]) => (
                   <MoveStatusCard
-                    key={`${name}-${label}`}
-                    label={label}
+                    key={key}
+                    label={key}
                     value={value}
-                    border={border}
-                    text={text.inverse}
+                    text={textColor.inverse}
                   />
                 ))}
                 <MoveStatusCard
                   label="Description"
-                  value={description}
+                  value={
+                    move.description || 'This move does not have a description'
+                  }
                   gridColumn={3}
-                  border={border}
-                  text={text.inverse}
+                  text={textColor.inverse}
                 />
               </div>
             </div>

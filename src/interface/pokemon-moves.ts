@@ -44,10 +44,7 @@ export interface PokemonMove {
 }
 
 export interface Move {
-  learn: {
-    'level-up': number | null;
-    machine: string | null;
-  };
+  learn: Record<LearnMove, number | string | null>;
   id: number;
   name: string;
   types: {
