@@ -1,4 +1,5 @@
 'use client';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -15,6 +16,7 @@ import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { PokemonTableRow } from './pokemon-table-row';
+import { TableRowSkeleton } from './table-row-skeleton';
 
 type PokemonTableProps = {
   pokemonId: string;
@@ -67,6 +69,7 @@ export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
               textColor={text}
             />
           ))}
+        {isLoading && <TableRowSkeleton />}
       </TableBody>
     </Table>
   );
