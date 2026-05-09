@@ -28,7 +28,7 @@ export function Species({ id }: PokemonParamId) {
   return (
     <section className="grid grid-cols-2 gap-1 py-2">
       {isLoading && <SpeciesSkeleton />}
-      {!species && (
+      {!species && !isLoading && (
         <p
           className={cn(
             'text-accent col-span-2 text-center font-mono tracking-wider',

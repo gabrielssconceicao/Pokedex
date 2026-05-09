@@ -19,7 +19,7 @@ export function AlternativeForms({ id }: PokemonParamId) {
   return (
     <section className="flex flex-wrap items-center justify-around gap-2 px-1 py-2">
       {isLoading && <PokemonCardSkeleton />}
-      {!species && (
+      {!species && !isLoading && (
         <p
           className={cn(
             'text-accent tracking-wides flex-1 text-center font-mono',

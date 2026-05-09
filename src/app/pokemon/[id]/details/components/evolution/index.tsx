@@ -19,7 +19,7 @@ export function Evolution({ id }: PokemonParamId) {
   return (
     <section className="xs:flex-row flex w-full flex-col flex-wrap items-center justify-around gap-3 px-1 py-2">
       {isLoading && <PokemonCardSkeleton />}
-      {!species && (
+      {!species && !isLoading && (
         <p
           className={cn(
             'text-accent tracking-wides flex-1 text-center font-mono',

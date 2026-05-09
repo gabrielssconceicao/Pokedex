@@ -26,7 +26,7 @@ export function Abilities({ id }: PokemonParamId) {
   return (
     <section className="flex flex-wrap items-stretch gap-3 px-1 py-2">
       {isLoading && <Skeleton className="h-8 w-full" />}
-      {!abilities && (
+      {!abilities && !isLoading && (
         <p
           className={cn(
             'text-accent tracking-wides flex-1 text-center font-mono',
@@ -38,6 +38,7 @@ export function Abilities({ id }: PokemonParamId) {
       )}
       {pokemon &&
         abilities &&
+        !isLoading &&
         abilities.map(({ effect_entries, id, is_hidden, name, pokemons }) => (
           <Drawer key={id}>
             <DrawerTrigger

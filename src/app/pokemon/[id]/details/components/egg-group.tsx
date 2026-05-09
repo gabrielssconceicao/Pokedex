@@ -24,7 +24,7 @@ export function EggGroups({ id }: PokemonParamId) {
   return (
     <section className="flex flex-wrap items-center justify-around gap-3 px-1 py-2">
       {isLoading && <Skeleton className="h-12 w-full" />}
-      {!species && (
+      {!species && !isLoading && (
         <p
           className={cn(
             'text-accent tracking-wides flex-1 text-center font-mono',

@@ -22,6 +22,7 @@ export function Status({ id }: PokemonParamId) {
     <section className="flex flex-col gap-3 px-2 py-3">
       {isLoading && <SpeciesSkeleton />}
       {pokemon &&
+        !isLoading &&
         pokemon.stats.map(({ name, base_stat }) => (
           <div className="flex w-full items-stretch" key={name}>
             <span
