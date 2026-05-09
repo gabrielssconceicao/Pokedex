@@ -1,4 +1,4 @@
-import { FetchAbilily } from '@/interface/fet-pokemon-abilities';
+import { FetchAbilily } from '@/interface/fetch-pokemon-abilities';
 import { Pokemon } from '@/interface/pokemon';
 import { fetcher } from '@/utils/fetcher';
 

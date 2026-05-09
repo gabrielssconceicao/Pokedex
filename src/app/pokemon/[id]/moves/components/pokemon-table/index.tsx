@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/table';
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
+import { usePokemonMoves } from '@/hooks/use-pokemon-moves';
 import { LearnMove } from '@/interface/pokemon-moves';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
@@ -57,6 +58,12 @@ type PokemonTableProps = {
 
 export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
   const { data: pokemon } = usePokemon({ pokemon: pokemonId });
+  const { data: movesa } = usePokemonMoves({
+    id: pokemonId,
+    learnMethod: query,
+    moves: pokemon?.moves,
+  });
+
   const { bg, text } = getPokemonColors(pokemon?.types[0] as PokemonType);
   return (
     <Table>

@@ -2,7 +2,7 @@
 import { PokemonContainer } from '@/app/pokemon/components/pokemon-container';
 import { PokemonParamId } from '@/interface/pokemon-param-id';
 
-import { useMove } from './hooks/use-moves';
+import { useMove } from '../hooks/use-moves';
 import { MoveTypeSelector } from './move-type-selector';
 import { PokemonTable } from './pokemon-table';
 
