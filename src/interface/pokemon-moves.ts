@@ -18,7 +18,7 @@ export interface MoveResponse {
   flavor_text_entries: Array<{
     flavor_text: string;
     language: { name: string };
-    version: { name: VersionName };
+    version_group: { name: VersionName };
   }>;
   machines: Array<{
     machine: { url: string };
@@ -35,15 +35,32 @@ export interface PokemonMove {
   pp: number | null;
   contest_type: ContestType;
   damage_class: DamageClass;
-  flavor_text_entries: Array<{
-    flavor_text: string;
-    language: { name: string };
-    version: { name: VersionName };
-  }>;
+
+  flavor_text_entry: string | null;
   level_learned: number | null;
 
   machine: string | null;
   type: PokemonType;
+}
+
+export interface Move {
+  learn: {
+    'level-up': number | null;
+    machine: string | null;
+  };
+  id: number;
+  name: string;
+  types: {
+    type: PokemonType;
+    competition: ContestType;
+    category: DamageClass;
+  };
+  status: {
+    accuracy: number | null;
+    power: number | null;
+    pp: number | null;
+  };
+  description: string | null;
 }
 
 export type LearnMove = 'level-up' | 'machine' | 'egg' | 'tutor';

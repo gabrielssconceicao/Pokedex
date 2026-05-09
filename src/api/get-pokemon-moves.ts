@@ -1,8 +1,9 @@
 import { FetchPokemonMove } from '@/interface/fetch-pokemon-moves';
-import { MoveResponse, PokemonMove } from '@/interface/pokemon-moves';
+import { Move, MoveResponse, PokemonMove } from '@/interface/pokemon-moves';
 import { LearnMove } from '@/interface/pokemon-moves';
 import { VersionName } from '@/interface/version-name';
 import { fetcher } from '@/utils/fetcher';
+import { formatPokemonMove } from '@/utils/format-pokemon-move';
 
 type Props = {
   moves: FetchPokemonMove[];
@@ -61,7 +62,14 @@ async function fetchMove(
 
   if (moveResponse === null) return null;
 
-  const { machines, contest_type, damage_class, type, ...rest } = moveResponse;
+  const {
+    machines,
+    contest_type,
+    damage_class,
+    type,
+    flavor_text_entries,
+    ...rest
+  } = moveResponse;
 
   const machine =
     machines.find(({ version_group }) =>
@@ -81,6 +89,10 @@ async function fetchMove(
     machine: machineName,
     contest_type: contest_type.name,
     damage_class: damage_class.name,
+    flavor_text_entry:
+      flavor_text_entries.find((entry) =>
+        entry.version_group.name.includes(version)
+      )?.flavor_text || null,
     type: type.name,
     ...rest,
   };
@@ -97,7 +109,21 @@ export async function getPokemonMoves({ moves, version, learnMethod }: Props) {
     (res) => res !== null
   );
 
-  console.log({ filteredMoveResponse });
+  let sortedMoves: Move[] = filteredMoveResponse.map(formatPokemonMove);
 
-  return [];
+  if (learnMethod === 'level-up') {
+    sortedMoves = sortedMoves.sort(
+      (a, b) => a.learn['level-up'] - b.learn['level-up']
+    );
+  }
+
+  if (learnMethod === 'machine') {
+    sortedMoves = sortedMoves.sort((a, b) =>
+      a.learn.machine.localeCompare(b.learn.machine)
+    );
+  }
+
+  console.log(sortedMoves);
+
+  return sortedMoves;
 }
