@@ -1,26 +1,27 @@
 'use client';
+import { useSearchParams } from 'next/navigation';
+
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemonSpecies } from '@/hooks/use-pokemon-species';
 import { PokemonParamId } from '@/interface/pokemon-param-id';
+import { VersionName } from '@/interface/version-name';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { SpeciesCard } from './species-card';
 import { SpeciesSkeleton } from './species-skeleton';
-
-const formatWeight = (weight: number) =>
-  `${(weight * 0.1).toFixed(1)} kg (${((weight / 10) * 2.20462).toFixed(2)} lbs)`;
-
-const formatHeight = (height: number) =>
-  `${(height / 10).toFixed(2)} m (${((height / 10) * 3.28084).toFixed(2).toString().replace('.', "'")}")`;
+import { formatHeight, formatWeight } from './utils/formatters';
 
 export function Species({ id }: PokemonParamId) {
+  const searchParams = useSearchParams();
+  const version = (searchParams.get('version') || 'red') as VersionName;
   const { data: pokemon } = usePokemon({
     pokemon: id,
   });
   const { data: species, isLoading } = usePokemonSpecies({
     id: pokemon?.id as number,
+    version,
   });
 
   const { text } = getPokemonColors(pokemon?.types[0] as PokemonType);

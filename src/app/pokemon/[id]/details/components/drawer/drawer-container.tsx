@@ -1,3 +1,4 @@
+import { formatText } from '@/app/pokemon/components/format-text';
 import { cn } from '@/lib/utils';
 
 interface DrawerContainerProps {
@@ -18,7 +19,9 @@ export function DrawerContainer({
         {title}
       </h4>
       {description && (
-        <p className="text-center text-gray-800">{description}</p>
+        <div className="text-center text-gray-800">
+          {formatText(description)}
+        </div>
       )}
       {children}
     </div>

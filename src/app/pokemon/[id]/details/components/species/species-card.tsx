@@ -1,4 +1,5 @@
 'use client';
+import { formatText } from '@/app/pokemon/components/format-text';
 import { PokemonType } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
@@ -35,7 +36,7 @@ export function SpeciesCard({
           border
         )}
       >
-        {value}
+        {formatText(value)}
       </div>
     </div>
   );

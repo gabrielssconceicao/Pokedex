@@ -1,6 +1,6 @@
 import { VersionName } from './version-name';
 
-type FlavorTextEntry = {
+export type FlavorTextEntry = {
   flavor_text: string;
   language: {
     name: string;

@@ -3,22 +3,24 @@ import { DynamicIcon, type IconName } from 'lucide-react/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { VersionName } from '@/interface/version-name';
 import { cn } from '@/lib/utils';
 
 interface NavLinkProps {
   label: string;
   href: string;
   icon: IconName;
+  version?: VersionName;
 }
 
-export function NavLink({ href, icon, label }: NavLinkProps) {
+export function NavLink({ href, icon, label, version }: NavLinkProps) {
   const pathname = usePathname().split('/')[3];
 
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <Link
-      href={href}
+      href={`${href}?version=${version}`}
       className="flex flex-col items-center justify-center gap-1"
       aria-label={label}
     >
