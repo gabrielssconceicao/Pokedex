@@ -57,7 +57,7 @@ export async function getPokemonSpecies({
   const chain = await getEvolutionChain(evolution);
 
   const flavor_text = flavor_text_entries.find(
-    (entry) => entry.version.name === version
+    (entry) => entry.version.name === version && entry.language.name === 'en'
   )?.flavor_text;
 
   return {

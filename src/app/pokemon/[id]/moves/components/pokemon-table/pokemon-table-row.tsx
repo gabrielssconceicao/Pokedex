@@ -48,10 +48,10 @@ export function PokemonTableRow({
             {isOpen ? <MinusIcon size={20} /> : <PlusIcon size={20} />}
           </Button>
         </TableCell>
-        <TableCell className="text-center text-xs">
+        <TableCell className="w-4 text-center text-xs">
           {move.learn[learnMethod]}
         </TableCell>
-        <TableCell className="text-center text-sm tracking-wide" colSpan={2}>
+        <TableCell className="text-center text-sm tracking-wide">
           {move.name.split('-').join(' ')}
         </TableCell>
       </TableRow>
@@ -68,12 +68,12 @@ export function PokemonTableRow({
             className={cn(
               'overflow-hidden transition-all duration-300 ease-in-out',
               isOpen
-                ? 'max-h-60 translate-y-0 opacity-100'
+                ? 'max-h-fit translate-y-0 opacity-100'
                 : 'max-h-0 -translate-y-2 opacity-0'
             )}
           >
-            <div className={cn('space-y-2 px-3 py-2')}>
-              <div className="flex flex-row flex-wrap gap-2">
+            <div className={cn('space-y-2 px-2 py-2')}>
+              <div className="max-xs:flex-col flex flex-row flex-wrap gap-2">
                 {Object.entries(move.types).map(([key, value]) => (
                   <BagdeCard
                     key={key}

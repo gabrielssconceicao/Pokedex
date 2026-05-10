@@ -1,4 +1,6 @@
 'use client';
+import { useSearchParams } from 'next/navigation';
+
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,
@@ -11,7 +13,9 @@ import {
 import { PokemonType } from '@/constants/pokemon-types';
 import { usePokemon } from '@/hooks/use-pokemon';
 import { usePokemonMoves } from '@/hooks/use-pokemon-moves';
+import { FetchPokemonMove } from '@/interface/fetch-pokemon-moves';
 import { LearnMove } from '@/interface/pokemon-moves';
+import { VersionName } from '@/interface/version-name';
 import { cn } from '@/lib/utils';
 import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
@@ -24,12 +28,22 @@ type PokemonTableProps = {
 };
 
 export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
+  const searchParams = useSearchParams();
+  const version = (searchParams.get('version') || 'red') as VersionName;
   const { data: pokemon } = usePokemon({ pokemon: pokemonId });
   const { data: moves, isLoading } = usePokemonMoves({
     id: pokemonId,
     learnMethod: query,
-    moves: pokemon?.moves,
+    moves: pokemon?.moves as FetchPokemonMove[],
+    version,
   });
+
+  if (moves?.length === 0)
+    return (
+      <div className="flex h-1/2 items-center justify-center font-mono text-xl font-semibold tracking-wider">
+        No moves found
+      </div>
+    );
 
   const { bg, text } = getPokemonColors(pokemon?.types[0] as PokemonType);
   return (
@@ -40,11 +54,11 @@ export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
           <TableHead className="w-6 first:rounded-tl-lg"></TableHead>
           <TableHead
             className={cn(
-              'w-8 text-center font-mono text-xs font-bold tracking-wide uppercase',
+              'w-8 text-center font-mono text-xs font-bold tracking-wide break-all uppercase',
               text.inverse
             )}
           >
-            {query}
+            {query.split('-')[0]}
           </TableHead>
           <TableHead
             className={cn(

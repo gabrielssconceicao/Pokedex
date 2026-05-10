@@ -15,7 +15,7 @@ export function MoveClient({ id }: PokemonParamId) {
       </PokemonContainer>
 
       <PokemonContainer title="Moves" pokemonId={id}>
-        <div className="h-[calc(100vh-19rem)] overflow-y-auto px-2 py-1">
+        <div className="h-[calc(100vh-20rem)] overflow-y-auto px-2 py-1">
           <PokemonTable query={moveType} pokemonId={id} />
         </div>
       </PokemonContainer>
