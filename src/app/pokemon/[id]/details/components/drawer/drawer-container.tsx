@@ -5,21 +5,30 @@ interface DrawerContainerProps {
   title: string;
   description?: string;
   children?: React.ReactNode;
-  color: string;
+  textColor: { default: string; inverse: string };
+  borderColor: string;
 }
 export function DrawerContainer({
   title,
-  color,
+  textColor,
+  borderColor,
   description,
   children,
 }: DrawerContainerProps) {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center rounded-md bg-white/50 py-2">
-      <h4 className={cn('text-center text-xl font-semibold', color)}>
+    <div
+      className={cn(
+        'flex flex-1 flex-col items-center justify-center rounded-md border-2 py-2',
+        borderColor
+      )}
+    >
+      <h4
+        className={cn('text-center text-xl font-semibold', textColor.default)}
+      >
         {title}
       </h4>
       {description && (
-        <div className="text-center text-gray-800">
+        <div className={cn('text-center', textColor.inverse)}>
           {formatText(description)}
         </div>
       )}

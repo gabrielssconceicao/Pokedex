@@ -9,7 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { VersionName, VERSIONS } from '@/interface/version-name';
+import { VERSIONS } from '@/constants/versions';
+import { VersionName } from '@/interface/version-name';
 
 type FormValues = {
   version: VersionName;

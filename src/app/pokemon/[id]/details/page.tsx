@@ -1,13 +1,23 @@
 'use server';
 
+import { Metadata } from 'next';
+
 import { PokemonContainer } from '../../components/pokemon-container';
 import { PageProps } from '../../interface/page-props';
+import { getMetadata } from '../../utils/metadata';
 import { Abilities } from './components/abilities';
 import { AlternativeForms } from './components/alternative-forms';
 import { EggGroups } from './components/egg-group';
 import { Evolution } from './components/evolution';
 import { Species } from './components/species';
 import { Status } from './components/status';
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  return getMetadata({ params, title: 'Details' });
+}
+
 export default async function Details({ params }: PageProps) {
   const { id } = await params;
 

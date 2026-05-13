@@ -1,7 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 
-import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -38,12 +37,13 @@ export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
     version,
   });
 
-  if (moves?.length === 0)
+  if (moves?.length === 0 || (!isLoading && !moves)) {
     return (
       <div className="flex h-1/2 items-center justify-center font-mono text-xl font-semibold tracking-wider">
         No moves found
       </div>
     );
+  }
 
   const { bg, text } = getPokemonColors(pokemon?.types[0] as PokemonType);
   return (

@@ -26,7 +26,7 @@ export function Abilities({ id }: PokemonParamId) {
   return (
     <section className="flex flex-wrap items-stretch gap-3 px-1 py-2">
       {isLoading && <Skeleton className="h-8 w-full" />}
-      {!abilities && !isLoading && (
+      {abilities && !isLoading && !abilities.length && (
         <p
           className={cn(
             'text-accent tracking-wides flex-1 text-center font-mono',
@@ -59,12 +59,14 @@ export function Abilities({ id }: PokemonParamId) {
                 {effect_entries && (
                   <>
                     <DrawerContainer
-                      color={text.default}
+                      textColor={text}
+                      borderColor={border}
                       title={'Effect'}
                       description={effect_entries.short_effect}
                     />
                     <DrawerContainer
-                      color={text.default}
+                      textColor={text}
+                      borderColor={border}
                       title={'Detailed description'}
                       description={effect_entries.effect}
                     />
@@ -72,7 +74,8 @@ export function Abilities({ id }: PokemonParamId) {
                 )}
                 {pokemons.length && (
                   <DrawerContainer
-                    color={text.default}
+                    textColor={text}
+                    borderColor={border}
                     title="Pokmeons with the same ability"
                   >
                     <div className="flex flex-1 flex-wrap items-stretch justify-center gap-3 px-4 py-3">

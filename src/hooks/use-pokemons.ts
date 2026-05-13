@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { fetchPokemons } from '@/api/fetch-pokemons';
 import { PokemonType } from '@/constants/pokemon-types';
+import { QUERY_KEYS } from '@/constants/query-keys';
 
 export type PokemonFilters = {
   id?: number;
@@ -27,7 +28,7 @@ export function usePokemons({
     types,
   };
   return useQuery({
-    queryKey: ['pokemon-fetch', page, perPage, id, name, types.join(',')],
+    queryKey: [QUERY_KEYS.POKEMONS, page, perPage, id, name, types.join(',')],
     queryFn: () => fetchPokemons({ pagination, filters }),
   });
 }

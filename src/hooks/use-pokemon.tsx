@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { getPokemon } from '@/api/get-pokemon';
+import { QUERY_KEYS } from '@/constants/query-keys';
 
 type Props = {
   pokemon: string;
@@ -10,7 +11,7 @@ type Props = {
 export function usePokemon({ pokemon }: Props) {
   const router = useRouter();
   return useQuery({
-    queryKey: ['pokemon', pokemon],
+    queryKey: [QUERY_KEYS.POKEMON, pokemon],
     retry: false,
     queryFn: async () => {
       try {

@@ -32,7 +32,7 @@ export function DrawerTrigger({
         {isHidden && (
           <div
             className={cn(
-              'flex items-center justify-center rounded-l-lg border-r px-2 py-1 text-xs',
+              'flex items-center justify-center rounded-l-lg border-r px-2 py-1 text-xs font-semibold',
               bg,
               text,
               border

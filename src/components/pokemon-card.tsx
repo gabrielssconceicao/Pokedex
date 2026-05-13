@@ -25,8 +25,7 @@ export function PokemonCard({ pokemon, variant = 'default' }: Props) {
   const { bg, border, text, img } = getPokemonColors(types[0]);
 
   const variantStyle: Record<Variant, string> = {
-    default:
-      'min-w-60 max-w-78  flex-1 gap-1 transition-transform hover:scale-[1.02]',
+    default: 'min-w-60  flex-1 gap-1 transition-transform hover:scale-[1.02]',
     card: 'min-h-56 w-28 flex-col justify-between overflow-hidden',
   };
 

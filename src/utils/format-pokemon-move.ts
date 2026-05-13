@@ -5,6 +5,8 @@ export function formatPokemonMove(move: PokemonMove): Move {
     learn: {
       'level-up': move.level_learned,
       machine: move.machine?.toUpperCase() || null,
+      egg: null,
+      tutor: null,
     },
     id: move.id,
     name: move.name,

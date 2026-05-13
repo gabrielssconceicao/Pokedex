@@ -1,4 +1,5 @@
 'use client';
+
 import { useVersion } from '../hooks/use-version';
 import { PokemonHeader } from './components/pokemon-header';
 import { PokemonNavLink } from './components/pokemon-nav-link';

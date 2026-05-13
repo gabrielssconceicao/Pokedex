@@ -1,6 +1,6 @@
 import { PokemonType } from '@/constants/pokemon-types';
 
-import { FetchPokemonMove } from './pokemon-moves';
+import { FetchPokemonMove } from './fetch-pokemon-moves';
 import { PokemonSprite } from './pokemon-sprite';
 
 export interface FormatPokemonParams {

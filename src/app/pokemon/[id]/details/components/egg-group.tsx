@@ -19,7 +19,9 @@ export function EggGroups({ id }: PokemonParamId) {
   const { data: species, isLoading } = usePokemonSpecies({
     id: pokemon?.id as number,
   });
-  const { text, bg } = getPokemonColors(pokemon?.types[0] as PokemonType);
+  const { text, bg, border } = getPokemonColors(
+    pokemon?.types[0] as PokemonType
+  );
 
   return (
     <section className="flex flex-wrap items-center justify-around gap-3 px-1 py-2">
@@ -48,7 +50,8 @@ export function EggGroups({ id }: PokemonParamId) {
             >
               <section className="grow overflow-y-auto px-5 py-3">
                 <DrawerContainer
-                  color={text.default}
+                  textColor={text}
+                  borderColor={border}
                   title={'Pokemons from this egg group'}
                 >
                   <div className="flex flex-wrap items-center justify-center gap-3 px-4 py-3">

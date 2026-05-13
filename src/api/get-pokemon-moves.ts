@@ -123,7 +123,5 @@ export async function getPokemonMoves({ moves, version, learnMethod }: Props) {
     );
   }
 
-  console.log(sortedMoves);
-
   return sortedMoves;
 }

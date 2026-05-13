@@ -18,9 +18,11 @@ export function NavLink({ href, icon, label, version }: NavLinkProps) {
 
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
 
+  const path = version !== undefined ? `${href}?version=${version}` : href;
+
   return (
     <Link
-      href={`${href}?version=${version}`}
+      href={path}
       className="flex flex-col items-center justify-center gap-1"
       aria-label={label}
     >
