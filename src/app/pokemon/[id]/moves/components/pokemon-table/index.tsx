@@ -29,6 +29,7 @@ type PokemonTableProps = {
 export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
   const searchParams = useSearchParams();
   const version = (searchParams.get('version') || 'red') as VersionName;
+
   const { data: pokemon } = usePokemon({ pokemon: pokemonId });
   const { data: moves, isLoading } = usePokemonMoves({
     id: pokemonId,
@@ -37,18 +38,14 @@ export function PokemonTable({ query, pokemonId }: PokemonTableProps) {
     version,
   });
 
-  if (moves?.length === 0 || (!isLoading && !moves)) {
-    return (
-      <div className="flex h-1/2 items-center justify-center font-mono text-xl font-semibold tracking-wider">
-        No moves found
-      </div>
-    );
-  }
-
   const { bg, text } = getPokemonColors(pokemon?.types[0] as PokemonType);
-  return (
+  return (moves === undefined || moves.length === 0) && !isLoading ? (
+    <div className="flex h-1/2 items-center justify-center font-mono text-xl font-semibold tracking-wider">
+      No moves found
+    </div>
+  ) : (
     <Table>
-      <TableCaption>A list of pokemon moves</TableCaption>
+      <TableCaption>A list of {pokemon?.name} moves</TableCaption>
       <TableHeader>
         <TableRow className={cn('border-b', bg.inverse)}>
           <TableHead className="w-6 first:rounded-tl-lg"></TableHead>

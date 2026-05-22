@@ -2,7 +2,7 @@ import { FetchAbilily } from '@/interface/fetch-pokemon-abilities';
 import { Pokemon } from '@/interface/pokemon';
 import { fetcher } from '@/utils/fetcher';
 
-import { getPokemon } from './get-pokemon';
+import { getPokemonData } from './get-pokemon';
 
 type Props = {
   abilities: Pokemon['abilities'];
@@ -21,10 +21,14 @@ export async function getPokemonAbilities({ abilities }: Props) {
       const { effect_entries, id, name, pokemon } = ability;
 
       const pokemonsPromise = pokemon.map(async (p) =>
-        getPokemon({ pokemon: p.pokemon.name })
+        getPokemonData({ pokemon: p.pokemon.name })
+          .then((res) => res)
+          .catch(() => null)
       );
 
-      const pokemons = await Promise.all(pokemonsPromise);
+      const pokemons = (await Promise.all(pokemonsPromise)).filter(
+        (d) => d !== null
+      );
 
       return { is_hidden, id, name, effect_entries, pokemons };
     }

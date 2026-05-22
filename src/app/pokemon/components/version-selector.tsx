@@ -33,23 +33,28 @@ export function VersionSelector({ onVersionChange }: Props) {
   };
 
   return (
-    <Controller
-      control={control}
-      name="version"
-      render={({ field }) => (
-        <Select defaultValue={field.value} onValueChange={handleVersionChange}>
-          <SelectTrigger size="default" className="w-full flex-1">
-            <SelectValue placeholder="Itens por página" />
-          </SelectTrigger>
-          <SelectContent>
-            {VERSIONS.map((version) => (
-              <SelectItem key={version} value={version}>
-                {version}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      )}
-    />
+    <div className="px-3 py-1">
+      <Controller
+        control={control}
+        name="version"
+        render={({ field }) => (
+          <Select
+            defaultValue={field.value}
+            onValueChange={handleVersionChange}
+          >
+            <SelectTrigger size="default" className="w-full flex-1">
+              <SelectValue placeholder="Itens por página" />
+            </SelectTrigger>
+            <SelectContent>
+              {VERSIONS.map((version) => (
+                <SelectItem key={version} value={version}>
+                  {version}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+      />
+    </div>
   );
 }

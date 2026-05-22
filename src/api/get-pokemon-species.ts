@@ -6,7 +6,7 @@ import { createUrl } from '@/utils/create-url';
 import { fetcher } from '@/utils/fetcher';
 import { getEvolutionChain } from '@/utils/format-evolution-chain';
 
-import { getPokemon } from './get-pokemon';
+import { getPokemonData } from './get-pokemon';
 
 type Props = {
   id: number;
@@ -22,27 +22,29 @@ export async function getPokemonSpecies({
 
   const variatesPromise = varieties
     .filter((v) => !v.is_default)
-    .map((v) => getPokemon({ pokemon: v.pokemon.name }));
+    .map((v) =>
+      getPokemonData({ pokemon: v.pokemon.name })
+        .then((res) => res)
+        .catch(() => null)
+    );
 
   const eggGroupsPromise = egg_groups.map((egg) => fetcher<EggGroup>(egg.url));
 
   const [varietiesResponse, eggGroupsResponse] = await Promise.all([
-    Promise.all(variatesPromise),
+    (await Promise.all(variatesPromise)).filter((v) => v !== null),
     Promise.all(eggGroupsPromise),
   ]);
 
   const eggGroupPokemons = eggGroupsResponse.map(async (egg) => {
     const { id, name, pokemon_species } = egg;
 
-    const pokemon = pokemon_species.map(async (p) => {
-      try {
-        return await getPokemon({ pokemon: p.name });
-      } catch {
-        return null;
-      }
-    });
+    const pokemon = pokemon_species.map(async (p) =>
+      getPokemonData({ pokemon: p.name })
+        .then((res) => res)
+        .catch(() => null)
+    );
 
-    const pokemonData = await Promise.all(pokemon);
+    const pokemonData = (await Promise.all(pokemon)).filter((p) => p !== null);
 
     return { id, name, pokemons: pokemonData };
   });

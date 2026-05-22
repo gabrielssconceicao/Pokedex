@@ -122,6 +122,5 @@ export async function getPokemonMoves({ moves, version, learnMethod }: Props) {
       a.learn.machine.localeCompare(b.learn.machine)
     );
   }
-
   return sortedMoves;
 }
