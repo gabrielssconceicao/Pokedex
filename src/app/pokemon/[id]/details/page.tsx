@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { PokemonContainer } from '../../components/pokemon-container';
 import { PageProps } from '../../interface/page-props';
 import { getMetadata } from '../../utils/metadata';
-import { Abilities } from './components/abilities';
+import { Abilities } from './components/ability';
 import { AlternativeForms } from './components/alternative-forms';
 import { EggGroups } from './components/egg-group';
 import { Evolution } from './components/evolution';

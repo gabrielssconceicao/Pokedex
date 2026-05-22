@@ -19,6 +19,7 @@ export function Abilities({ id }: PokemonParamId) {
   const { data: abilities, isLoading } = usePokemomAbilities({
     abilities: pokemon?.abilities as Pokemon['abilities'],
   });
+  
   const { bg, text, border } = getPokemonColors(
     pokemon?.types[0] as PokemonType
   );
