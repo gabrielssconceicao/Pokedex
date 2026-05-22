@@ -1,69 +1,90 @@
+'use client';
 import { PokemonCard } from '@/components/pokemon-card';
 import { Drawer } from '@/components/ui/drawer';
-import { getPokemonColors } from '@/constants/pokemon-types';
+import { Skeleton } from '@/components/ui/skeleton';
+import { PokemonType } from '@/constants/pokemon-types';
+import { usePokemon } from '@/hooks/use-pokemon';
+import { usePokemomAbilities } from '@/hooks/use-pokemon-abilities';
+import { Pokemon } from '@/interface/pokemon';
+import { PokemonParamId } from '@/interface/pokemon-param-id';
+import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { DrawerContainer } from './drawer/drawer-container';
 import { DrawerContent } from './drawer/drawer-content';
 import { DrawerTrigger } from './drawer/drawer-trigger';
 
-const pokemonAbilities = {
-  pokemon: 'Pikachu',
-  abilities: Array.from({ length: 3 }).map((_, index) => ({
-    isHidden: index % 2 === 0,
-    name: `Ability name ${index + 1}`,
-    efect: 'lorem ipsum dolor',
-    description:
-      'lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt iste voluptates doloribus ipsa vel impedit suscipit, animi quod!',
-    pokemons: Array.from({ length: 10 }).map((_, index) => ({
-      id: index + 1,
-      img: '/pokemon-egg.png',
-      name: 'Charmander',
-      types: ['fire'],
-    })),
-  })),
-};
+export function Abilities({ id }: PokemonParamId) {
+  const { data: pokemon } = usePokemon({ pokemon: id });
+  const { data: abilities, isLoading } = usePokemomAbilities({
+    abilities: pokemon?.abilities as Pokemon['abilities'],
+  });
+  const { bg, text, border } = getPokemonColors(
+    pokemon?.types[0] as PokemonType
+  );
 
-export function Abilities() {
-  const { bg, text, border, textInverse } = getPokemonColors('fire');
   return (
     <section className="flex flex-wrap items-stretch gap-3 px-1 py-2">
-      {pokemonAbilities.abilities.map(
-        ({ description, efect, isHidden, name, pokemons }) => (
-          <Drawer key={name}>
+      {isLoading && <Skeleton className="h-8 w-full" />}
+      {abilities && !isLoading && !abilities.length && (
+        <p
+          className={cn(
+            'text-accent tracking-wides flex-1 text-center font-mono',
+            text.default
+          )}
+        >
+          This pokemon has no abilities
+        </p>
+      )}
+      {pokemon &&
+        abilities &&
+        !isLoading &&
+        abilities.map(({ effect_entries, id, is_hidden, name, pokemons }) => (
+          <Drawer key={id}>
             <DrawerTrigger
-              bg={bg}
+              bg={bg.default}
               border={border}
               text={text}
-              textInverse={textInverse}
-              isHidden={isHidden}
+              isHidden={is_hidden}
             >
               {name}
             </DrawerTrigger>
             <DrawerContent
-              bgColor={bg}
-              textColor={text}
+              bgColor={bg.default}
+              textColor={text.default}
               title={name}
-              description={`${pokemonAbilities.pokemon} ${isHidden && 'hidden'} ability`}
+              description={`${pokemon.name} ${is_hidden ? 'hidden' : ''} ability`}
             >
               <section className="flex grow flex-col space-y-3 overflow-y-auto px-5 py-4">
-                <DrawerContainer
-                  color={text}
-                  title={'Effect'}
-                  description={efect}
-                />
-                <DrawerContainer
-                  color={text}
-                  title={'Detailed description'}
-                  description={description}
-                />
+                {effect_entries && (
+                  <>
+                    <DrawerContainer
+                      textColor={text}
+                      borderColor={border}
+                      title={'Effect'}
+                      description={effect_entries.short_effect}
+                    />
+                    <DrawerContainer
+                      textColor={text}
+                      borderColor={border}
+                      title={'Detailed description'}
+                      description={effect_entries.effect}
+                    />
+                  </>
+                )}
                 {pokemons.length && (
                   <DrawerContainer
-                    color={text}
+                    textColor={text}
+                    borderColor={border}
                     title="Pokmeons with the same ability"
                   >
-                    <div className="flex flex-1 flex-wrap items-center justify-center gap-3 px-4 py-3">
+                    <div className="flex flex-1 flex-wrap items-stretch justify-center gap-3 px-4 py-3">
                       {pokemons.map((pokemon) => (
-                        <PokemonCard key={pokemon.id} {...pokemon} />
+                        <PokemonCard
+                          key={pokemon.id}
+                          pokemon={pokemon}
+                          variant="card"
+                        />
                       ))}
                     </div>
                   </DrawerContainer>
@@ -71,8 +92,7 @@ export function Abilities() {
               </section>
             </DrawerContent>
           </Drawer>
-        )
-      )}
+        ))}
     </section>
   );
 }

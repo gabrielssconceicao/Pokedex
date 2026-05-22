@@ -12,7 +12,7 @@ interface PaginationButtonProps {
 export function PaginationButton(props: PaginationButtonProps) {
   return (
     <Button
-      className="h-8 w-8 p-0"
+      className="hover:bg-primary/75 hover:text-primary-foreground/70 h-8 w-8 cursor-pointer p-0"
       disabled={props.disabled}
       onClick={props.onClick}
     >

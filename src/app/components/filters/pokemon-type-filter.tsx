@@ -7,9 +7,23 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { pokemonTypes } from '@/constants/pokemon-types';
+import { PokemonType, pokemonTypes } from '@/constants/pokemon-types';
 
-export function PokemonTypeFilter() {
+interface PokemonTypeFilterProps {
+  value: PokemonType[];
+  onChange: (types: PokemonType[]) => void;
+}
+
+export function PokemonTypeFilter({ onChange, value }: PokemonTypeFilterProps) {
+  function handleToggle(type: PokemonType) {
+    const isSelected = value.includes(type);
+
+    if (isSelected) {
+      onChange(value.filter((t) => t !== type));
+    } else {
+      onChange([...value, type]);
+    }
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -19,15 +33,19 @@ export function PokemonTypeFilter() {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-32 sm:w-40">
-        {Object.entries(pokemonTypes).map(([key, type]) => (
-          <DropdownMenuCheckboxItem
-            key={key}
-            onSelect={(event) => event.preventDefault()}
-            className="text-xs"
-          >
-            {type.label}
-          </DropdownMenuCheckboxItem>
-        ))}
+        {pokemonTypes.map((key) => {
+          return (
+            <DropdownMenuCheckboxItem
+              key={key}
+              checked={value.includes(key)}
+              onCheckedChange={() => handleToggle(key)}
+              onSelect={(event) => event.preventDefault()}
+              className="text-xs"
+            >
+              {key}
+            </DropdownMenuCheckboxItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );

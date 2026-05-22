@@ -1,34 +1,43 @@
 'use client';
 
 import { PokemonCard } from '@/components/pokemon-card';
-import { getPokemonColors, PokemonType } from '@/constants/pokemon-types';
+import { PokemonCardSkeleton } from '@/components/pokemon-card-skeleton';
+import { PokemonType } from '@/constants/pokemon-types';
+import { usePokemon } from '@/hooks/use-pokemon';
+import { usePokemonSpecies } from '@/hooks/use-pokemon-species';
+import { PokemonParamId } from '@/interface/pokemon-param-id';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
-const alternativeForms: Array<{
-  id: number;
-  image: string;
-  name: string;
-  types: PokemonType[];
-}> = Array.from({ length: 4 }).map((_, index) => ({
-  id: index + 1,
-  image: '/pokemon-egg.png',
-  name: 'Charmander',
-  types: ['fire'],
-}));
-
-export function AlternativeForms() {
-  const { text } = getPokemonColors('fire');
+export function AlternativeForms({ id }: PokemonParamId) {
+  const { data: pokemon } = usePokemon({ pokemon: id });
+  const { data: species, isLoading } = usePokemonSpecies({
+    id: pokemon?.id as number,
+  });
+  const { text } = getPokemonColors(pokemon?.types[0] as PokemonType);
 
   return (
     <section className="flex flex-wrap items-center justify-around gap-2 px-1 py-2">
-      {alternativeForms.map(({ id, image, name, types }) => (
-        <PokemonCard key={id} id={id} img={image} name={name} types={types} />
-      ))}
-      {!alternativeForms.length && (
+      {isLoading && <PokemonCardSkeleton />}
+      {!species && !isLoading && (
+        <p
+          className={cn(
+            'text-accent tracking-wides flex-1 text-center font-mono',
+            text.default
+          )}
+        >
+          This pokemon does not have alternative forms
+        </p>
+      )}
+      {species &&
+        species.varieties.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+        ))}
+      {species && !species.varieties.length && (
         <p
           className={cn(
             'text-accent text-center font-mono text-sm font-semibold tracking-wider',
-            text
+            text.default
           )}
         >
           There are no alternative forms

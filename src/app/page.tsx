@@ -1,33 +1,40 @@
-import { PokemonCard } from '@/components/pokemon-card';
+'use server';
+
 import { PokemonType } from '@/constants/pokemon-types';
 
 import { Filters } from './components/filters';
 import { Header } from './components/header';
 import { Pagination } from './components/pagination';
+import { PokemonList } from './components/pokemon-list';
+import { parsePokemonSearchParams } from './utils/parse-pokemon-search-params';
+type HomeProps = {
+  searchParams: Promise<{
+    id?: string;
+    q?: string;
+    page?: string;
+    perPage?: string;
+    type?: PokemonType | PokemonType[];
+  }>;
+};
 
-const pokemons = Array.from({ length: 20 }).map((_, index) => ({
-  id: index + 1,
-  name: 'pikachu',
-  img: '/pokemon-egg.png',
-  types:
-    (index + 1) % 2 === 0
-      ? (['fire', 'water'] as PokemonType[])
-      : (['fire'] as PokemonType[]),
-}));
+export default async function Home({ searchParams }: HomeProps) {
+  const { id, q, type, perPage = '25', page = '1' } = await searchParams;
 
-export default function Home() {
+  const filterOptions = parsePokemonSearchParams({
+    id,
+    name: q,
+    type,
+    page,
+    perPage,
+  });
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex h-full flex-1 flex-col">
         <Filters />
-        <section className="flex grow basis-0 flex-wrap items-center justify-between gap-4 overflow-y-auto px-4 py-2">
-          {pokemons.map(({ id, img, name, types }) => (
-            <PokemonCard key={id} id={id} name={name} img={img} types={types} />
-          ))}
-        </section>
+        <PokemonList filters={filterOptions} />
       </main>
-      <Pagination />
+      <Pagination filters={filterOptions} />
     </div>
   );
 }

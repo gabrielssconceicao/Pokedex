@@ -1,8 +1,11 @@
 'use client';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 
-import { getPokemonColors, PokemonType } from '@/constants/pokemon-types';
+import { Pokemon } from '@/interface/pokemon';
+import { saveReturnUrl } from '@/lib/navigation';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 import { PokemonImage } from './pokemon-image';
 import { PokemonNameTitle } from './pokemon-name-title';
@@ -11,35 +14,45 @@ import { PokemonTypeBadge } from './pokemon-type-badge';
 export type Variant = 'default' | 'card';
 
 type Props = {
-  id: number;
-  img: string;
-  name: string;
-  types: PokemonType[];
+  pokemon: Pokemon;
   variant?: Variant;
 };
 
-export function PokemonCard({
-  id,
-  img,
-  name,
-  types,
-  variant = 'default',
-}: Props) {
+export function PokemonCard({ pokemon, variant = 'default' }: Props) {
   const isCard = variant === 'card';
-  const { bg, border, text, img: Img } = getPokemonColors(types[0]);
+  const { id, name, sprites, types } = pokemon;
+
+  const { bg, border, text, img } = getPokemonColors(types[0]);
+
+  const variantStyle: Record<Variant, string> = {
+    default: 'min-w-60  flex-1 gap-1 transition-transform hover:scale-[1.02]',
+    card: 'min-h-56 w-28 flex-col justify-between overflow-hidden',
+  };
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  function handleClick() {
+    const url = `${pathname}?${searchParams.toString()}`;
+    saveReturnUrl(url);
+  }
 
   return (
     <Link
       href={`/pokemon/${name}/details`}
+      onClick={handleClick}
       className={cn(
-        'flex items-stretch rounded-2xl',
-        bg,
-        isCard
-          ? 'h-56 w-28 min-w-fit flex-col justify-between overflow-hidden'
-          : 'min-w-60 flex-1 gap-1 transition-transform hover:scale-[1.02]'
+        'shadow-accent-foreground flex items-stretch rounded-2xl shadow',
+        bg.default,
+        variantStyle[variant]
       )}
     >
-      <PokemonImage src={img} alt={name} bgColor={Img} variant={variant} />
+      <PokemonImage
+        sprites={sprites}
+        alt={name}
+        bgColor={img}
+        variant={variant}
+      />
       <div
         className={cn(
           'flex flex-1 flex-col justify-between gap-2',
@@ -49,7 +62,7 @@ export function PokemonCard({
         <PokemonNameTitle
           name={name}
           id={id}
-          textColor={text}
+          textColor={text.default}
           variant={variant}
         />
 
@@ -58,8 +71,8 @@ export function PokemonCard({
             <PokemonTypeBadge
               key={type}
               type={type}
-              textColor={text}
-              borderCoor={border}
+              textColor={text.default}
+              borderColor={border}
             />
           ))}
         </div>

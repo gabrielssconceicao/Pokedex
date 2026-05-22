@@ -1,25 +1,42 @@
+'use client';
+import { formatText } from '@/app/pokemon/components/format-text';
+import { PokemonType } from '@/constants/pokemon-types';
 import { cn } from '@/lib/utils';
+import { getPokemonColors } from '@/utils/get-pokemon-colors';
 
 type CardProps = {
   label: string;
   value: string;
+  pokemonType: PokemonType;
   colSpan?: 1 | 2;
 };
 
-export function SpeciesCard({ label, value, colSpan = 1 }: CardProps) {
+export function SpeciesCard({
+  label,
+  value,
+  pokemonType,
+  colSpan = 1,
+}: CardProps) {
   const colSpanMap = { 1: 'col-span-1', 2: 'col-span-2' };
+  const { text, border } = getPokemonColors(pokemonType);
   return (
     <div
       className={cn(
         'flex flex-col items-center justify-center gap-0.5 space-y-0.5',
-        colSpanMap[colSpan]
+        colSpanMap[colSpan],
+        text.default
       )}
     >
-      <span className="rounded-md px-1 text-center font-mono text-xs font-semibold text-gray-950">
+      <span className="rounded-md px-1 text-center font-mono text-xs font-semibold">
         {label}
       </span>
-      <div className="xs:text-sm w-full rounded-md border border-gray-500/50 px-2 py-1 text-center text-xs text-gray-950">
-        {value}
+      <div
+        className={cn(
+          'xs:text-sm w-full rounded-md border-2 px-2 py-1 text-center text-xs font-semibold tracking-wide',
+          border
+        )}
+      >
+        {formatText(value)}
       </div>
     </div>
   );

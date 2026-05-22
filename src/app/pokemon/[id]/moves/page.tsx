@@ -1,19 +1,17 @@
-import { PokemonContainer } from '../../components/pokemon-container';
-import { MoveTypeSelector } from './components/move-type-selector';
-import { PokemonTable } from './components/pokemon-table';
+'use server';
 
-export default function Moves() {
-  return (
-    <section className="flex h-full flex-col gap-2">
-      <PokemonContainer title="Learns from">
-        <MoveTypeSelector />
-      </PokemonContainer>
+import { Metadata } from 'next';
 
-      <PokemonContainer>
-        <div className="h-[calc(100vh-19rem)] overflow-y-auto px-2 py-1">
-          <PokemonTable />
-        </div>
-      </PokemonContainer>
-    </section>
-  );
+import { PageProps } from '../../interface/page-props';
+import { getMetadata } from '../../utils/metadata';
+import { MoveClient } from './components/move-client';
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  return getMetadata({ params, title: 'Moves' });
+}
+export default async function Moves({ params }: PageProps) {
+  const { id } = await params;
+
+  return <MoveClient id={id} />;
 }
