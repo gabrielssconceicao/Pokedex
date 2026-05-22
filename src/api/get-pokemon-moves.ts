@@ -113,13 +113,14 @@ export async function getPokemonMoves({ moves, version, learnMethod }: Props) {
 
   if (learnMethod === 'level-up') {
     sortedMoves = sortedMoves.sort(
-      (a, b) => a.learn['level-up'] - b.learn['level-up']
+      (a, b) => (a.learn['level-up'] as number) - (b.learn['level-up'] as number)
     );
   }
 
   if (learnMethod === 'machine') {
-    sortedMoves = sortedMoves.sort((a, b) =>
-      a.learn.machine.localeCompare(b.learn.machine)
+
+    sortedMoves = sortedMoves.sort((a:any, b:any) =>
+       a.learn.machine.localeCompare(b.learn.machine)
     );
   }
   return sortedMoves;

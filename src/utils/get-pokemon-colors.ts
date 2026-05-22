@@ -29,5 +29,7 @@ export function getColor(key: string, type: string): TypeKeys {
       return getContestColors(type as ContestType);
     case 'category':
       return getDamageClassColors(type as DamageClass);
+    default:
+      return { border: '', text: { default: '', inverse: '' } };
   }
 }
